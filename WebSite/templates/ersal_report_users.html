@@ -1,0 +1,27 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+
+{% block body %}
+{% include 'partials/firstpageheader.html' %}
+<div class="container-fluid">
+    <div class="row">
+        <div style="display: block;" class="col-12 mt-2 mb-2 float-right">
+            <h3 class="text-right">شرایط ارسال کالا : </h3>
+            <hr/>
+        </div>
+        
+        <div style="display: block;" class="col-12 mt-1 mb-2 float-right">
+            {% if ersalusers %}
+            {% for eu in ersalusers %}
+            <p>
+                {{ eu }}
+            </p>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% include 'partials/mobile.html' %}
+{% include 'partials/footer.html' %}
+{% endblock %}

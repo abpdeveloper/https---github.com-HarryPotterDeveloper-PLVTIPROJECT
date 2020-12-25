@@ -1,0 +1,199 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} درباره ما|
+{% endblock %}
+
+
+{% block body %}
+<script>
+    function myMap() {
+        var mapProp = {
+            center: new google.maps.LatLng(51.508742, -0.120850),
+            zoom: 5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    }
+</script>
+<div class="page-wrapper">
+    {% include 'partials/firstpageheader.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">تماس با ما</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div class="container-fluid">
+            <div class="page-header page-header-big text-center"
+                style="background-image: url('/static/media/logo/contactus.jpeg')">
+                <h1 class="page-title text-white mt-8">تماس با ما<span class="text-white">ارتباط خود را با ما حفظ
+                        کنید</span></h1>
+            </div><!-- End .page-header -->
+        </div><!-- End .container -->
+
+        <div class="page-content pb-0">
+            <div class="container-fluid">
+                <div class="row">
+                    {% if uccontactus %}
+                    {% for cc in uccontactus %}
+                    <div class="col-lg-6 mb-2 mb-lg-0">
+                        <h2 class="title mb-1">اطلاعات تماس</h2><!-- End .title mb-2 -->
+                        <p class="mb-3">{{ cc.callinfo }}</p>
+                        <div class="row">
+                            <div class="col-sm-7">
+                                <div class="contact-info">
+                                    <h3>دفتر</h3>
+                                    <ul class="contact-list">
+                                        <li>
+                                            <i class="fa fa-map"></i>
+                                            آدرس : {{ cc.address }}
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-phone"></i>
+                                            <a href="tel:#">تلفن : {{ cc.tell }}</a>
+                                        </li>
+                                        {% comment %}
+                                        <!-- <li>
+                                            <i class="icon-phone"></i>
+                                            <a href="tel:#">تلفن : {{ cc.tell2 }}</a>
+                                        </li> -->
+                                        {% endcomment %}
+                                        <li>
+                                            <i class="fa fa-mobile"></i>
+                                            <a href="tel:#">تلفن همراه : {{ cc.mobile }}</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-fax"></i>
+                                            <a href="tel:#">فکس : {{ cc.fax }}</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-envelope"></i>
+                                            <a href="mailto:#">ایمیل : {{ cc.email }}</a>
+                                        </li>
+                                    </ul><!-- End .contact-list -->
+                                </div><!-- End .contact-info -->
+                            </div><!-- End .col-sm-7 -->
+
+                            <div class="col-sm-5">
+                                <div class="contact-info">
+                                    <h3>ساعت کار دفتر</h3>
+
+                                    <ul class="contact-list">
+                                        <li>
+                                            <i class="icon-clock-o"></i>
+                                            <span class="text-dark">شنبه تا چهارشنبه</span> <br>{{ cc.wtworkstart }} صبح
+                                            تا {{ cc.wtworkend }} عصر
+                                        </li>
+                                        <li>
+                                            <i class="icon-clock-o"></i>
+                                            <span class="text-dark">پنج شنبه</span> <br>{{ cc.ltworkstart }} صبح تا
+                                            {{ cc.ltworkend }} عصر
+                                        </li>
+                                    </ul><!-- End .contact-list -->
+                                </div><!-- End .contact-info -->
+                            </div><!-- End .col-sm-5 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .col-lg-6 -->
+                    {% endfor %}
+                    {% endif %}
+                    <div class="col-lg-6">
+                        <h2 class="title mb-1">سوالی دارید؟</h2><!-- End .title mb-2 -->
+                        <p class="mb-2">با استفاده از فرم زیر می توانید با ما ارتباط برقرار کنید</p>
+
+                        <form method="POST" action="" class="contact-form mb-3">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>نام </label>
+                                    {{ cq.name }}
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label>آدرس ایمیل</label>
+                                    {{ cq.email }}
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label>شماره تماس</label>
+                                    {{ cq.tell }}
+                                </div><!-- End .col-sm-6 -->
+
+                                <div class="col-sm-6">
+                                    <label>موضوع</label>
+                                    {{ cq.title }}
+                                </div><!-- End .col-sm-6 -->
+                            </div><!-- End .row -->
+
+                            <label>پیام</label>
+                            {{ cq.desc }}
+
+                            <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm float-right">
+                                <span>تایید و ارسال</span>
+                                <i class="icon-long-arrow-left"></i>
+                            </button>
+                        </form><!-- End .contact-form -->
+                    </div><!-- End .col-lg-6 -->
+                </div><!-- End .row -->
+
+                <hr class="mt-4 mb-5">
+
+                <div class="stores mb-4 mb-lg-5">
+                    
+                    <div class="row">
+                        {% if uscontactus %}
+                        {% for sc in uscontactus %}
+                        <div class="col-lg-6">
+                            <div class="store">
+                                <div class="row">
+                                    <div class="col-sm-5 col-xl-6">
+                                        <figure class="store-media mb-2 mb-lg-0">
+                                            <img src="{% static 'media/' %}{{ sc.centerimg }}" alt="image">
+                                        </figure><!-- End .store-media -->
+                                    </div><!-- End .col-xl-6 -->
+                                    <div class="col-sm-7 col-xl-6">
+                                        <div class="store-content">
+                                            <h3 class="store-title">دفتر فروش : {{ sc.salecentername }} </h3>
+                                            <!-- End .store-title -->
+                                            <address>آدرس : {{ sc.saddress }}</address>
+                                            <div><a href="tel:#">شماره تماس : {{ sc.stell }}</a></div>
+                                            {% comment %}
+                                            <!-- <div><a href="tel:#">شماره تماس : {{ sc.stell2 }}</a></div> -->
+                                            {% endcomment %}
+                                            <div><a href="tel:#">شماره تلفن همراه : {{ sc.smobile }}</a></div>
+                                            <div><a href="tel:#">شماره فکس : {{ sc.sfax }}</a></div>
+                                            <h4 class="store-subtitle">ساعت کاری فروشگاه :</h4>
+                                            <!-- End .store-subtitle -->
+                                            <div>شنبه-چهارشنبه {{ sc.swtworkstart }}صبح تا {{ sc.swtworkend }} عصر</div>
+                                            <div>پنج شنبه {{ sc.sltworkstart }} صبح تا {{ sc.sltworkend }} عصر</div>
+                                        </div><!-- End .store-content -->
+                                    </div><!-- End .col-xl-6 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .store -->
+                        </div><!-- End .col-lg-6 -->
+                        {% endfor %}
+                        {% endif %}
+                    </div><!-- End .row -->
+                </div><!-- End .stores -->
+            </div><!-- End .container -->
+            <div class="col-12 d-flex">
+                
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d401.35964535120434!2d54.96550103371948!3d36.412167156200546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sua!4v1603207382159!5m2!1sen!2sua"
+                    width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+                    tabindex="0"></iframe>
+            </div>
+
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+{% include 'partials/footer.html' %}
+{% include 'partials/mobile.html' %}
+
+{% endblock %}

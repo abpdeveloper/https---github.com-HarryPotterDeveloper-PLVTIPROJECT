@@ -1,0 +1,47 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} لیست حساب ها|
+{% endblock %}
+
+
+{% block body %}
+
+<div class="page-wrapper">
+  {% include 'partials/firstpageheader.html' %}
+  <nav aria-label="breadcrumb" class="breadcrumb-nav ">
+    <div class="container-fluid border-bottom border-black">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="font-weight-bold" style="font-size: large;"
+            href="{% url 'WebSite:login' %}">خانه</a>
+        </li>
+  
+        <li class="breadcrumb-item">
+          <a class="font-weight-bold" style="font-size: large;" href="#">اطلاعات حساب های بانک</a></li>
+      </ol>
+    </div>
+  </nav>
+  <main class="main">
+    <div class="container-fluid" style="height: 500px;" >
+      {% if bankreport %}
+        {% for b in bankreport %}
+      <div class="row p-3" >
+        <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12 float-right ">
+          <img class="shadow border rounded" style="height: 100px;" 
+          src="{% static 'media/' %}{{ b.accountimg }}" alt="پخش لوله و تجهیزات ایران">
+      </div>
+        <div class="col-lg-11 col-md-10 col-sm-12 col-xs-12 float-left">
+          <div class="col-12 shadow border rounded text-right font-wheit-bold " 
+          style="height: 100px; background-color: whitesmoke;">
+          <p style="position: relative; top: 35%; left: -5%; font-weight: bold; font-size: large;">نام بانک : {{ b.account }}</p></div>
+        </div>
+        
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </main><!-- End .main -->
+  {% include 'partials/footer.html' %}
+  {% include 'partials/mobile.html' %}
+  {% endblock %}

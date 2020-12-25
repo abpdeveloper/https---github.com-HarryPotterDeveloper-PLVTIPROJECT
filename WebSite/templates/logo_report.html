@@ -1,0 +1,175 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش بنر ها|
+{% endblock %}
+
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#logoBtnDelete").click({
+            ModelName: "firstpagebaners",
+            RedirectPath: "logoreport", TableId: "example"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">گزارش بنر ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12  float-left">
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:logoreport' %}">ایجاد لولگو
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'WebSite:bannersreportview' %}">ایجاد
+                                            بنر ها
+
+                                        </a>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success rounded shadow"
+                                    href="{% url 'WebSite:create' 'firstpagebaners' 'firstpagebanersform' 'logoreport' 'logo_create' 'logo' %}">
+                                    ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger rounded shadow" id="logoBtnDelete" href="#"> حذف گروهی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش بنر ها
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%" id="example"
+                                class="display table table-hover table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                                class="selectAll " name="selectAll" value="all"></th>
+                                        <th class="text-center">شماره</th>
+                                        <th class="text-center">کلید ها</th>
+                                        <th class="text-center">بنر یک</th>
+                                        <th class="text-center">گروه یک</th>
+                                        <th class="text-center">بنر دو</th>
+                                        <th class="text-center">گروه دو</th>
+                                        <th class="text-center">بنر سه</th>
+                                        <th class="text-center">گروه سه</th>
+                                        <th class="text-center">بنر چهار</th>
+                                        <th class="text-center">گروه چهار</th>
+                                        <th class="text-center">بنر پنج</th>
+                                        <th class="text-center">گروه پنج</th>
+                                        <th class="text-center">بنر شش</th>
+                                        <th class="text-center">گروه شش</th>
+                                        <th class="text-center">بنر هفت</th>
+                                        <th class="text-center">گروه هفت</th>
+                                        <th class="text-center">بنر هشت</th>
+                                        <th class="text-center">گروه هشت</th>
+                                        <th class="text-center">بنر نه</th>
+                                        <th class="text-center">گروه نه</th>
+                                        <th class="text-center">بنر ده</th>
+                                        <th class="text-center">گروه ده</th>
+                                        <th class="text-center">بنر یازده</th>
+                                        <th class="text-center">گروه یازده</th>
+                                
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if logo %}
+                                    {% for result in logo %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'firstpagebaners' 'firstpagebanersform' 'logoreport' 'logo_update' 'logo' result.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'firstpagebaners' 'logoreport' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner1 }}"
+                                                alt="">{{ result.baner1 }}</td>
+                                        <td>{{ result.group1 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner2 }}"
+                                                alt="">{{ result.baner2 }}</td>
+                                        <td>{{ result.group2 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner3 }}"
+                                                alt="">{{ result.baner3 }}</td>
+                                        <td>{{ result.group3 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner4 }}"
+                                                alt="">{{ result.baner4 }}</td>
+                                        <td>{{ result.group4 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner5 }}"
+                                                alt="">{{ result.baner5 }}</td>
+                                        <td>{{ result.group5 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner6 }}"
+                                                alt="">{{ result.baner6 }}</td>
+                                        <td>{{ result.group6 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner7 }}"
+                                                alt="">{{ result.baner7 }}</td>
+                                        <td>{{ result.group7 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner8 }}"
+                                                alt="">{{ result.baner8 }}</td>
+                                        <td>{{ result.group8 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner9 }}"
+                                                alt="">{{ result.baner9 }}</td>
+                                        <td>{{ result.group9 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner10 }}"
+                                                alt="">{{ result.baner10 }}</td>
+                                        <td>{{ result.group10 }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.baner11 }}"
+                                                alt="">{{ result.baner11 }}</td>
+                                        <td>{{ result.group11 }}</td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

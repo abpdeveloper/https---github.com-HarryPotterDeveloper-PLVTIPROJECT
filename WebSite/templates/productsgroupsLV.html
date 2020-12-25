@@ -1,0 +1,233 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش گروه محصول|
+{% endblock %}
+
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#productsgroupsBtnDelete").click({
+            ModelName: "productsgroups",
+            RedirectPath: "productsgroupsLV", TableId: "example"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">داشبورد ادمین</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link  active" href="{% url 'WebSite:productsgroupsLV' %}">گزارش
+                                            گروه محصول
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:product' %}">گزارش محصول
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:brandreport' %}">گزارش برند</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:costreport' %}">گزارش قیمت محصول</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:commentreport' %}">گزارش کامنت ها</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:customerLV' %}">گزارش مشتری
+                                            ها</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:factorreport' %}">گزارش فاکتور
+                                            ها</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="{% url 'WebSite:PayRcvreport' %}">گزارش رسید ها
+                                            </a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success shadow rounded"
+                                    href="{% url 'WebSite:create' 'productsgroups' 'productsgroupsform' 'productsgroupsLV' 'productsgroups_create' 'group_report' %}">
+                                    ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger shadow rounded" id="productsgroupsBtnDelete" href="#"> حذف
+                                    گروهی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش گروه محصول ها
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%" id="example"
+                                class="display table table-hover table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                                class="selectAll " name="selectAll" value="all"></th>
+                                        <th class="text-center">کلید ها</th>
+                                        <th class="text-center">شماره</th>
+                                        <th class="text-center">نام</th>
+                                        <th class="text-center">کلید زیر گروه ها</th>
+                                        <th class="text-center">کد گروه بالادست</th>
+                                        <th class="text-center">سطح گروه</th>
+                                        <th class="text-center">دسته بندی یکم</td>
+                                        <th class="text-center">دسته بندی دوم</td>
+                                        <th class="text-center">دسته بندی سوم</td>
+                                        <th class="text-center">شرح</th>
+                                        <th class="text-center">عکس</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if productsgroupsLV %}
+                                    {% for result in productsgroupsLV %}
+                                    {% if result.gparentid == 0  %}
+
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'productsgroups' 'productsgroupsFormUpdate' 'productsgroupsLV' 'productsgroups_update' 'group_report' result.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'productsgroups' 'productsgroupsLV' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+
+
+                                        <td class="text-center">{{ result.Group_Name }}</td>
+                                        <td class="text-center"><a
+                                                href="{% url 'WebSite:treeshowgroupcreate' result.id %}">ایجاد زیر گروه
+                                                (سطح یک)</a></td>
+                                        <td class="text-center text-dark">{{ result.gparentid }}</td>
+                                        <td class="text-center text-dark">{{ result.glevel }}</td>
+                                        <td class="text-center">{{ result.Group_Desc }}</td>
+                                        <td class="text-center text-dark">{{ result.cname1 }}</td>
+                                        <td class="text-center text-dark">{{ result.cname2 }}</td>
+                                        <td class="text-center text-dark">{{ result.cname3 }}</td>
+                            
+
+                                        <td class="text-center"><img style="width: 70%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.group_img }}">{{ result.group_img}}
+                                        </td>
+                                    </tr>
+                                    {% for result2 in productsgroupsLV %}
+                                    {% if result2.gparentid == result.id  %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result2.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'productsgroups' 'productsgroupsFormUpdate' 'productsgroupsLV' 'productsgroups_update' 'group_report' result2.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'productsgroups' 'productsgroupsLV' result2.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+
+
+                                        <td class="text-center">{{ result2.Group_Name }}</td>
+                                        <td class="text-center"><a
+                                                href="{% url 'WebSite:treeshowgroupcreate' result2.id %}">ایجاد زیر گروه
+                                                (سطح دو)</a></td>
+                                        <td class="text-center text-dark">{{ result2.gparentid }}</td>
+                                        <td class="text-center text-dark">{{ result2.glevel }}</td>
+                                        <td class="text-center">{{ result2.Group_Desc }}</td>
+                                        <td class="text-center text-dark">{{ result2.cname1 }}</td>
+                                        <td class="text-center text-dark">{{ result2.cname2 }}</td>
+                                        <td class="text-center text-dark">{{ result2.cname3 }}</td>
+                                        <td class="text-center"><img style="width: 70%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result2.group_img }}">{{ result2.group_img}}
+                                        </td>
+                                    </tr>
+                                    {% for result3 in productsgroupsLV %}
+                                    {% if result3.gparentid == result2.id  %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result3.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'productsgroups' 'productsgroupsFormUpdate' 'productsgroupsLV' 'productsgroups_update' 'group_report' result3.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'productsgroups' 'productsgroupsLV' result3.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+
+
+                                        <td class="text-center">{{ result3.Group_Name }}</td>
+                                        <td class="text-center">سطح آخر</td>
+                                        <td class="text-center text-dark">{{ result3.gparentid }}</td>
+                                        <td class="text-center text-dark">{{ result3.glevel }}</td>
+                                        <td class="text-center">{{ result3.Group_Desc }}</td>
+                                        <td class="text-center text-dark">{{ result3.cname1 }}</td>
+                                        <td class="text-center text-dark">{{ result3.cname2 }}</td>
+                                        <td class="text-center text-dark">{{ result3.cname3 }}</td>
+                                        <td class="text-center"><img style="width: 70%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result3.group_img }}">{{ result3.group_img}}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

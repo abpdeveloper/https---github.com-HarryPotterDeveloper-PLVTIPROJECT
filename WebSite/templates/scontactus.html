@@ -1,0 +1,144 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش ارتباط با ما|
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#scontactusBtnDelete").click({
+            ModelName: "salecontactus",
+            RedirectPath: "scontactus", TableId: "example"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">گزارش ارتباط با ما</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="{% url 'WebSite:ccontactusreport' %}">گزارش
+                                            ارتباط با ما - مرکز
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'WebSite:scontactusreport' %}"> گزارش ارتباط با ما - مراکز
+                                            فروش </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'WebSite:customerquestionsreport' %}">گزارش سوال های مشتری ها</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-12">
+                                <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                    <a class="btn btn-success rounded shadow"
+                                        href="{% url 'WebSite:create' 'salecontactus' 'salecontactusForm' 'scontactusreport' 'scontactus_create' 'scontactus' %}">
+                                        ایجاد</a>
+                                </div>
+                                <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                    <a class="btn btn-danger rounded shadow" id="scontactusBtnDelete" href="#"> حذف
+                                        گروهی</a>
+                                </div>
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            گزارش ارتباط با ما
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <iframe id="txtArea1" style="display:none"></iframe>
+                                <table style="width:100%" id="example"
+                                    class="display table table-hover table-striped table-bordered shadow">
+                                    <thead>
+                                        <tr class="font-weight-bold text-center">
+                                            <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                                    class="selectAll " name="selectAll" value="all"></th>
+                                            <th class="text-center">شماره</th>
+                                            <th class="text-center">کلید ها</th>
+                                            
+                                            <th class="text-center">نام مرکز</th>
+                                            <th class="text-center">اطلاعات تماس</th>
+                                            <th class="text-center">تلفن دفتر</th>
+                                            <th class="text-center">تلفن همراه</th>
+                                            <th class="text-center">فکس دفتر</th>
+                                            <th class="text-center">آدرس</th>
+                                            <th class="text-center">تلفن دفتر</th>
+                                            <th class="text-center">ایمیل</th>
+                                            <th class="text-center">ساعات شروع کار در هفته</th>
+                                            <th class="text-center">ساعت پایان کار در هفته</th>
+                                            <th class="text-center">ساعت شروع کار در پنج شنبه</th>
+                                            <th class="text-center">ساعت پایان کار در پنج شنبه</th>
+                                            <th class="text-center">عکس فروشگاه</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if scontactus %}
+                                        {% for result in scontactus %}
+                                        <tr class="text-center">
+                                            <td></td>
+                                            <td class="text-center">{{ result.id }}</td>
+                                            <td class="text-center">
+                                                <a class="text-decoration-none text-success"
+                                                    href="{% url 'WebSite:update' 'salecontactus' 'salecontactusFormUpdate' 'scontactusreport' 'scontactus_update' 'scontactus' result.id %}">
+                                                    <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                        style="width: 20px; height: 20px;  display: inline-block;">
+                                                    ویرایش</a> |
+                                                <a class="text-decoration-none text-danger"
+                                                    href="{% url 'WebSite:delete' 'salecontactus' 'scontactusreport' result.id %}">حذف
+                                                    <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                        style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                            </td>
+                                            <td class="text-center">{{ result.salecentername }}</td>
+                                            <td class="text-center">{{ result.sallinfo }}</td>
+                                            <td class="text-center">{{ result.saddress }}</td>
+                                            <td class="text-center">{{ result.stell }}</td>
+                                            <td class="text-center">{{ result.stell2 }}</td>
+                                            <td class="text-center">{{ result.smobile }}</td>
+                                            <td class="text-center">{{ result.sfax }}</td>
+                                            <td class="text-center">{{ result.semail }}</td>
+                                            <td class="text-center">{{ result.swtworkstart }}</td>
+                                            <td class="text-center">{{ result.swtworkend }}</td>
+                                            <td class="text-center">{{ result.sltworkstart }}</td>
+                                            <td class="text-center">{{ result.sltworkend }}</td>
+                                            <td class="text-center"><img src="{% static 'media/' %}{{ result.centerimg  }}" >{{ result.centerimg }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </tbody>
+
+                            </div><!-- End .col-lg-9 -->
+                        </div><!-- End .row -->
+                    </div><!-- End .container -->
+                </div><!-- End .dashboard -->
+            </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

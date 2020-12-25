@@ -1,0 +1,95 @@
+{% load static %}
+
+
+<div class="mobile-menu-container" style="z-index:  200000000; ; ">
+    <div class="mobile-menu-wrapper">
+        <span class="mobile-menu-close"><i class="icon-close"></i></span>
+        <nav class="mobile-nav">
+            <ul class="mobile-menu">
+
+                <li>
+                    <form method="get" action="{% url 'WebSite:search_box' %}" class="col-lg-12 text-center">
+                        <div class="header-search-wrapper search-wrapper-wide text-center col-lg-12">
+                            <label for="q" class="sr-only">جستجو</label>
+                            <button class="btn " type="submit"><i class="icon-search"></i></button>
+                            <input type="search" class="form-control" name="search" id="q"
+                                placeholder="کالا و با برند مورد نظر خود را وارد کنید  ..." required>
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </li>
+                <li class="active">
+                    <a href="{% url 'WebSite:login' %}" style="color: white;">خانه</a>
+                </li>
+                <li>
+                    {% if user.is_authenticated %}
+                    <a href="#" class="sf-with-ul">{% if request.user.username %}
+                        سلام
+                        {{ request.user.first_name }}
+                        {% endif %}</a>
+
+                    <ul style="display: none;">
+                        <li><a {% if user.is_superuser %} href="{% url 'WebSite:productsgroupsLV' %}" {% else %}
+                                href="{% url 'WebSite:dashboard'  %}" {% endif %}>پنل کاربری</a></li>
+                        <li><a href="{% url 'WebSite:logout' %}">خروج</a></li>
+
+                    </ul>
+                    {% else %}
+
+                    <a href="{% url 'WebSite:loginusermobile' %}">ورود یا ثبت نام</a>
+
+                    {% endif %}
+                    {% for spg in spg %}
+                    {% if spg and spg.gparentid == 0 %}
+                <li>
+                    <a class="sf-with-ul" href="">&nbsp{{ spg.Group_Name }}&nbsp&nbsp&nbsp</a>
+                    <ul style="display: none;">
+                        {% for spgt in spgt %}
+                        {% if spgt.gparentid == spg.id and spgt.glevel == 2 %}
+
+                        <li>
+                            <a style="color: #00b6be; font-weight: bolder;"
+                                href="{% url 'WebSite:advancedsearchProducts' spgt.id %}">{{ spgt.Group_Name }}
+                            </a>
+                            <ul style="display: none;">
+                                {% for spgtr in spgtr %}
+                                {% if spgt.id == spgtr.gparentid and spgtr.glevel == 3 %}
+                                <li><a href="{% url 'WebSite:advancedsearchProducts' spgtr.id %}">{{ spgtr.Group_Name }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                                {% for spgtr2 in spgtr2 %}
+                                {% if spgt.id == spgtr2.id %}
+                                <li><a href="{% url 'WebSite:advancedsearchProducts' spgtr2.id %}">+موارد
+                                        بیشتر . .</a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </li>
+
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endif %}
+                {% endfor %}
+
+
+                <li><a href="{% url 'WebSite:stors' %}">نمایندگی ها</a></li>
+                <li>
+                    <a href="" class="sf-with-ul">درباره ما</a>
+                    <ul style="display: none;">
+                        <li><a href="{% url 'WebSite:about' %}">درباره ما</a></li>
+                        <li><a href="{% url 'WebSite:contact' %}">تماس با ما</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav><!-- End .mobile-nav -->
+
+        <div class="social-icons">
+
+            <a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i class="icon-instagram"></i></a>
+            <a href="#" class="social-icon" title="واتس آپ" target="_blank"><i class="icon-whatsapp"></i></a>
+            <a href="#" class="social-icon" title="تلگرام" target="_blank"><i class="icon-telegram"></i></a>
+        </div><!-- End .soial-icons -->
+    </div><!-- End .mobile-menu-wrapper -->
+</div><!-- End .mobile-menu-container -->

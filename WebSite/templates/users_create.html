@@ -1,0 +1,313 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد گروه محصول|
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد ادمین</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:usersreport' %}">گزارش لیست کاربر ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد کاربر ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+
+            <div class="dashboard">
+                <div class="container-fluid">
+
+                    <div class="row">
+
+                        {% include 'partials/side_menu_dashboard.html' %}
+
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <div style="margin-bottom: 2%;"
+                                class="col-lg-12 col-md-12 col-sm-12 col-xs-12 float-right text-center">
+                                {% if error %}
+                                {% for error in error %}
+                                <p class="font-wait-bold float-right border border-danger rounded text-danger shadow"
+                                    style="padding: 1%; margin-right: 1%;">
+                                    {{ error }}</p>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <form method="POST" role="form" enctype="multipart/form-data" autocomplete="off">
+                                {% csrf_token %}
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            فرم معرفی کاربر توسط ادمین سیستم
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="col-12 table-hover table-sm table-striped shadow">
+                                    <tr class="font-weight-bold">
+                                        {% if error %}
+                                        <td class="text-center text-danger">
+                                            {{ Users.username.label }}
+                                        </td>
+                                        {% else %}
+                                        <td class="text-center">
+                                            {{ Users.username.label }}
+                                        </td>
+                                        {% endif %}
+
+                                        <td class="text-center">
+                                            {{ Users.first_name.label }}
+                                        </td>
+
+                                        <td class="text-center">
+                                            {{ Users.email.label }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ Users.cellphone.label }}
+                                        </td>
+
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td>
+                                            {{ Users.username }}
+                                        </td>
+
+                                        <td>
+                                            {{ Users.first_name }}
+                                        </td>
+                                        <td>
+                                            {{ Users.email }}
+                                        </td>
+                                        <td>
+                                            {{ Users.cellphone }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top:2%;"
+                                    class="col-12 table-hover table-sm table-striped table-hover shadow">
+
+                                    <tr class="font-weight-bold">
+
+                                        <td class="text-center">
+                                            آدرس
+                                        </td>
+                                        <td class="text-center">
+                                            {{ Users.avatar.label }}
+                                        </td>
+
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td>
+                                            {{ Users.last_name }}
+                                        </td>
+
+                                        <td>
+                                            {{ Users.avatar }}
+                                        </td>
+
+                                    </tr>
+                                </table>
+                                <table style="margin-top:2%;"
+                                    class="col-12 table-hover table-sm table-striped table-hover shadow">
+                                    <tr>
+                                        <td class="text-center">
+                                            جستجوی مشتری :
+                                        </td>
+                                        <td>
+                                            <input type="search" class="searchcustomer form-control">
+                                            <div class="spinner-border text-danger"></div>
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="text-center">
+                                            نام مشتری :
+                                        </td>
+                                        <td>
+                                            <select name="customersid" class="customerresult form-control"
+                                                id="id_customersid">
+                                                <option value="">---------</option>
+                                                {% for c in Customerslist %}
+                                                <option value="{{c.id}}">{{c.Name}}</option>
+                                                {% endfor %}
+
+                                            </select>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top:2%;"
+                                    class=" col-12 table-hover table-bordered text-center table-striped shadow">
+                                    <tr>
+                                        <td>
+                                            <label>وضعیت فعال بودن کاربر :</label>
+                                        </td>
+                                        <td>
+                                            <fieldset name="is_active">
+                                                {% if Users.is_active %}
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_active"
+                                                        id="gridRadios1" value="true" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        فعال
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_active"
+                                                        id="gridRadios2" value="false">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        غیر فعال
+                                                    </label>
+                                                </div>
+                                                {% else %}
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_active"
+                                                        id="gridRadios1" value="true" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        فعال
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_active"
+                                                        id="gridRadios2" value="false">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        غیر فعال
+                                                    </label>
+                                                </div>
+                                                {% endif %}
+                                        </td>
+                                        <td>
+                                            نشان می‌دهد که آیا این کاربر اجازهٔ فعالیت دارد یا
+                                            خیر.
+                                            به جای حذف , کاربر را غیرفعال نمایید.
+                                        </td>
+                                        </fieldset>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td>
+                                            <label>وضعیت مدیریتی کاربری :</label>
+                                        </td>
+                                        <td>
+                                            <fieldset name="is_staff">
+                                                {% if updateUsers.is_staff %}
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_staff"
+                                                        id="gridRadios1" value="true" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        فعال
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_staff"
+                                                        id="gridRadios2" value="false">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        غیر فعال
+                                                    </label>
+                                                </div>
+                                                {% else %}
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_staff"
+                                                        id="gridRadios1" value="true">
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        فعال
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_staff"
+                                                        id="gridRadios2" value="false" checked>
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        غیر فعال
+                                                    </label>
+                                                </div>
+                                                {% endif %}
+                                            </fieldset>
+                                        </td>
+                                        <td>
+                                            نشان می‌دهد که آیا این کاربر می‌تواند وارد بخش های
+                                            مربوط به
+                                            مدیریت شود یا خیر.
+
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td>
+                                            <label>وضعیت ادمین بودن :</label>
+                                        </td>
+                                        <td>
+                                            <fieldset name="is_superuser">
+                                                {% if updateUsers.is_superuser %}
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_superuser"
+                                                        id="gridRadios1" value="true" checked>
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        فعال
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_superuser"
+                                                        id="gridRadios2" value="false">
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        غیر فعال
+                                                    </label>
+                                                </div>
+                                                {% else %}
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_superuser"
+                                                        id="gridRadios1" value="true">
+                                                    <label class="form-check-label" for="gridRadios1">
+                                                        فعال
+                                                    </label>
+                                                </div>
+                                                <div class="form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="is_superuser"
+                                                        id="gridRadios2" value="false" checked>
+                                                    <label class="form-check-label" for="gridRadios2">
+                                                        غیر فعال
+                                                    </label>
+                                                </div>
+                                                {% endif %}
+
+                                            </fieldset>
+                                        </td>
+                                        <td>
+                                            نشان می دهد که آیا این کاربر عضور گروه ادمین می باشد
+                                            یا خیر.
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top:2%;"
+                                    class="table-hover table-sm table-striped table-hover shadow">
+                                    <tr>
+                                        <td>
+                                            <input
+                                                class="btn btn-success rounded shadow col-lg-2 col-md-2 col-sm-12 col-xs-12"
+                                                type="submit" value='ذخیره'>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+{% endif %}
+{% endif %}
+
+{% endblock %}

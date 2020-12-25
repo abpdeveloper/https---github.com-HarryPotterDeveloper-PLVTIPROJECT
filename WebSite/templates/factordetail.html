@@ -1,0 +1,91 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+{% load my_templatetag %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="container-fluid mt-2">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <table class="table table-hover table-sm table-striped table-bordered shadow">
+                <tr class="font-weight-bold">
+                    <td><h5 class="text-center">خلاصه اقلام فاکتور</h5></td>
+                    </tr>
+            </table>
+            <table style="width:100%; color: black; font-weight: bold; font-family: sans-serif;" class="table table-hover table-sm table-striped table-bordered shadow">
+                <tr class="font-weight-bold">
+                    <td></td>
+                    <td class="text-center">تعداد اقلام</td>
+                    <td class="text-center">قیمت واحد</td>
+                    <td class="text-center">تخفیف</td>
+                    <td class="text-center">مالیات</td>
+                    <td class="text-center">عوارض</td>
+                    <td class="text-center">جمع کل</td>
+                </tr>
+                <tr>
+                    <td class="text-center">جمع</td>
+                    <td class="text-center">{% if Amountsum %}{{ Amountsum }}{% endif %}</td>
+                    <td class="text-center">{% if UnitPricesum %}{{ UnitPricesum | intdot  }}{% endif %}</td>
+                    <td class="text-center">{% if VTaxsum %}{{ VTaxsum | intdot  }}{% endif %}</td>
+                    <td class="text-center">{% if VChargesum %}{{ VChargesum | intdot  }}{% endif %}</td>
+                    <td class="text-center">{% if Percentagesum %}{{ Percentagesum | intdot  }}{% endif %}</td>
+                    <td class="text-center">{% if ATotalsum %}{{ ATotalsum | intdot  }}{% endif %}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <iframe id="txtArea1" style="display:none"></iframe>
+            <table style="width:100%; color: black; font-weight: bold; font-family: sans-serif;" id="example"
+                class="display table table-hover table-sm table-striped table-bordered shadow">
+                <thead>
+                    <tr class="font-weight-bold text-center">
+                        <th></th>
+                        <th class="text-center">کد کالا</th>
+                        <th class="text-center">نام کالا</th>
+                        <th class="text-center">تعداد</th>
+                        <th class="text-center">قیمت واحد</th>
+                        <th class="text-center">تخفیف</th>
+                        <th class="text-center">مالیات</th>
+                        <th class="text-center">عوارض</th>
+                        <th class="text-center">جمع کل(ریال)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if fd %}
+                    {% for result in fd %}
+                    <tr>
+                        <td></td>
+                        <td class="text-center">{{ result.MerchandiseId }}</td>
+                        <td class="text-center">{{ result.Merchandisename }}</td>
+                        <td class="text-center">{{ result.Amount | intdot  }}</td>
+
+                        <td class="text-center">{{ result.UnitPrice | intdot  }}</td>
+                        <td class="text-center">{{ result.VTax | intdot  }}</td>
+                        <td class="text-center">{{ result.VCharge | intdot  }}</td>
+                        <td class="text-center">{{ result.Percentage | intdot  }}</td>
+                        <td class="text-center">{{ result.ATotal | intdot  }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                </tbody>
+                <div class="tab-pane fade" id="tab-orders" role="tabpanel" aria-labelledby="tab-orders-link">
+                    <p>سفارش جدیدی وجود ندارد</p>
+                    {% endif %}
+                </div>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+<!-- Mobile Menu -->
+<!-- Sign in / Register Modal -->
+{% else %}
+{% include '404.html' %}
+{% endif %}
+</div>
+
+{% endblock %}

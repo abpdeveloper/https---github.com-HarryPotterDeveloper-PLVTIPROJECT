@@ -1,0 +1,52 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} لیست خبر ها|
+{% endblock %}
+
+
+{% block body %}
+
+<div class="page-wrapper">
+  {% include 'partials/firstpageheader.html' %}
+  <nav aria-label="breadcrumb" class="breadcrumb-nav ">
+    <div class="container border-bottom border-black">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="font-weight-bold" style="font-size: large;"
+            href="{% url 'WebSite:login' %}">خانه</a>
+        </li>
+
+        <li class="breadcrumb-item">
+          <a class="font-weight-bold" style="font-size: large;" href="#">جدید ترین اخبار</a></li>
+      </ol>
+    </div>
+  </nav>
+  <main class="main">
+    <div class="container" >
+      {% if lnp %}
+      {% for lnp in lnp %}
+      <div class="row p-3">
+        <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12 float-right">
+          <img class="shadow border rounded" style="height: 100px;" src="{% static 'media/' %}{{ lnp.newsimg }}"
+            alt="پخش لوله و تجهیزات ایران">
+        </div>
+        <div class="col-lg-11 col-md-10 col-sm-12 col-xs-12 float-left ">
+          <div class="col-12  text-right font-wheit-bold  p-4 shadow" 
+            style=" background-color: whitesmoke; ">
+            <p style=" font-weight: bold; font-size: large; width: 300rem;" class="text-wrap"> {{ lnp.title }} :
+            </p>
+            <pre style="font-family: sans-serif; text-justify: inter-word; text-align: justify; font-weight: medium; font-size: large; text-justify: inter-word;" class="text-wrap">
+              {{ lnp.descriptions }}
+            </pre>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </main><!-- End .main -->
+  {% include 'partials/footer.html' %}
+  {% include 'partials/mobile.html' %}
+  {% endblock %}

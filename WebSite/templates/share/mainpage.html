@@ -1,0 +1,847 @@
+{% load static %}
+
+<html lang="fr" dir="rtl">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="HTML5 Template">
+    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="author" content="p-themes">
+    <!-- Favicon -->
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'assets/images/icons/site.html' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/icons/safari-pinned-tab.svg' %}" color="#666666">
+    <link rel="shortcut icon" href="{% static 'assets/images/icons/favicon.ico' %}"> -->
+    <meta name="apple-mobile-web-app-title" content="Molla">
+    <meta name="application-name" content="Molla">
+    <meta name="msapplication-TileColor" content="#cc9966">
+    <meta name="msapplication-config" content="{% static 'assets/images/icons/browserconfig.xml' %}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap-rtl.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/owl-carousel/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup/magnific-popup.css' %}">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/plugins/nouislider/nouislider.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/skins/skin-demo-22.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/demos/demo-22.css' %}">
+    <link href="{% static 'css/slider.css' %}" rel="stylesheet">
+
+    <!-- OR -->
+    <link rel="stylesheet" href="{% static 'fontawesome-free-5.15.1-web/css/all.css' %}">
+    <!-- loading by form (if used AdminJalaliDateWidget) -->
+    {{ form.media }}
+    <style>
+        #loader {
+            /* position: absolute;
+    left: 50%;
+    top: 50%;
+    
+    margin: -75px 0 0 -75px; */
+            z-index: 1;
+            position: fixed;
+            /* width: 500px;
+height: 200px; */
+            top: 50%;
+            left: 50%;
+            margin-top: -130px;
+            /* Negative half of height. bayad nesfe height bashe */
+            margin-left: -150px;
+            /* Negative half of width. bayad nesfe width bashe */
+            /* border: 16px solid #f3f3f3; */
+            /* border-radius: 50%; */
+            /* border-top: 16px solid #3498db; */
+            width: 320px;
+            height: 250px;
+            /* -webkit-animation: spin 2s linear infinite; */
+            /* animation: spin 2s linear infinite; */
+            /* border-top: 16px solid blue;
+border-right: 16px solid green;
+border-bottom: 16px solid red;
+border-left: 16px solid pink; */
+        }
+
+        /* @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+    }
+
+    @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+        } */
+
+        #sl2 {
+            width: 130px;
+        }
+
+        .container {
+            background: #fff;
+        }
+
+        .lds-ellipsis {
+            display: inline-block;
+            z-index: 1;
+            position: fixed;
+            top: 80%;
+            left: 60%;
+            margin-top: -130px;
+            margin-left: -150px;
+            width: 320px;
+            height: 250px;
+        }
+
+        .lds-ellipsis div {
+            position: absolute;
+            top: 40%;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: blue;
+            animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        }
+
+        .lds-ellipsis div:nth-child(1) {
+            left: 8px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(2) {
+            left: 8px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(3) {
+            left: 32px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+
+        .lds-ellipsis div:nth-child(4) {
+            left: 56px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+
+        @keyframes lds-ellipsis1 {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes lds-ellipsis3 {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(0);
+            }
+        }
+
+        @keyframes lds-ellipsis2 {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(24px, 0);
+            }
+        }
+   
+        @import url("{% static 'fontiran.css/' %}");
+        /* لینک فایلی که وظیفه بارگذاری فونت ها را برعهده دارد */
+
+        body {
+            font-family: IRANSans;
+            font-weight: 300;
+        }
+
+        /* سایر دستورات وب سایت */
+        /* ... */
+
+        .megamenu-li {
+            position: static;
+            direction: rtl;
+        }
+
+        .megamenu {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            direction: rtl;
+        }
+
+        .iconfirst {
+            color: blue;
+            margin: 15%;
+        }
+
+        .icon {
+            color: black;
+            margin: 15%;
+        }
+
+        .icon:hover {
+            border: 1px;
+            border-radius: 5%;
+            color: black;
+            font-weight: bold;
+        }
+
+        .navbar-nav li:hover>.dropdown-menu {
+            display: block;
+        }
+
+
+    </style>
+    
+    <title>{% block title %} {% endblock %} پخش لوله و تجهیزات ایران</title>
+    
+</head>
+
+
+
+<body class="main_page" style="background-color: white; font-family: sans-serif;" 
+
+{% if registererror %}
+{% for error in registererror %}
+
+onload="hulla.send('{{ error }}', 'danger'); $(function(){$('#enter').click();}); $(function(){$('#registerform').click();});"
+  
+{% endfor %}
+{% endif %}
+{% if mregistererror %}
+{% for error in mregistererror %}
+
+onload="hulla.send('{{ error }}', 'danger'); $(function(){$('#enter').click();}); $(function(){$('#register-tab-2').click();});"
+  
+{% endfor %}
+{% endif %}
+
+{% if error_list %}
+{% for error in error_list %}
+
+onload="hulla.send('{{ error_list.0 }}', 'danger'); $(function(){$('#enter').click();});"
+ 
+{% endfor %}
+{% endif %}
+
+>
+    <div id="loader">
+
+        <!-- {% for b in fhlogo %}
+    
+        <img src="{% static 'media/' %}{{ b.Logo }}" alt="پخش لوله و تجهیزات ایران">
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        {% endfor %} -->
+    </div>
+    
+    <div id="blur1" class="sheree_text_wrapper" style="color:#00B6BE;">
+        {% block body %}
+
+        {% endblock %}
+    
+    </div>
+    <!-- Plugins JS File -->
+
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.hoverIntent.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'assets/js/superfish.min.js' %}"></script>
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-input-spinner.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.elevateZoom.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap-input-spinner.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-slider.js.download' %}"></script>
+    <!-- Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'js/persianumber.min.js' %}"></script>
+
+    <!-- <script src="{% static 'js/rating.js' %}"></script> -->
+    <script>
+                $('form[name="login"]').submit(function(event) {
+
+                var recaptcha = $("#g-recaptcha-response").val();
+                if (recaptcha === "") {
+                event.preventDefault();
+                // alert("Please check the recaptcha");
+                hulla.send('لطفا تیک"من ربات نیستم" را بزنید ', 'danger');
+                }
+                });
+        function tooglebar(p1, p2) {
+
+
+            var t = $("#" + p1);
+
+            $("." + p2).toggle("slow")
+
+            t.toggleClass("expanded");
+
+            if (t.hasClass("expanded")) {
+                t.html('<i class="fa fa-chevron-up" aria-hidden="true"></i>');
+
+            } else {
+                t.html('<i class="fa fa-chevron-down" aria-hidden="true">');
+            }
+
+            return 1;
+        }
+
+        $(function () {
+
+
+            $('#sl2').slider();
+
+
+
+        });
+    </script>
+    <script>
+        function myLoadingFunction() {
+            document.getElementById("loader").style.display = "block";
+            var filterVal = 'blur(3px)';
+            $('#blur1')
+                .css('filter', filterVal)
+                .css('webkitFilter', filterVal)
+                .css('mozFilter', filterVal)
+                .css('oFilter', filterVal)
+                .css('msFilter', filterVal);
+        }
+        function myLoadingFunctionEnd() {
+            document.getElementById("loader").style.display = "none";
+            var filterVal = 'blur(0px)';
+
+            $("#blur1").removeAttr("style");
+        }
+        myLoadingFunctionEnd();
+        function addbascket(id, name, img) {
+            if ('{{user.id}}' != 'None') {
+                //var action = confirm("به سبد خرید اضافه شود؟");
+                //if (action != false ) {
+                $.ajax({
+                    url: '{% url "WebSite:AddBascket" %}',
+                    data: {
+                        'pid': id,
+                        'name': name,
+                        'img1': img,
+                        'Create_Uid': '{{request.user.id}}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if(data.AddedBefor>0){hulla.send('این کالا قبلا انتخاب شده است!', 'warning');}
+                        else {
+                        if (data.goods>0 && data.numberofgoods>0 ) {
+                        if (data.Bascket) {
+                            appendToBascket(data.Bascket, data.priceoff);
+                            $('#cart-count').text(data.sellbascketCount);
+                            $('#cart-total-price').text(data.sumBascketPriceoff + ' تومان');
+                            hulla.send(data.Bascket.name + ' ' + 'به سبد خرید افزوده شد  ', 'success');
+
+                        }
+                    }
+                    else {
+                        hulla.send('کالای انتخاب شده نا موجود می باشد!', 'danger');
+                    }}
+                    }
+                });
+                // }
+            }
+            else {
+                alert('لطفا ابتدا در سایت ثبت نام کنید')
+            }
+        }
+        function appendToBascket(Bascket, priceoff) {
+            $(".dropdown-cart-products").append(`
+                                 <div class="product" id="Bascket${Bascket.id}">
+                                    <div class="product-cart-details">
+                                        <h4 class="product-title">
+                                            <a href="product.html">
+
+                                                ${Bascket.name}
+                                               
+                                               
+                                            </a>
+                                        </h4>
+
+                                        <span class="cart-product-info">
+                                            <!--<span class="cart-product-qty">1 x </span>-->
+                                            قیمت واحد:
+                                            ${priceoff}
+                                        </span>
+                                        <br/>
+                                        <span >
+                                          قیمت کل: 
+                                          
+                                          <span id="totalcost${Bascket.id}" >
+                                            ${priceoff}
+                                        </span>
+                                    
+                                        </span>
+                                    </div><!-- End .product-cart-details -->
+                                    
+                                    <figure class="product-image-container">
+                                        
+                                        <a href="product.html" class="product-image">
+                                            <img src="{% static 'media/' %}${Bascket.img1}" alt="محصول">
+                                        </a>
+                                        
+                                    <div style="width: 5em">
+                                        <form>
+                                            <input type="number" id="qty${Bascket.id}" onchange="updatecount('${Bascket.id}','${Bascket.pid}')"  class="form-control" value="1" min="1"  step="1" data-decimals="0" required="" >
+                                        </form>
+                                    </div>
+                                    </figure>
+                                    <div onclick="deleteBascket(${Bascket.id})"  style="cursor: pointer;" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></div>
+                                    
+                                </div>
+                                 
+    `);
+        }
+
+        function deleteBascket(id) {
+            //var action = confirm("Are you sure you want to delete this user?");
+            // if (action != false) {
+            $.ajax({
+                url: '{% url "WebSite:Bascketdelete" %}',
+                data: {
+                    'id': id,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.deleted) {
+                        $('#Bascket' + id).remove();
+                        $('#cartrow' + id).remove();
+                        $('#cart-count').text(data.sellbascketCount);
+                        $('#cart-total-price').text(data.sumBascketPriceoff + ' تومان');
+                        hulla.send(data.name + ' ' + 'ازسبد خرید حذف شد', 'danger');
+                    }
+                }
+            });
+            // }
+        }
+        function addّFavorite(id, name, img) {
+            if ('{{user.id}}' != 'None') {
+                //var action = confirm("به سبد خرید اضافه شود؟");
+                //if (action != false ) {
+                $.ajax({
+                    url: '{% url "WebSite:AddFavorite" %}',
+                    data: {
+                        'pid': id,
+                        'name': name,
+                        'img1': img,
+                        'Create_Uid': '{{request.user.id}}'
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.Favorite) {
+                            appendToFavorite(data.Favorite, data.priceoff);
+                            $('#wishlist-count').text(data.favoriteCount);
+                            //alert(data.favoriteCount)
+                            $('#wishlist-total-price').text(data.sumFavoritePriceoff + ' تومان');
+                            hulla.send(data.Favorite.name + ' ' + 'به لیست علاقه مندی ها افزوده شد', 'info');
+
+                        }
+                    }
+                });
+                // }
+            }
+            else {
+                alert('لطفا ابتدا در سایت ثبت نام کنید')
+            }
+        }
+        function appendToFavorite(Favorite, priceoff) {
+            $(".dropdown-wishlist-products").append(`
+                                 <div class="product" id="wishlist${Favorite.id}">
+                                    <div class="product-wishlist-details">
+                                        <h4 class="product-title">
+                                            <a href="product.html">
+
+                                                ${Favorite.name}
+                                               
+                                               
+                                            </a>
+                                        </h4>
+
+                                        <span class="wishlist-product-info">
+                                            <!--<span class="wishlist-product-qty">1 x </span>-->
+                                            ${priceoff}
+                                        </span>
+                                        
+                                    </div><!-- End .product-wishlist-details -->
+
+                                    <figure class="product-image-container">
+                                        
+                                        <a href="product.html" class="product-image">
+                                            <img src="{% static 'media/' %}${Favorite.img1}" alt="محصول">
+                                        </a>
+                                        
+                                        
+                                    </figure>
+                                    <div onclick="deleteFavorite(${Favorite.id})"  style="cursor: pointer;" class="btn-remove" title="حذف محصول"><i class="icon-close"></i></div>
+                                    
+                                </div>
+                                 
+    `);
+        }
+
+        function deleteFavorite(id) {
+            //var action = confirm("Are you sure you want to delete this user?");
+            // if (action != false) {
+            $.ajax({
+                url: '{% url "WebSite:Favoritedelete" %}',
+                data: {
+                    'id': id,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.deleted) {
+                        $('#wishlist' + id).remove();
+                        $('#wishlistid' + id).remove();
+
+                        $('#wishlist-count').text(data.favoriteCount);
+                        //alert(data.favoriteCount)
+                        $('#wishlist-total-price').text(data.sumFavoritePriceoff + ' تومان');
+                        hulla.send(data.name + ' ' + 'از لیست علاقه مندی ها حذف شد', 'warning');
+                    }
+                }
+            });
+            // }
+        }
+
+        $("form#addcomment").submit(function () {
+            var HeadInput = $('input[name="Head"]').val().trim();
+            //alert(HeadInput)
+            var comInput = $('textarea[name="com"]').val().trim();
+            //var ageInput = $('input[name="age"]').val().trim();
+            if (HeadInput && comInput) {
+                if ('{{user.id}}' != 'None') {
+                    $.ajax({
+                        url: '{% url "WebSite:AddComment" %}',
+                        data: {
+                            'pid': '{{id}}',
+                            'Head': HeadInput,
+                            'com': comInput,
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.comment1) {
+                                appendTocomment(data.comment1, data.Create_Uid, data.alarm);
+                                //$('#wishlist-count').text(data.favoriteCount);
+                                //alert(data.favoriteCount)
+                                // $('#wishlist-total-price').text(data.sumFavoritePriceoff+' تومان');
+
+                            }
+                        }
+                    });
+                }
+                else {
+                    alert('لطفا ابتدا در سایت ثبت نام کنید');
+                    return false;
+                }
+            }
+            else {
+                alert("لطفا فیلد ها را کامل کنید.");
+            }
+            $('form#addcomment').trigger("reset");
+            return false;
+
+        });
+        function appendTocomment(comment1, Create_Uid, alarm) {
+            $(".reviews").append(`
+                                 <div class="review">
+                                    <div class="row no-gutters">
+                                        <div class="col-auto">
+                                            <h4><a href="#">
+                                               
+                                                
+                                                
+                                                ${Create_Uid}
+                                               
+                                            
+                                            </a></h4>
+                                            <div class="ratings-container">
+                                                <div class="ratings">
+                                                    <div class="ratings-val" style="width: 80%;"></div>
+                                                    <!-- End .ratings-val -->
+                                                </div><!-- End .ratings -->
+                                            </div><!-- End .rating-container -->
+                                            <span class="review-date">${comment1.Create_Date}</span>
+                                        </div><!-- End .col -->
+                                        <div class="col-12">
+                                            <h4>${comment1.Head}</h4>
+
+                                            <div class="review-content">
+                                                <p>${comment1.com}</p>
+                                                <p class="text-danger"> ${alarm}</p>
+                                            </div><!-- End .review-content -->
+
+                                            <div class="review-action text-dark">
+                                                <a href="#"><i class="icon-thumbs-up"></i>مثبت (2)</a>
+                                                <a href="#"><i class="icon-thumbs-down"></i>منفی (0)</a>
+                                            </div><!-- End .review-action -->
+                                        </div><!-- End .col-auto -->
+                                    </div><!-- End .row -->
+                                </div><!-- End .review -->
+                                 
+    `);
+        }
+        function updatecount(id, pid) {
+            var i = '#qty' + id
+            var j = '#cartcount' + id
+            var c = $(i).val();
+            var d = $(j).val();
+            // $('#cartcount'+id).val(c);
+
+            if (d) {
+                $(i).val(d);
+                var c = $(i).val();
+            }
+
+            //alert(i);
+
+            if ('{{user.id}}' != 'None') {
+                $.ajax({
+                    url: '{% url "WebSite:UpdateCount" %}',
+                    data: {
+                        'id': id,
+                        'pid': pid,
+                        'newcount': c,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        if (data.isUpdated==0){
+                            hulla.send('تعداد انتخاب شده بیشتر از موجودی کالا است!', 'danger');
+                        }
+                        if (data.sumBascketPriceoff) {
+                            //appendTocomment(data.comment1,data.Create_Uid,data.alarm);
+                            //$('#wishlist-count').text(data.favoriteCount);
+                            //alert(data.favoriteCount)
+                            // $('#wishlist-total-price').text(data.sumFavoritePriceoff+' تومان');
+                            $('#cart-total-price').text(data.sumBascketPriceoff + ' ریال');
+                            $('.sumBascketPriceoff').text(data.sumBascketPriceoff + ' ریال');
+                            $('#totalcost' + id).text(data.Newtotalcost);
+                            $('#carttotalcost' + id).text(data.Newtotalcost  + ' ریال');
+                            $(i).val(data.newcount);
+                            $(j).val(data.newcount);
+                            $('.pcount').val(data.newcount);
+
+                        }
+                    }
+                });
+            }
+            else {
+                alert('لطفا ابتدا در سایت ثبت نام کنید');
+                return false;
+            }
+
+        };
+    </script>
+    <script src="{% static 'js/hullabaloo.js' %}"></script>
+
+
+    <script type="text/javascript">
+        var hulla = new hullabaloo();
+
+    // hulla.send("jQueryScript.Net", "success");
+      //hulla.send("jQuery Hullabaloo.js Plugin Examples", "info");
+     //hulla.send("A Bootstrap 4 Notification Plugin", "warning");
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>
+        $(document).ready(function () {
+            $(".megamenu").on("click", function (e) {
+                e.stopPropagation();
+            });
+            $('*').persiaNumber();
+            // $('.sheree_text_wrapper').addClass('show');
+        });
+    </script>
+    <script>
+        function change(id) {
+
+            myLoadingFunction();
+
+            var modelCbs = document.querySelectorAll(".models input[type='checkbox']");
+            var processorCbs = document.querySelectorAll(".processors input[type='checkbox']");
+            var pc1 = document.querySelectorAll(".pc1 input[type='checkbox']");
+            var pc2 = document.querySelectorAll(".pc2 input[type='checkbox']");
+            var pc3 = document.querySelectorAll(".pc3 input[type='checkbox']");
+            var filters = {
+                models: getClassOfCheckedCheckboxes(modelCbs),
+                processors: getClassOfCheckedCheckboxes(processorCbs)
+            };
+
+            var Groups = getClassOfCheckedCheckboxes(modelCbs);
+
+
+            var Brands = getClassOfCheckedCheckboxes(processorCbs)
+
+            var pc1 = getClassOfCheckedCheckboxes(pc1)
+            var pc2 = getClassOfCheckedCheckboxes(pc2)
+            var pc3 = getClassOfCheckedCheckboxes(pc3)
+            // alert(Brands)
+            //   filterResults(filters);
+            $.ajax({
+                url: '{% url "WebSite:advancedsearchProductsJson"  %}',
+                data: {
+                    'Groups': '[' + Groups + ']',
+                    'Brands': '[' + Brands + ']',
+                    'pc1': '[' + pc1 + ']',
+                    'pc2': '[' + pc2 + ']',
+                    'pc3': '[' + pc3 + ']',
+                    'id': id,
+                    'nb_page_items': $("#nb_page_items").val(),
+                    'selectProductSort': $("#selectProductSort").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.filterd) {
+                        // $('#cart-total-price').text(data.sumBascketPriceoff + ' تومان');
+                        // $('.sumBascketPriceoff').text(data.sumBascketPriceoff );
+                        // $('#totalcost'+id).text(data.Newtotalcost);
+                        // $('#carttotalcost'+id).text(data.Newtotalcost);
+                        // $(i).val(data.newcount);
+                        // $(j).val(data.newcount);
+                        //alert(data.ProductsHtml);
+                        $('.product').remove();
+                        $('#count').text(data.productsFilteredCount);
+                        $('#countkol').text(data.productsFilteredCountKol);
+                        // $('.SubGroup2in').remove();
+                        // $('.SubGroup3in').remove();
+
+                        $(".row1").append(data.ProductsHtml);
+                        // $(".SubGroup2").append(data.productsgroups2Html);
+                        // $(".SubGroup3").append(data.productsgroups3Html);
+                        myLoadingFunctionEnd();
+
+
+                    }
+                }
+            });
+
+        }
+
+        function getClassOfCheckedCheckboxes(checkboxes) {
+            var classes = [];
+
+            if (checkboxes && checkboxes.length > 0) {
+                for (var i = 0; i < checkboxes.length; i++) {
+                    var cb = checkboxes[i];
+
+                    if (cb.checked) {
+                        classes.push(cb.getAttribute("rel"));
+                    }
+                }
+            }
+            return classes;
+        }
+
+
+    </script>
+    <script>
+        function forgetpass() {
+
+
+            var forgetform='<form autocomplete="off" id="forgetform" class="border p-4"> <p>نام کاربری خود را وارد نمایید  :<p/><input placeholder="نام کاربری" type="text" id="userforget" class="form-control p-3"/><p>شماره تلفن همراه خود را وارد نمایید  :<p/><input placeholder="09xxxxxxxxx" type="tel" id="tel" pattern="[0]{1}[9]{1}[0-9]{9}" class="form-control p-3"/> <span id="insertbuttun"><buttun type="submit" class="shadow btn btn-success font-weight-bold rounded border" id="btnforgetsubmit" onclick="resetpass();" style="background-color: #00b6be;">ارسال کلمه عبور جدید <i class="icon-long-arrow-left"></i></buttun></span></form>'
+                $("#phone").html(forgetform)
+
+                   
+        }
+        function resetpass () {
+            
+            $.ajax({
+                url: '{% url "WebSite:resetpass"  %}',
+                data: {
+
+                    'tel': $("#tel").val(),
+                    'userforget':$("#userforget").val()
+                    
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.filterd) {
+                        // $('form[id="forgetform"]').remove();
+                        $('#clickforgetagain').html("درصورتی که پس از <span id='resendalarm'>30</span> ثانیه کلمه عبور ارسال نشد مجدد روی کلید ارسال کلیک نمایید.")
+                        var d = new Date(); 
+                        hulla.send('کلمه عبور جدید برای شما ارسال شد.', 'success');
+                        // $("#phone").children().prop('disabled',true);
+                        // $("#btnforgetsubmit").html('لطفا منتظر بمانید...')
+                        // $("#btnforgetsubmit").attr("disabled","true");
+                        $("#btnforgetsubmit").hide();
+                        runFunction(d);
+                        
+                        //$("#insertbuttun").html('<buttun type="submit" class="shadow btn btn-success font-weight-bold rounded border" id="btnforgetsubmit" onclick="resetpass();" style="background-color: #00b6be;">ارسال کلمه عبور جدید <i class="icon-long-arrow-left"></i></buttun>');
+                        
+                        // $("#btnforgetsubmit").prop("disabled",false);
+                        
+                        
+                    }
+                    else{
+                        // $("#phone").html(forgetform)
+                       
+                        hulla.send('شماره تلفن یا نام کاربری وارد شده موجود نمی باشد.', 'danger');
+                    }                    
+                }
+            });
+                
+            };
+            // $('#test').on("click",function(){
+            //     var d = new Date(); 
+            // runFunction(d);
+
+            // });
+           
+            function runFunction(d){
+                var e = new Date(); 
+                g=e;
+                i=d;
+                // console.log(g);
+                // console.log(i);
+                var h=parseInt((g-i)/1000);
+                // console.log(h);
+                if(h<=30){
+                    $('#resendalarm').text(30-h);
+                    setTimeout(  function() 
+                    {
+                        runFunction(d);
+                    }, 1000);
+                                        
+                                    
+                                      
+                                    }
+                else{
+                    // $("#phone").children().prop('disabled',false);
+                    // $("#btnforgetsubmit").html('ارسال مجدد')
+                    // $("#btnforgetsubmit").attr("disabled","false");
+                    $("#btnforgetsubmit").show();
+                    console.log('end');
+                    return 1;
+                }
+                                     
+
+            }
+
+
+    </script>
+    <script src="{% static 'js/bootstrap-slider.js.download' %}"></script>
+</body>
+
+
+</html>

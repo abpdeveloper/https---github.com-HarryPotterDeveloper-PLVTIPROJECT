@@ -1,0 +1,135 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} لیست گروه کالا ها|
+{% endblock %}
+
+
+
+{% block body %}
+<div class="page-wrapper" style="background-color: whitesmoke;">
+    {% include 'partials/firstpageheader.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav breadcrumb-with-filter ">
+            <div class="container-fluid border-bottom border-black ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="font-weight-bold" style="font-size: large;"
+                            href="{% url 'WebSite:login' %}">خانه</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a class="font-weight-bold" style="font-size: large;" href="#">لیست گروه های کالا</a>
+                    </li>
+                </ol>
+            </div><!-- End .container-fluid -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="categories-page">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% if pg %}
+                        {% for pgp in pg %}
+                        <div class="col-lg-2 col-md-4 col-sm-6 banner border shadow rounded">
+                            <a style="margin-top: 1%;" href="{% url 'WebSite:treeshowgroup' pgp.id %}">
+                                <img style="width: 100%;" src="{% static 'media/' %}{{ pgp.group_img }}" alt="بنر">
+                            </a>
+
+                            <a class="banner-link" href="#">
+                                <p class="text-center text-dark font-weight-bolder" style="font-size: large;">
+                                    {{ pgp.Group_Name }}</p>
+                                <!-- End .banner-title -->
+                                {% for pl in pl %}
+                                {% if pl and pl.group_id == pgp.id %}
+                                <a class="banner-link-text" href="#"></a>
+                                {% endif %}
+                                {% endfor %}
+
+                            </a><!-- End .banner-link -->
+                        </div><!-- End .banner -->
+
+                        {% endfor %}
+
+
+                        {% endif %}
+                    </div><!-- End .row -->
+                </div><!-- End .container-fluid -->
+            </div><!-- End .categories-page -->
+        </div><!-- End .page-content -->
+
+
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="products">
+                    <div class="row">
+                        {% if prd %}
+                        {% for pl in prd %}
+                        <div style="display: inline-block;"
+                            class="product col-lg-3 col-md-3 col-sm-12 col-xs-12 border shadow rounded">
+                            <figure class="product-media ">
+                                <a href="{% url 'WebSite:showproduct' pl.id %}">
+                                    <img src="{% static 'media/' %}{{ pl.img1 }}" alt="تصویر محصول"
+                                        class="product-image">
+                                </a>
+
+                                <div class="product-action-vertical">
+                                    <div onclick="addّFavorite({{pl.id}},'{{ pl.name }}','{{pl.img1}}')"
+                                        class="btn-product-icon btn-wishlist btn-expandable" style="cursor: pointer;">
+                                        <span>افزودن
+                                            به لیست علاقه مندی</span></div>
+                                </div><!-- End .product-action -->
+
+                                <div class="product-action action-icon-top">
+                                    <div onclick="addbascket({{pl.id}},'{{ pl.name }}','{{pl.img1}}')"
+                                        style="cursor: pointer;" class="text-decoration-none btn-product btn-cart"
+                                        title="افزودن به سبد خرید"><span>افزودن به سبد
+                                            خرید</span></div>
+                                </div><!-- End .product-action -->
+                            </figure><!-- End .product-media -->
+
+                            <div class="product-body">
+                                <div class="product-cat">
+                                    <a href="#">{% for group in fehrests %}
+                                        {% if group and group.id == pl.group_id %}
+                                        گروه محصول : {{ group.Group_Name }}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </a>
+                                </div><!-- End .product-cat -->
+                                <h3 class="product-title"><a href="{% url 'WebSite:showproduct' pl.id %}">نام کالا :
+                                        {{ pl.name }}</a></h3>
+                                <h3 class="product-title"><a href="#">برند کالا :
+                                        {{ pl.brand }}</a></h3>
+                                <!-- End .product-title -->
+                                <div class="product-price">
+                                    {% for cost in Cost %}
+                                    {% if cost and cost.pid_id == pl.id %}
+                                    {% if cost.priceoff %}
+                                    قیمت : {{ cost.priceoff }}تومان
+                                    {% else %}
+                                    قیمت : {{ cost.priceorg }}تومان
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div><!-- End .product-price -->
+                                <div class="ratings-container">
+                                    <div class="ratings">
+                                        <div class="ratings-val" style="width: 0%;"></div>
+                                        <!-- End .ratings-val -->
+                                    </div><!-- End .ratings -->
+                                    <span class="ratings-text">( 0 دیدگاه )</span>
+                                </div><!-- End .rating-container -->
+                            </div><!-- End .product-body -->
+                        </div><!-- End .product -->
+                        {% endfor %}
+                        {% endif %}
+                    </div><!-- End .products -->
+                </div><!-- End .container -->
+            </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/mobile.html' %}
+    {% endblock %}

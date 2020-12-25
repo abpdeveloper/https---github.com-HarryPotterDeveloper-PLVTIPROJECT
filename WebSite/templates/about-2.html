@@ -1,0 +1,107 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} درباره ما|
+{% endblock %}
+
+
+
+
+{% block body %}
+<div class="page-wrapper">
+    {% include 'partials/firstpageheader.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">درباره ما</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content pb-3">
+            <div class="container-fluid">
+                <div class="row">
+                    {% if aboutusteam %}
+                    {% for about in aboutusteam %}
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="about-text text-center mt-3">
+                            <h2 class="title text-center mb-2">ما که هستیم</h2><!-- End .title text-center mb-2 -->
+                            <p class="justify">{{ about.whoweare }} </p>
+                            <img src="{% static 'media/' %}{{ about.teamimg }}" alt="signature" class="mx-auto mb-5">
+                        </div><!-- End .about-text -->
+                    </div><!-- End .col-lg-10 offset-1 -->
+                    {% endfor %}
+                    {% endif %}
+                </div><!-- End .row -->
+                <div class="mb-2"></div><!-- End .mb-2 -->
+
+                <div class="bg-light-2 pt-6 pb-7 mb-6">
+                    <div class="container">
+                        <h2 class="title text-center mb-4">آشنایی با تیم ما</h2><!-- End .title text-center mb-2 -->
+                        <div class="row">
+                            {% if about %}
+                            {% for about in about %}
+                            <div class="col-sm-6 col-lg-3">
+                                <div class="member member-2 text-center">
+                                    <figure class="member-media">
+                                        <img src="{% static 'media/' %}{{ about.personelimg }}" alt="توضیح عکس">
+
+                                        <figcaption class="member-overlay">
+                                            <div class="social-icons social-icons-simple">
+                                                <a href="#" class="social-icon" title="فیسبوک" target="_blank"><i
+                                                        class="icon-facebook-f"></i></a>
+                                                <a href="#" class="social-icon" title="توییتر" target="_blank"><i
+                                                        class="icon-twitter"></i></a>
+                                                <a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
+                                                        class="icon-instagram"></i></a>
+                                            </div><!-- End .soial-icons -->
+                                        </figcaption><!-- End .member-overlay -->
+                                    </figure><!-- End .member-media -->
+                                    <div class="member-content">
+                                        <h3 class="member-title">{{ about.pposision }}<span>{{ about.ptitle }}</span>
+                                        </h3>
+                                        <!-- End .member-title -->
+                                    </div><!-- End .member-content -->
+                                </div><!-- End .member -->
+                            </div><!-- End .col-lg-3 -->
+                            {% endfor %}
+                            {% endif %}
+                        </div><!-- End .row -->
+
+                    </div><!-- End .container -->
+                </div><!-- End .bg-light-2 pt-6 pb-6 -->
+{% comment %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            <div class="brands-text text-center mx-auto mb-6">
+                                <h2 class="title">برند های معروفی که با ما همکاری می کنند</h2>
+                                <!-- End .title -->
+                            </div><!-- End .brands-text -->
+                            <div class="brands-display">
+                                <div class="row justify-content-center">
+                                    {% if aboutbrand %}
+                                    {% for ab in aboutbrand %}
+                                    <div class="col-6 col-sm-4 col-md-3">
+                                        <a href="#" class="brand">
+                                            <img src="{% static 'media/' %}{{ ab.img }}" alt="نام برند">
+                                        </a>
+                                    </div><!-- End .col-md-3 -->
+                                    {% endfor %}
+                                    {% endif %}
+                                </div><!-- End .row -->
+                            </div><!-- End .brands-display -->
+                        </div><!-- End .col-lg-10 offset-lg-1 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+                {% endcomment %}
+            </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/mobile.html' %}
+
+{% endblock %}

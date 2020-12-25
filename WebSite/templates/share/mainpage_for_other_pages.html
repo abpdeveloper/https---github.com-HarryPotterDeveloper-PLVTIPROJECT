@@ -1,0 +1,127 @@
+{% load static %}
+<html lang="fr" dir="rtl">
+
+<head>
+    {% include 'partials/link.html' %}
+<title>{% block title %} {% endblock %} پخش لوله و تجهیزات ایران</title>
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'favicon.png' %}"/>
+</head>
+<body class="main_page" style="font-family: sans-serif; " >
+   
+    <div id="loader">
+
+        {% for b in fhlogo %}
+
+        <img src="{% static 'media/' %}{{ b.Logo }}" alt="پخش لوله و تجهیزات ایران">
+        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        {% endfor %}
+    </div>
+
+    <div id="blur1" style="color:#00B6BE; font-family: sans-serif;">
+        {% block body %}
+
+        {% endblock %}
+    </div>
+ <!-- tessssst -->
+ 
+ <link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}"/>
+
+    {{ form.media }}
+    <script>
+        function myLoadingFunction() {
+                    document.getElementById("loader").style.display = "block";
+                    var filterVal = 'blur(3px)';
+                    $('#blur1')
+                        .css('filter', filterVal)
+                        .css('webkitFilter', filterVal)
+                        .css('mozFilter', filterVal)
+                        .css('oFilter', filterVal)
+                        .css('msFilter', filterVal);
+                }
+                function myLoadingFunctionEnd() {
+                    document.getElementById("loader").style.display = "none";
+                    var filterVal = 'blur(0px)';
+        
+                    $("#blur1").removeAttr("style");
+                }
+                
+                myLoadingFunctionEnd();
+        function changegroup(id) {
+            myLoadingFunction();
+        
+        $.ajax({
+            url: '{% url "WebSite:ProductCategoryJson"  %}',
+            data: {
+                'Groups': id,
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.filterd) {
+                   
+                    $('#id_cname1').html(data.html1);
+                    $('#id_cname2').html(data.html2);
+                    $('#id_cname3').html(data.html3);
+                    $('#cname1').html(data.categoryname1);
+                    $('#cname2').html(data.categoryname2);
+                    $('#cname3').html(data.categoryname3);
+                    myLoadingFunctionEnd();
+        
+        
+                }
+            }
+        });
+        
+        }
+        </script>
+         <script>
+             $(".searchcustomer").on("change paste keyup", function() {
+               
+               searchcustomer();
+              
+             
+              
+               
+
+               });
+
+            function searchcustomer() {
+
+            ss=$('.searchcustomer').val();     
+             
+            // $('.load1').addClass("spinner-border");
+            // $('.load1').addClass("text-danger");
+            
+            
+   
+            $.ajax({
+                url: '{% url "WebSite:searchcustomerJson"  %}',
+                data: {
+                    'serachstatement': ss,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.filterd) {
+                       
+                        
+                        $('.customerresult').html(data.html1);
+                        // $('.load1').removeClass("spinner-border");
+                        // $('.load1').removeClass("text-danger");
+
+                       
+                        
+
+              
+                  
+            
+            
+                    }
+                }
+            });
+            
+            }
+            </script>
+    
+    <!-- tessssst -->
+</body>
+
+</html>

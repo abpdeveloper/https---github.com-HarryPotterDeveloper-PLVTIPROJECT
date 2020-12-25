@@ -1,0 +1,176 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش لیست کاربر ها|
+{% endblock %}
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#userBtnDelete").click({
+            ModelName: "User",
+            RedirectPath: "users", TableId: "userTable"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد ادمین</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">گزارش لیست کاربر ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success rounded shadow" href="{% url 'WebSite:create_user' %}">
+                                    ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger rounded shadow" id="userBtnDelete" href="#"> حذف گروهی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش لیست کاربر ها
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+
+                            <table id="example"
+                                class="display shadow rounded table table-hover table-striped table-bordered table-sm text-center">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input type="checkbox" class="selectAll "
+                                                name="selectAll" value="all">
+                                        </th>
+                                        <th>کد کاربر</th>
+                                        <th>کلید ها</th>
+                                        <th>تغییر کلمه عبور</th>
+                                        <th>عکس کاربر</th>
+                                        <th>کد مشتری</th>
+                                        <th>نام کاربری</th>
+                                        <th>نام و نام خانوادگی</th>
+                                        <!-- <th>ایمیل</th> -->
+                                        <th>فعال بودن</th>
+                                        <th>جایگاه</th>
+                                        <th>ادمین بودن</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if users %}
+                                    {% for result in users %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td>
+                                            {{ result.id }}
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update_user' result.id %}"><img
+                                                    src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:Delete_User' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+                                        <td>
+                                            <a onclick="formdetailsOpen('{{ result.id  }}')"
+                                                class="text-decoration-none text-success" href="#">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px; display: inline-block;">
+                                                تغییر کلمه عبور
+                                                <script>
+                                                    var Window;
+
+                                                    function formdetailsOpen(a) {
+
+                                                        Window = window.open(
+                                                            "/dashboard/Admin/ChangePassword/" + a,
+                                                            "_blank", "width=700, height=400,position=relative; top=10%; left=-20%;");
+                                                    }
+                                                </script>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {% if user.avatar %}
+                                            <img class="img-responsive img-rounded ui-icon-image" alt=""
+                                                style="max-height: 50px; max-width: 50px; border-radius: 20%;"
+                                                src="{% static 'media/' %}{{ result.avatar }}">
+                                            {% else %}
+                                            <img class="img-responsive img-rounded ui-icon-image" alt=""
+                                                style="max-height: 50px; max-width: 50px; border-radius: 20%;"
+                                                src="{% static 'media/userpic/non-pic/user (1).png' %}">
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {{ result.customersid }}
+                                        </td>
+                                        <td>
+                                            {{ result.username }}
+                                        </td>
+                                        <td>
+                                            {{ result.first_name }}
+                                        </td>
+                                        <!-- <td>
+                                            {{ result.email }}
+                                        </td> -->
+                                        <td>
+                                            {% if result.is_active %}
+                                            فعال
+                                            {% else %}
+                                            غیر فعال
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if result.is_staff %}
+                                            مدیر
+                                            {% else %}
+                                            مدیر نمی باشد
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if result.is_superuser %}
+                                            ادمین
+                                            {% else %}
+                                            ادمین نمی باشد
+                                            {% endif %}
+                                        </td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+{% endif %}
+{% endif %}
+
+{% endblock %}

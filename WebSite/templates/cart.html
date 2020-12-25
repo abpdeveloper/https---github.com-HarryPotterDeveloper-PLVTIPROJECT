@@ -1,0 +1,304 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+{% load my_templatetag %}
+
+{% block title %}
+{{ super }} سبد خرید|
+{% endblock %}
+
+
+
+{% block body %}
+<div class="page-wrapper">
+    {% include 'partials/firstpageheader.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav border-bottom border-dark">
+            <div class="container-fluid ">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item"><a class="font-weight-bold" href="{% url 'WebSite:login' %}" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;">خانه</a></li>
+                    <li class="breadcrumb-item active font-weight-bold" aria-current="page" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;">سبد خرید</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        
+        
+        <div class="page-content">
+            <div class="cart">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="container">
+                                {% if user_info %}
+                                    {% for ui in user_info %}
+                                    <div class="p-3 border shadow" style="border-radius: 10px;">
+                                        <div class="row">
+                                            <h3 class="summary-title border-bottom p-3" 
+                                            style="color:blck; font-weight: bold; font-size: large; font-family: sans-serif;">اطلاعات شما</h3><!-- End .summary-title -->
+
+                                        </div>
+                                        <div class="row p-3 mb-2 border-bottom" >
+                                            <div class="col-lg-6 col-md-6 col-12" >
+                                                <p class="col-12 " style=" font-weight: bold; font-size: large; font-family: sans-serif;">نام و نام خانوادگی :</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <p class="col-12 " style=" font-weight: bold; font-size: large; font-family: sans-serif;">{{ ui.first_name }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row p-3 mb-2 border-bottom" >
+                                            <div class="col-lg-6 col-md-6 col-12" >
+                                                <p class="col-12 " style=" font-weight: bold; font-size: large; font-family: sans-serif;">شماره تماس :</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <p class="col-12 " style=" font-weight: bold; font-size: large; font-family: sans-serif;">{{ ui.cellphone }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row p-3 mb-2 border-bottom" >
+                                            <div class="col-lg-6 col-md-6 col-12" >
+                                                <p class="col-12" style=" font-weight: bold; font-size: large; font-family: sans-serif;">ایمیل :</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <p class="col-12" style=" font-weight: bold; font-size: large; font-family: sans-serif;">{{ ui.email }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row p-3 mb-2 border-bottom" >
+                                            <div class="col-lg-6 col-md-6 col-12" >
+                                                <p class="col-12" style=" font-weight: bold; font-size: large; font-family: sans-serif;">آدرس :</p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-12">
+                                                <p class="col-12" style="justify-self: auto; font-weight: bold; font-size: large; font-family: sans-serif;">{{ ui.last_name }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                {% endif %}
+                            
+                            <div class="p-3 border shadow mt-2" style="border-radius: 10px;">
+                            <h3 class="summary-title border-bottom p-3" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;">اطلاعات فاکتور شما</h3><!-- End .summary-title -->
+                            <table class="table table-hover table-striped col-lg-12 col-md-12 col-12">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;">عکس محصول</th>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;">محصول</th>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;">برند</th>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;">قیمت </th>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;">تعداد</th>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;">مجموع</th>
+                                        <th style="font-size: large; font-family: sans-serif; color: black; font-weight: bold;"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% if sb %}
+                                    {% for sb in sb %}
+                                    <tr id="cartrow{{sb.id}}">
+                                        <td class="product-col">
+                                                    {% for psb in psb %}
+                                                    {% if psb and psb.id == sb.pid_id %}
+                                                   <div style="width: 80px; height: 80px;"  >
+                                                        <img class="text-center" src="{% static 'media/' %}{{ psb.img1 }}"
+                                                            alt="تصویر محصول">
+                                                        </div>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                        </td>
+                                        <td>
+                                            <h3 class="product-title">
+                                                <a style="font-weight: bold; font-size: large; font-family: sans-serif; color: black;" href="{% url 'WebSite:showproduct' sb.pid_id %}">{{ sb.pid }}</a>
+                                            </h3><!-- End .product-title -->
+                                        </td>
+                                        <td>
+                                            {% for psb in psb %}
+                                            {% if psb and psb.id == sb.pid_id %}
+                                            <h3 class="product-title">
+                                                <a style="font-weight: bold; font-size: large; font-family: sans-serif; color: black;" href="#">{{ psb.brand }}</a></h3>
+                                            {% endif %}
+                                            {% endfor %}
+                                            <!-- End .product-title -->
+                                        </td>
+                                        {% if CostLV %}
+                                        {% for cost in CostLV %}
+                                        {% if  sb.pid_id == cost.pid_id  %}
+                                        <td  style="font-weight: bold; font-size: large; font-family: sans-serif; color: black;" class="price-col">{% if  cost.priceorg  %}{{ cost.priceorg | intdot }}{% else %}{% if  cost.priceoff  %}{{ cost.priceoff | intdot }}{% else %} 0
+                                            {% endif %} 
+                                            {% endif %}</td>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% endif %}
+                                        <td class="quantity-col">
+                                            <div class="cart-product-quantity">
+                                                <input type="number" id="cartcount{{sb.id}}"
+                                                    onchange="updatecount('{{sb.id}}','{{sb.pid_id}}')"
+                                                    class="form-control"   value="{{ sb.pcount }}" min="1" max="1000000"
+                                                    step="1" data-decimals="0" required>
+                                            </div><!-- End .cart-product-quantity -->
+                                        </td>
+                                        <td id="carttotalcost{{sb.id}}" class="total-col" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;"><span>
+                                                {% for Cost in Cost %}
+                                                {% if Cost.pid_id == sb.pid_id %}
+                                                <span style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;" id="totalcost{{sb.id}}">
+                                                   {% widthratio Cost.priceoff 1 sb.pcount %}  ریال
+                                                </span>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </span></td>
+                                        <td class="remove-col"><button class="btn-remove text-center" 
+                                                onclick="deleteBascket({{sb.id}})"><i style="color: red;" class="icon-close"></i></button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                </tbody>
+                            </table><!-- End .table table-wishlist -->
+                        </div>
+                    </div>
+                        </div><!-- End .col-lg-9 -->
+                        <aside class="col-lg-3">
+                            <div class="summary summary-cart"  style="border-radius: 10px;">
+                                <h3 class="summary-title" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;">جمع سبد خرید</h3><!-- End .summary-title -->
+
+                                <table class="table table-summary">
+                                    <tbody>
+                                        <tr class="summary-total">
+                                            <td style="color:green; font-weight: bold; font-size: large; font-family: sans-serif;" >مبلغ قابل پرداخت :</td>
+                                            <td class="text-left sumBascketPriceoff" style="color:green; font-weight: bold; font-size: large; font-family: sans-serif;">{{sumBascketPriceoff | intdot }} ریال</td>
+                                        </tr><!-- End .summary-total -->
+                                    </tbody>
+                                </table><!-- End .table table-summary -->
+
+                                </div>
+                            <div class="summary summary-cart" style="border-radius: 10px;">
+                                <h3 class="summary-title" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;">تغییر اطلاعات کاربری</h3><!-- End .summary-title -->
+                                <a onclick="userinfochangeOpen()" class="btn mt-3 shadow btn-block"
+                                style="color: white; background-color: #00b6be;  font-size: large; font-family: sans-serif; border-radius: 10px;" id="tab-orders-link" data-toggle="tab"
+                                    href="#" role="tab" aria-controls="tab-orders" aria-selected="false">
+                                    <span class="btn-text">تغییر آدرس</span>
+                                    <span class="btn-hover-text">تغییر اطلاعات حساب کاربری</span>
+                                    
+                                    <script>
+                                        var Window;
+                                        function userinfochangeOpen() {
+
+                                            Window = window.open(
+                                                "{% url 'WebSite:userchangeinfo' %}",
+                                                "_blank", "width=1200, height=900,position=relative; top=10%; left=-20%;");
+                                        }
+                                    </script>
+                                </a>
+                            </div>
+                            
+                                <div class="summary summary-cart"  style="border-radius: 10px;">
+                                    <h3 class="summary-title" style="color:black; font-weight: bold; font-size: large; font-family: sans-serif;">انتخاب درگاه پرداخت</h3><!-- End .summary-title -->
+    
+                                <div class="accordion-summary" id="accordion-payment">
+                                    <div class="card">
+                            {% comment %}
+                                        <div class="card-header" id="heading-1">
+                                            <h2 class="card-title">
+                                                <a role="button" data-toggle="collapse" href="#collapse-1"
+                                                    aria-expanded="true" aria-controls="collapse-1">
+                                                    درگاه بانک ملت
+                                                </a>
+                                            </h2>
+                                        </div><!-- End .card-header -->
+                                        <div id="collapse-1" class="collapse show" aria-labelledby="heading-1"
+                                            data-parent="#accordion-payment">
+                                            <div class="card-body">
+                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی
+                                                با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی
+                                                نامفهوم.
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+
+                                        <div class="card">
+                                            <div class="card-header" id="heading-2">
+                                                <h2 class="card-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse"
+                                                        href="#collapse-2" aria-expanded="false"
+                                                        aria-controls="collapse-2">
+                                                        درگاه شاپرک
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-2" class="collapse" aria-labelledby="heading-2"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body">
+                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوملورم ایپسوم متن
+                                                    ساختگی با تولید سادگی نامفهوم.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+                                {% endcomment %}
+                                        <div class="card">
+                                            <div class="card-header" id="heading-3">
+                                                <h2 class="card-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse"
+                                                        href="#collapse-3" aria-expanded="false"
+                                                        aria-controls="collapse-3">
+                                                        زرین پال <small class="float-left paypal-link">زرین پال
+                                                            چیست؟</small>
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-3" class="collapse" aria-labelledby="heading-3"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body text-justify justify-content text-dark" style="font-family: sans-serif;">زرین‌پال، اولین پرداخت‌یار پیشگامِ کشور است که با سبک و استانداردهای جدید، سرویس‌های پرداخت الکترونیک را برای کسب‌ وکارها ارائه کرده است. ما هر روزه، میلیاردها تومان را در بستر وبِ کشور، بدون کوچک‌‌‌‌‌ترین خطایی به گردش درمی‌آوریم، با این هدف که در افزایش سهم تجارت الکترونیکی در تولید ناخالص ملی و کمک به رشد و توسعه‌ی کسب وکارها، نقش سازنده و موثری داشته باشیم. https://www.zarinpal.com
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+                                {% comment %}
+                                        <div class="card">
+                                            <div class="card-header" id="heading-4">
+                                                <h2 class="card-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse"
+                                                        href="#collapse-4" aria-expanded="false"
+                                                        aria-controls="collapse-4">
+                                                        واریز بانک
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-4" class="collapse" aria-labelledby="heading-4"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body">
+                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن
+                                                    ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید
+                                                    سادگی نامفهوم.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+
+                                        <div class="card">
+                                            <div class="card-header" id="heading-5">
+                                                <h2 class="card-title">
+                                                    <a class="collapsed" role="button" data-toggle="collapse"
+                                                        href="#collapse-5" aria-expanded="false"
+                                                        aria-controls="collapse-5">
+                                                        کارت به کارت
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-5" class="collapse" aria-labelledby="heading-5"
+                                                data-parent="#accordion-payment">
+                                                <div class="card-body"> لورم ایپسوم متن ساختگی با تولید سادگی
+                                                    نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
+                                    </div><!-- End .accordion -->
+                        {% endcomment %}
+                                    <a href="{% url 'WebSite:request' %}" type="submit" class="btn btn-order btn-block shadow mt-3"
+                                    style="color: white; background-color: #00b6be; font-weight: bold; font-size: large; font-family: sans-serif; border-radius: 10px;">
+                                    <span class="btn-text">پراخت</span>
+                                    <span class="btn-hover-text">پرداخت نهایی</span>
+                                     </a>
+                            </div><!-- End .summary -->
+                        </aside><!-- End .col-lg-3 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .cart -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/mobile.html' %}
+    {% endblock %}

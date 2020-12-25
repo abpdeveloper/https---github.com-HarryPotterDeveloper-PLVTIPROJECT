@@ -1,0 +1,54 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} فروشکاه ها|
+{% endblock %}
+
+
+{% block body %}
+{% include 'partials/firstpageheader.html' %}
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item font-weight-bold"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+            <li class="breadcrumb-item  font-weight-bold"><a href="#">نمایندگی ها</a></li>
+        </ol>
+        <hr/>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+    {% if stor %}
+    {% for sc in stor %}
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 shadow" style="display: inline-block; margin: 1%;">
+        <div class="store">
+            <div class="row">
+                <div class="col-sm-5 col-xl-6">
+                    <figure class="store-media mb-2 mb-lg-0" style="margin-top: 5%;">
+                        <img src="{% static 'media/' %}{{ sc.centerimg }}" alt="image">
+                    </figure><!-- End .store-media -->
+                </div><!-- End .col-xl-6 -->
+                <div class="col-sm-6 col-xl-5" style=" margin-top: 10%;">
+                    <div class="store-content">
+                        <h3 class="store-title  font-weight-bold">نام فروشگاه : {{ sc.salecentername }} </h3>
+                        <!-- End .store-title -->
+                        <address class=" font-weight-bold">آدرس فروشگاه : {{ sc.saddress }}</address>
+                        <div><a href="#" class=" font-weight-bold">شماره تماس : {{ sc.stell }}</a></div>
+
+                        <h4 class="store-subtitle font-weight-bold">ساعت کاری فروشگاه :</h4>
+                        <!-- End .store-subtitle -->
+                        <div class=" font-weight-bold">شنبه-چهارشنبه {{ sc.swtworkstart }}صبح تا {{ sc.swtworkend }} عصر</div>
+                        <div class=" font-weight-bold">پنج شنبه {{ sc.sltworkstart }} صبح تا {{ sc.sltworkend }} عصر</div>
+                    </div><!-- End .store-content -->
+                </div><!-- End .col-xl-6 -->
+            </div><!-- End .row -->
+        </div><!-- End .store -->
+    </div><!-- End .col-lg-6 -->
+    {% endfor %}
+    {% endif %}
+
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+{% include 'partials/footer.html' %}
+{% include 'partials/mobile.html' %}
+
+{% endblock %}

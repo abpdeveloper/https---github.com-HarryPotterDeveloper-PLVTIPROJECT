@@ -1,0 +1,54 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} خدمات پس از فروش|
+{% endblock %}
+
+
+{% block body %}
+
+<div class="page-wrapper">
+  {% include 'partials/firstpageheader.html' %}
+  <nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container-fluid border-bottom border-black">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="font-weight-bold" style="font-size: large;"
+            href="{% url 'WebSite:login' %}">خانه</a>
+        </li>
+  
+        <li class="breadcrumb-item">
+          <a class="font-weight-bold" style="font-size: large;" href="#">اطلاعات خدمات پس از فروش</a></li>
+      </ol>
+    </div>
+  </nav>
+  <main class="main">
+    <div class="container-fluid" style="height: 100%;" >
+      {% if sasreport %}
+        {% for b in sasreport %}
+      <div class="row p-3 mt-1" >
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 float-right " style="height: 100%; width: 100%;">
+          <img class="shadow border rounded" style="height: 200px; width: 100%;" 
+          src="{% static 'media/' %}{{ b.img }}" alt="پخش لوله و تجهیزات ایران">
+      </div>
+      <div class="row col-lg-10 col-md-10 col-sm-12 col-xs-12 float-left">
+      <div class="col-12 float-right" style="height: 50px;">
+        <div class="col-12 shadow border rounded text-right font-wheit-bold " 
+        style="height: 50px; background-color: whitesmoke;">
+        <p style="position: relative; top: 10%; left: -2%; font-weight: bold; font-size: large;">عنوان خدمات : {{ b.title }}</p></div>
+      </div>
+        <div class="col-12 float-right mt-1" style="height: 450px;">
+          <div class="col-12 shadow border rounded text-right font-wheit-bold " 
+          style="height: 450px; background-color: whitesmoke;">
+          <p style="position: relative; top: 5%; text-align: justify; text-justify: inter-word; font-weight: bold; font-size: large;">شرح خدمات : <br/>{{ b.desc }}</p></div>
+        </div>
+      </div>
+        
+      </div>
+      {% endfor %}
+      {% endif %}
+    </div>
+  </main><!-- End .main -->
+  {% include 'partials/footer.html' %}
+  {% include 'partials/mobile.html' %}
+  {% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+{% load my_templatetag %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">داشبورد</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%; color: black; font-weight: bold; font-family: sans-serif;" id="example"
+                                class="display table table-hover table-sm table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th></th>
+                                        <th class="text-center">کد کالا</th>
+                                        <th class="text-center">نام کالا</th>
+                                        <th class="text-center">تعداد</th>
+                                        <th class="text-center">واحد شمارش</th>
+                                        <th class="text-center">قیمت واحد</th>
+                                        <th class="text-center">تخفیف</th>
+                                        <th class="text-center">مالیات</th>
+                                        <th class="text-center">عوارض</th>
+                                        <th class="text-center">جمع کل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if userarticles %}
+                                    {% for result in userarticles %}
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center">{{ result.MerchandiseId }}</td>
+                                        <td class="text-center">{{ result.Merchandisename }}</td>
+                                        <td class="text-center">{{ result.Amount | intdot  }}</td>
+                                        <td class="text-center">{{ result.UnitId }}</td>
+                                        <td class="text-center">{{ result.UnitPrice | intdot  }}</td>
+                                        <td class="text-center">{{ result.VTax | intdot  }}</td>
+                                        <td class="text-center">{{ result.VCharge | intdot  }}</td>
+                                        <td class="text-center">{{ result.Percentage | intdot  }}</td>
+                                        <td class="text-center">{{ result.ATotal | intdot  }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                </tbody>
+                                <div class="tab-pane fade" id="tab-orders" role="tabpanel"
+                                    aria-labelledby="tab-orders-link">
+                                    <p>سفارش جدیدی وجود ندارد</p>
+                                    {% endif %}
+                                </div>
+                            </table>
+                            <div>
+                                <button type="submit"
+                class="closbtn shadow btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold"
+                style="background-color:#e7462a; color: white;">بستن پنجره</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End .col-lg-9 -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+<!-- Mobile Menu -->
+{% include 'partials/mobile.html' %}
+<!-- Sign in / Register Modal -->
+{% else %}
+{% include '404.html' %}
+{% endif %}
+{% endblock %}

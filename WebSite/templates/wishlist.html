@@ -1,0 +1,127 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} لیست علاقه مندی|
+{% endblock %}
+
+
+{% block body %}
+<div class="page-wrapper" style="background-color: whitesmoke;">
+    {% include 'partials/firstpageheader.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav">
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">لیست علاقه مندی</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <table class="table table-wishlist table-mobile">
+                    <thead>
+                        <tr>
+                            <th>عکس</th>
+                            <th>نام</th>
+                            <th>برند</th>
+                            <th>قیمت اصلی</th>
+                            <th>فروش ویژه</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% if sb %}
+                        {% for sb in sb %}
+                        <tr id="wishlistid{{sb.id}}">
+                            <td class="product-col">
+                                <figure class="product-media">
+                                    {% for psb in psb %}
+                                    {% if psb and psb.id == sb.pid_id %}
+                                    <a href="#">
+                                        <img src="{% static 'media/' %}{{ psb.img1 }}" alt="تصویر محصول">
+                                    </a>
+                                    {% endif %}
+                                    {% endfor %}
+                                </figure>
+                            </td>
+                            <td>
+                                <h3 class="product-title">
+                                    <a href="{% url 'WebSite:showproduct' sb.pid_id %}">{{ sb.pid }}</a>
+                                </h3><!-- End .product-title -->
+                            </td>
+                            <td>
+                                {% for psb in psb %}
+                                {% if psb and psb.id == sb.pid_id %}
+                                <h3 class="product-title">
+                                    <a href="#">{{ psb.brand }}</a></h3>
+                                {% endif %}
+                                {% endfor %}
+                                <!-- End .product-title -->
+                            </td>
+                            <td class="price-col">
+                                {% if Cost %}
+                                {% for Cost1 in Cost %}
+                                {% if  sb.pid_id == Cost1.pid_id  %}
+                                {% if  Cost1.priceoff  %}{{ Cost1.priceoff }}
+                                {% elif Cost1.priceorg %}{{ Cost1.priceorg }}{% else %} 0 {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for Cost1 in Cost %}
+                                {% if Cost1.specialcell and Cost1.pid_id == sb.pid_id %}
+                                <p class="text-danger font-wight-bold"></span>فروش ویژه</span>
+                                    {% endif %}
+                                    {% endfor %}
+                            </td>
+
+
+                            <td id="carttotalcost{{sb.id}}" class="total-col"><span>
+
+                                    {% for Cost1 in Cost %}
+                                    {% if Cost1.pid_id == sb.pid_id %}
+                                    <span id="totalcost{{sb.id}}">
+                                        {% widthratio Cost1.priceoff|add:"0" 1 sb.pcount|add:"0" %}
+                                    </span>
+                                    {% endif %}
+                                    {% endfor %}
+                                </span></td>
+                            <td>
+                                <div onclick="addbascket({{sb.pid_id}},'{{ sb.name }}','{{sb.img1}}')"
+                                    style="cursor: pointer;" class="text-decoration-none btn-product btn-cart"
+                                    title="افزودن به سبد خرید"><span>افزودن به سبد
+                                        خرید</span></div>
+                            </td>
+                            <td class="remove-col">
+                                <div  class="btn-remove" onclick="deleteFavorite({{sb.id}})"  style="cursor: pointer;" title="حذف محصول"><i class="icon-close" ></i></div>
+                            
+                               </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+                </table><!-- End .table table-wishlist -->
+                <div class="wishlist-share">
+                    <div class="social-icons social-icons-sm mb-2">
+                        <label class="social-label">اشتراک گذاری در : </label>
+                        <a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
+                                class="icon-instagram"></i></a>
+                        <a href="#" class="social-icon" title="واتس آپ" target="_blank"><i
+                                class="icon-whatsapp"></i></a>
+                        <a href="#" class="social-icon" title="تلگرام" target="_blank"><i class="icon-telegram"></i></a>
+                    </div><!-- End .soial-icons -->
+                </div><!-- End .wishlist-share -->
+            </div><!-- End .container -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/mobile.html' %}
+    {% endblock %}

@@ -1,0 +1,424 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+
+{% block body %}
+{% include 'partials/firstpageheader.html' %}
+<style>
+    .boxshadow:hover {
+        box-shadow: 2px 2px lightgray;
+    }
+
+    .texthover {
+        color: black;
+    }
+
+    .texthover:hover {
+        color: grey;
+    }
+</style>
+<div class="page-wrapper" style="background-color: rgb(245, 245, 245);">
+    <div class="col-12">
+        {% if sliders %}
+        <div id="carouselExampleIndicators" class="carousel slide mt-1" data-ride="carousel" style=" width: 100%;">
+            <ul class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" class="active" data-slide-to="0"></li>
+                {% for h in sliders %}
+                {% if forloop.counter > 1 %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}"></li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+            <div>
+                <div class="carousel-inner carousel-position rounded shadow ">
+                    <div class="carousel-item active rounded" style=" width: 100%;">
+                        <img style="  width: 100%;" src="{% static 'media/' %}{{ sliders.0.FirstPage_Carousel_pic_1 }}"
+                            alt="پخش لوله و تجهیزات ایران">
+                    </div>
+                    {% for h in sliders %}
+                    {% if forloop.counter > 1 %}
+                    <div class="carousel-item  rounded shadow">
+                        <img style=" width: 100%;" src="{% static 'media/' %}{{ h.FirstPage_Carousel_pic_1 }}"
+                            alt="پخش لوله و تجهیزات ایران">
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">قبلی</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">بعدی</span>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="page-content mt-1">
+            <div class="categories-page">
+                <div class="row">
+                    {% for logo in banner %}
+                    {% if forloop.first %}
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
+                        <a href="{% url 'WebSite:advancedsearchProducts' logo.group8_id %}"><img
+                                src="{% static 'media/' %}{{ logo.baner8 }}" class="shadow"
+                                style=" width: 100%; border: 1px grey; border-radius: 3%;">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
+                        <a href="{% url 'WebSite:advancedsearchProducts' logo.group9_id %}"><img
+                                src="{% static 'media/' %}{{ logo.baner9 }}" class="shadow"
+                                style=" width: 100%; border: 1px grey; border-radius: 3%;">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
+                        <a href="{% url 'WebSite:advancedsearchProducts' logo.group10_id %}"><img
+                                src="{% static 'media/' %}{{ logo.baner10 }}" class="shadow"
+                                style=" width: 100%; border: 1px grey; border-radius: 3%;">
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-6 mb-2">
+                        <a href="{% url 'WebSite:advancedsearchProducts' logo.group11_id %}"><img
+                                src="{% static 'media/' %}{{ logo.baner11 }}" class="shadow"
+                                style=" width: 100%; border: 1px grey; border-radius: 3%;">
+                        </a>
+                    </div>
+
+                    <div class="row ">
+                        <div style=" border-radius: 2%;  max-height: 430px;" class="mt-1 ml-3 row pr-2 col-lg-3 col-md-3 col-12 
+                        float-right text-center ">
+                            <div style="width: 100%; background-color: whitesmoke;" class="border">
+                                <p style="font-size: larger;" class="text-right  texthover p-4">
+                                    &nbsp&nbsp&nbsp&nbsp
+                                    اخبار و تازه ها !</p>
+                            </div>
+                            <div style="height: 300px; overflow:auto; background-color: white; width: 100%;">
+                                {% if khabar %}
+                                {% for kh in khabar %}
+                                <div style=" background-color: white; height: 33.33333%;">
+                                    <div class="col-lg-9 col-md-9 col-9 float-left p-4 "
+                                        style="background-color: white;">
+                                        <a href="{% url 'WebSite:lastnewspageone' kh.id %}">
+                                            <span style="display: block; color: black;   font-size: 15px; "
+                                                class="text-right">{{ kh.title }}</span>
+                                            <span style="display: block; color: black;  font-size: 12px; "
+                                                class="text-right">{{ kh.khdesc }}</span>
+                                    </div>
+                                    </a>
+                                    <div class="col-lg-3 col-md-3 col-3 p-3 float-right">
+                                        <img style=" height: 70px; border-radius: 50%;"
+                                            src="{% static 'media/' %}{{ kh.newsimg }}">
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class=" p-3 col-12 border shadow" style=" background-color: whitesmoke;">
+                                <a href="{%url 'WebSite:lastnewspage'  %}" style="font-size: larger; color: #00b6be; "
+                                    class=" text-center texthover">مشاهده
+                                    اخبار
+                                    بیشتر ...</a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9  col-12">
+                            <div class="row mt-1 pl-3">
+
+                                <div class="col-lg-8 col-md-8  col-12 mt-1 mb-1">
+                                    <a href="{% url 'WebSite:advancedsearchProducts' logo.group1_id %}"><img
+                                            src="{% static 'media/' %}{{ logo.baner1 }}" class="shadow"
+                                            style="  border-radius: 3%;  width: 100%;"></a>
+                                </div>
+                                <div class="col-lg-4 col-md-4  col-6 mt-1 mb-1 ">
+                                    <a href="{% url 'WebSite:advancedsearchProducts' logo.group2_id %}"><img
+                                            src="{% static 'media/' %}{{ logo.baner2 }}" class="shadow"
+                                            style="  border-radius: 3%;  height: 100%; width: 100%; "></a>
+                                </div>
+
+                                <div class="col-lg-4 col-md-4  col-6 mt-1 mb-1">
+                                    <a href="{% url 'WebSite:advancedsearchProducts' logo.group3_id %}"><img
+                                            src="{% static 'media/' %}{{ logo.baner3 }}" class=" shadow"
+                                            style="  border-radius: 3%;  width: 100%; "></a>
+                                </div>
+                                <div class="col-lg-4 col-md-4  col-6 mt-1 mb-1">
+                                    <a href="{% url 'WebSite:advancedsearchProducts' logo.group4_id %}"><img
+                                            src="{% static 'media/' %}{{ logo.baner4 }}" class=" shadow"
+                                            style="  border-radius: 3%;  width: 100%;"></a>
+                                </div>
+                                <div class="col-lg-4 col-md-4  col-6 mt-1 mb-1">
+                                    <a href="{% url 'WebSite:advancedsearchProducts' logo.group5_id %}"><img
+                                            src="{% static 'media/' %}{{ logo.baner5 }}" class=" shadow"
+                                            style="  border-radius: 3%;   width: 100%; "></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-12" style="margin-top: -2%;">
+            <div class="row">
+                <div class="col-12 p-1 border text-right shadow" style="background-color: whitesmoke;">
+                    <h6 class="font-wight-bold" style="color: #00b6be; position: relative; top: 15%;">
+                        &nbsp&nbsp&nbsp&nbspپر
+                        فروش ترین
+                        های فصل</h6>
+                </div>
+            </div>
+            <div class="row shadow">
+                <div class="col-12 border" style="background-color: white;">
+                    <div class="row p-2">
+                        {% if bestssale %}
+                        {% for bs in bestssale %}
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-6 p-1 border shadow ">
+                            <div class="product product-3 text-center">
+                                <figure class="product-media">
+                                   
+                                 
+                                    {% if bs.existing == 0   %}
+
+                                         <p class="product-label label-sale">ناموجود</p>
+                                    
+                                    {% endif %}
+                               
+                                    
+                                    {% for Cost1 in Cost %}
+                                    {% if Cost1.specialcell and Cost1.pid_id == bs.id %}
+                                    <p class="product-label label-sale">فروش ویژه</p>
+                                    {% endif %}
+                                    {% endfor %}
+
+
+                                    
+                                    
+                                    
+                                    <a href="{% url 'WebSite:showproduct' bs.id %}">
+                                        <img  class="product-image shadow border"
+                                            src="{% static 'media/' %}{{ bs.img1 }}" alt="تصویر محصول">
+
+                                    </a>
+                                    <div class="product-action-vertical">
+                                        <div onclick="addّFavorite({{bs.id}},'{{ bs.name }}','{{bs.img1}}')"
+                                            class="btn-product-icon btn-wishlist btn-expandable"
+                                            style="cursor: pointer;">
+                                            <span>افزودن
+                                                به لیست علاقه مندی</span>
+                                        </div>
+                                    </div><!-- End .product-action-vertical -->
+                                </figure><!-- End .product-media -->
+                                <div class="product-body">
+                                    <div class="product-cat text-center">
+                                        <a href="#">گروه کالا : {{ bs.groupname }}</a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title text-center"><a href="">نام کالا :
+                                            {{ bs.name }}</a></h3>
+                                    <!-- End .product-title -->
+                                    <h3 class="product-title text-center"><a href="">برند کالا :
+                                            {{ bs.brand }}</a></h3>
+                                    <!-- End .product-title -->
+                                    <div class="product-price">
+                                        {% for Cost1 in Cost %}
+                                        {% if Cost1.pid_id == bs.id %}
+                                        <span class="new-price">{{ Cost1.priceoff }}تومان</span>
+                                        {% if Cost1.priceorg == None %}
+
+                                        {% else %}
+                                        <span class="old-price">{{ Cost1.priceorg }}</span>
+                                        {% endif %}
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div><!-- End .product-price -->
+                                </div><!-- End .product-body -->
+                                <div class="product-footer">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="my-rating" style="width: 60%;"></div>
+                                            <!-- End .ratings-val -->
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-text">( {{CommentCount}} دیدگاه )</span>
+                                    </div><!-- End .rating-container -->
+                                    <div class="product-action">
+                                        <div onclick="addbascket({{bs.id}},'{{ bs.name }}','{{bs.img1}}')"
+                                            style="cursor: pointer;" class="text-decoration-none btn-product btn-cart"
+                                            title="افزودن به سبد خرید">
+                                            <span>افزودن به سبد
+                                                خرید</span>
+                                        </div>
+                                        <!-- <a href="popup/quickView.html" class="btn-product btn-quickview"
+                                            title="مشاهده سریع محصول"><span>مشاهده سریع</span></a> -->
+                                    </div><!-- End .product-action -->
+                                </div><!-- End .product-footer -->
+                            </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 mt-1">
+                {% for logo in banner %}
+                {% if forloop.first %}
+                <div class="row ">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 float-right mb-1" style="border-radius: 2%;">
+                        <a href="{% url 'WebSite:advancedsearchProducts' logo.group6_id %}"><img
+                                src="{% static 'media/' %}{{ logo.baner6 }}" class="shadow"
+                                style="  border-radius: 2%; width: 100%;">
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 float-left mb-1" style="border-radius: 2%;">
+                        <a href="{% url 'WebSite:advancedsearchProducts' logo.group7_id %}"><img
+                                src="{% static 'media/' %}{{ logo.baner7 }}" class="shadow"
+                                style="  border-radius: 2%; width: 100%;">
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-12 ">
+            <div class="row">
+                <div class="col-12 mt-2 p-1 border text-right" style="background-color: whitesmoke;">
+                    <h6 class="font-wight-bold" style="color: #00b6be; position: relative; top: 15%;">
+                        &nbsp&nbsp&nbsp&nbspمحصولات جدید</h6>
+                </div>
+            </div>
+            <div class="row shadow">
+                <div class="col-12 border" style="background-color: white;">
+                    <div class="row p-2">
+                        {% if Latestproducts %}
+                        {% for lp in Latestproducts %}
+                        <div class="col-lg-2 col-md-3 col-6 p-1 border shadow ">
+                            <div class="product product-3 text-center">
+                                <figure class="product-media">
+                                    {% if  lp.goods == 0   %}
+                                    
+                                    <p class="product-label label-sale">ناموجود</p>
+                                   
+                                    {% endif %}
+                                    {% for Cost1 in Cost %}
+                                    {% if Cost1.specialcell and Cost1.pid_id == lp.id %}
+                                    <p><span class="product-label label-sale">فروش ویژه</span></p>
+                                    {% endif %}
+                                    {% endfor %}
+                                    
+                                    
+                                    
+                                    <a href="{% url 'WebSite:showproduct' lp.id %}">
+                                        <img src="{% static 'media/' %}{{ lp.img1 }}" alt="تصویر محصول"
+                                            class="product-image shadow border">
+                                    </a>
+                                    
+                                    <div class="product-action-vertical">
+                                        <div onclick="addّFavorite({{lp.id}},'{{ lp.name }}','{{lp.img1}}')"
+                                            class="btn-product-icon btn-wishlist btn-expandable"
+                                            style="cursor: pointer;">
+                                            <span>افزودن
+                                                به لیست علاقه مندی</span>
+                                        </div>
+                                       
+                                    </div><!-- End .product-action-vertical -->
+                                </figure><!-- End .product-media -->
+                                <div class="product-body">
+                                    <div class="product-cat text-center">
+                                        <a href="#">گروه کالا : {{ lp.group }}</a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title text-center"><a href="">نام کالا :
+                                            {{ lp.name }}</a></h3>
+                                    <!-- End .product-title -->
+                                    <h3 class="product-title text-center mb-1"><a href="">برند کالا :
+                                            {{ lp.brand }}</a></h3>
+                                    <!-- End .product-title -->
+                                    <div class="product-price">
+                                        {% for Cost1 in Cost %}
+                                        {% if Cost1.pid_id == lp.id %}
+                                        <span class="new-price">{{ Cost1.priceoff }}تومان</span>
+                                        {% if Cost1.priceorg == None %}
+
+                                        {% else %}
+                                        <span class="old-price">{{ Cost1.priceorg }}</span>
+                                        {% endif %}
+
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div><!-- End .product-price -->
+                                </div><!-- End .product-body -->
+                                <div class="product-footer">
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="my-rating" style="width: 60%;"></div>
+                                            <!-- End .ratings-val -->
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-text">( {{CommentCount}} دیدگاه )</span>
+                                    </div><!-- End .rating-container -->
+                                    <div class="product-action">
+                                        <div onclick="addbascket({{lp.id}},'{{ lp.name }}','{{lp.img1}}')"
+                                            style="cursor: pointer;" class="text-decoration-none btn-product btn-cart"
+                                            title="افزودن به سبد خرید">
+                                            <span>افزودن به سبد
+                                                خرید</span>
+                                        </div>
+                                        <!-- <a href="popup/quickView.html" class="btn-product btn-quickview"
+                                            title="مشاهده سریع محصول"><span>مشاهده سریع</span></a> -->
+                                    </div><!-- End .product-action -->
+                                </div><!-- End .product-footer -->
+                            </div><!-- End .product -->
+                        </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-3 p-2 shadow" style="border: 1px black; background-color: white;">
+
+            <div class="container-fluid text-center shop shadow">
+                <div class="owl-carousel owl-simple " data-toggle="owl" data-owl-options='{
+                    "nav": true, 
+                    "dots": false,
+                    "margin": 30,
+                    "loop": false,
+                    "responsive": {
+                        "0": {
+                            "items":2
+                        },
+                        "420": {
+                            "items":3
+                        },
+                        "600": {
+                            "items":4
+                        },
+                        "900": {
+                            "items":5
+                        },
+                        "1024": {
+                            "items":6
+                        }
+                    }
+                }'>
+                    {% if brand %}
+                    {% for b in brand %}
+                    <a href="#" class="brand p-3 border-right" style="background-color:white; border-radius: 3%;">
+                        <img style="width: 100px; height: 70px;" src="{% static 'media/' %}{{ b.img }}"
+                            alt="نام برند"></a>
+                    {% endfor %}
+                    {% endif %}
+                </div><!-- End .owl-carousel -->
+            </div><!-- End .container -->
+        </div>
+    </div>
+    {% include 'partials/mobile.html' %}
+    {% include 'partials/footer.html' %}
+
+    {% endblock %}
+    <script>
+        // Rating Initialization
+        $(document).ready(function () {
+            $('#rateMe4').mdbRate();
+        });
+    </script>

@@ -1,0 +1,502 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} لیست کالا ها|
+{% endblock %}
+
+
+
+{% block body %}
+<script>
+
+</script>
+<style>
+
+</style>
+<div class="page-wrapper" style="background-color: white; font-family: sans-serif;">
+  {% include 'partials/firstpageheader.html' %}
+  <nav aria-label="breadcrumb" class="breadcrumb-nav mb-0">
+    <div class="container-fluid border-bottom border-black">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="font-weight-bold" style="font-size: large; font-family: sans-serif;"
+            href="{% url 'WebSite:login' %}">خانه</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a class="font-weight-bold" style="font-size: large;  font-family: sans-serif;" href="#">فروشگاه</a></li>
+      </ol>
+    </div>
+  </nav>
+
+  <div class="container-fluid" style=" font-family: sans-serif;">
+    <!--این بخش مربوط به محتوای ستون سمت راست صفحه می باشد -->
+    
+    <div class=" col-lg-3 col-md-3 col-sm-12 col-xs-12 float-right mt-1" style=" font-family: sans-serif;">
+      <div class="row">
+
+     
+      <div class="col-12 float-right">
+        {% for advancb in advancb %}
+        {% if forloop.last %}
+        <a href="{% url 'WebSite:advancedsearchProducts' advancb.group2_id %}"><img
+            src="{% static 'media/' %}{{ advancb.baner2 }}" class="shadow p-1 col-lg-12 col-md-12 col-6 float-right"
+            style="  border-radius: 2%;  width: 100%; "></a>
+
+        <a href="{% url 'WebSite:advancedsearchProducts' advancb.group3_id %}"><img
+            src="{% static 'media/' %}{{ advancb.baner3 }}" class="shadow p-1  col-lg-12 col-md-12 col-6 float-left"
+            style="  border-radius: 2%;   width: 100%; "></a>
+
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="col-12 float-right  
+        filter text-right rounded font-weight-bold mt-1" dir="rtl">
+        <div class="row rounded border shadow mt-2" style="border: black 1px;">
+          <div class="col-12 border p-2" style="background-color: whitesmoke; color: #00b6be;">
+            <strong>دسته بندی ها :</strong>
+          </div>
+          <div class="models col-12 p-2" style="background-color: white;">
+            <div>
+              <span class="col-11 ">انتخاب گروه کالا:</span>
+              <span class="col-1 expanded float-left" style="padding-top: 3%;" id="groups"
+                onclick="tooglebar('groups','SubGroup3');"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+            </div>
+
+            <div class="SubGroup3">
+              <div class="SubGroup3in">
+                {% for a in productsgroups2 %}
+                <div class="checkbox">
+                  <label class="col-12"><input type="checkbox" rel="{{a.id}}" onchange="change('{{ id }}');"
+                      {%for c in allchecked %}{% if c.0 == a.id %}checked{% endif %}{% endfor %} />&nbsp&nbsp{{a.Group_Name}}&nbsp&nbsp</label>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row rounded border shadow mt-1" style="background-color: white;">
+          <div class="col-12">
+            <span class="col-1 expanded float-left" style="padding-top: 3%;" id="brand"
+              onclick="tooglebar('brand','processors');"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+            <span class="col-11  border-bottom p-1">&nbsp&nbspانتخاب برند:</span>
+          </div>
+          <div class="processors col-12">
+            {% for a in productsbrands %}
+            <div class="checkbox">
+              <label class="col-12">
+                <input type="checkbox" rel="{{a.id}}" onchange="change('{{ id }}');" />&nbsp&nbsp{{a.name}}&nbsp&nbsp
+              </label>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row rounded border shadow mt-1 " style="background-color: white;">
+          <div class="col-12">
+            <!--cname1-->
+            {% for a in pc1 %}
+            {% if a.cparentid == 0 %}
+            <div class="border-bottom">
+              <span class="col-11 border-bottom p-1">{{ a.cname }}</span>
+
+              <span class="col-1 expanded float-left" style="padding-top: 3%;" id="pc1{{forloop.counter}}"
+                onclick="tooglebar('pc1{{forloop.counter}}','c1{{forloop.counter}}');"><i class="fa fa-chevron-up"
+                  aria-hidden="true"></i></span>
+
+            </div>
+            <div class="pc1 c1{{forloop.counter}}">
+              {% for b in pc1 %}
+              {% if b.cparentid == a.id %}
+              <div class="checkbox">
+                <label class="col-12">
+
+                  <input type="checkbox" rel="{{b.id}}"
+                    onchange="change('{{ id }}');" />&nbsp&nbsp{{b.cname }}&nbsp&nbsp
+                </label>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row rounded border shadow mt-1" style="background-color: white;">
+          <div class="col-12">
+            <!--cname2-->
+            {% for a in pc2 %}
+            {% if a.cparentid == 0 %}
+            <div class="border-bottom">
+              <span class="col-11 border-bottom p-1">{{ a.cname }}</span>
+
+              <span class="col-1 expanded float-left" style="padding-top: 3%;" id="pc2{{forloop.counter}}"
+                onclick="tooglebar('pc2{{forloop.counter}}','c2{{forloop.counter}}');"><i class="fa fa-chevron-up"
+                  aria-hidden="true"></i></span>
+
+            </div>
+            <div class="pc2 c2{{forloop.counter}}">
+              {% for b in pc2 %}
+              {% if b.cparentid == a.id %}
+              <div class="checkbox">
+                <label class="col-12">
+
+                  <input type="checkbox" rel="{{b.id}}"
+                    onchange="change('{{ id }}');" />&nbsp&nbsp{{b.cname }}&nbsp&nbsp
+                </label>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row rounded border shadow mt-1" style="background-color: white;">
+          <div class="col-12">
+            <!--cname3-->
+            <div class="border-bottom">
+              {% for a in pc3 %}
+              {% if a.cparentid == 0 %}
+              <span class="col-11 p-1 ">{{ a.cname }}</span>
+
+              <span class="col-1 expanded float-left" style="padding-top: 3%;" id="pc3{{forloop.counter}}"
+                onclick="tooglebar('pc3{{forloop.counter}}','c3{{forloop.counter}}');"><i class="fa fa-chevron-up"
+                  aria-hidden="true"></i></span>
+            </div>
+            <div class="pc3 c3{{forloop.counter}}">
+              {% for b in pc3 %}
+              {% if b.cparentid == a.id %}
+              <div class="checkbox">
+                <label class="col-12">
+
+                  <input type="checkbox" rel="{{b.id}}"
+                    onchange="change('{{ id }}');" />&nbsp&nbsp{{b.cname }}&nbsp&nbsp
+                </label>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+
+
+        </div>
+        {% comment %}
+        <div class="col-12 p-4 mt-2 border">
+
+          <div class="container" style="z-index:99999999999999999999;">
+
+
+            <div class="span4" style="z-index:99999999999999999999;">
+
+              <p class="p-2" style="font-weight: bold; font-size: medium;">انتخاب براساس قیمت : </p>
+              <div class="well" style="z-index:99999999999999999999;">
+                <b> 0 &nbsp;&nbsp;&nbsp;</b>
+                <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="399995545"
+                  data-slider-step="5" data-slider-value="[0,399995545]" id="sl2">
+                <b> &nbsp;&nbsp;&nbsp;399995545</b>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endcomment %}
+      </div>
+      <div class="row rounded border shadow mt-1 p-1" style="background-color: white;">
+        <div class=" col-12 p-3">
+          <div style="height: 400px; border-radius: 2%; ">
+            <div style="width: 100%; background-color: whitesmoke;" class="border">
+              <p style="font-size: larger;" class="text-right  texthover p-4">
+                &nbsp&nbsp&nbsp&nbsp
+                اخبار و تازه ها !</p>
+            </div>
+            <div style="height: 280px; overflow:auto; background-color: white;">
+              {% if khabar %}
+              {% for kh in khabar %}
+              <div style=" background-color: white; height: 33.33333%;">
+                <div class="col-lg-9 col-md-9 col-9 float-left p-4 border-bottom" style="background-color: white;">
+                  <a href="{% url 'WebSite:lastnewspageone' kh.id %}">
+                    <span style="display: block; color: black;   font-size: 15px; "
+                      class="text-right" style="font-family: sans-serif;">{{ kh.title }}</span>
+                    <span style="display: block; color: black;  font-size: 12px; "
+                      class="text-right" style="font-family: sans-serif;">{{ kh.khdesc }}</span>
+                </div>
+                </a>
+                <div class="col-lg-3 col-md-3 col-3 p-3 float-right">
+                  <img style="width: 100px; height: 70px; border-radius: 50%;"
+                    src="{% static 'media/' %}{{ kh.newsimg }}">
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+            <div class=" p-3 col-lg-12 border shadow text-center" style=" background-color: whitesmoke;">
+              <a href="{%url 'WebSite:lastnewspage'  %}" style="font-size: medium; color: #00b6be; font-family: sans-serif;"
+                class=" text-center">مشاهده
+                اخبار
+                بیشتر ...</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!--محتوای این بخش مربوط به اسلایدر و توضیح ها و محتوای کالا ها می باشد .-->
+  <div class="col-lg-9 col-md-9 col-sm-12 col-12 float-left">
+    <div class="border p-3 row mt-1 text-right" style="height: 50px; font-size: medium;  background-color: whitesmoke; font-family: ;">
+
+      <div style="direction: rtl;" class="col-8">
+        {% if productsgroups1 %}
+        <span class=" font-weight-bold float-right" style="font-family: sans-serif;">{{ productsgroups1.0.Group_Name }}</span>
+        {% endif %}
+      </div>
+      <div style="direction: rtl; font-family: sans-serif;" class="col-4">
+        {% if productsCount %}
+
+        <span id='count' class=" font-weight-bold " style="font-family: sans-serif;">{{ productsCount }}</span>
+        <span>از</span>
+        <span style="color: #00b6be; font-weight: bold;" style="font-family: sans-serif;" id="countkol">{{ productsCountKol }}</span>
+        <span class=" font-weight-bold " style="font-family: sans-serif;">محصول وجود دارد </span>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row border">
+      {% if sliders %}
+      <div id="carouselExampleIndicators" class="carousel" data-ride="carousel" style=" width: 100%;">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" class="active" data-slide-to="0"></li>
+          {% for h in sliders %}
+          {% if forloop.counter > 1 %}
+          <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}"></li>
+          {% endif %}
+          {% endfor %}
+        </ol>
+        <div style="border: 1px grey; border-radius: 3%;">
+          <div class="carousel-inner carousel-position rounded  ">
+            <div class="carousel-item active rounded shadow">
+              <img style="  width: 100%;" src="{% static 'media/' %}{{ sliders.0.slide }}"
+                alt="پخش لوله و تجهیزات ایران">
+            </div>
+            {% for h in sliders %}
+            {% if forloop.counter > 1 %}
+            <div class="carousel-item  rounded shadow">
+              <img style=" width: 100%;" src="{% static 'media/' %}{{ h.slide }}" alt="پخش لوله و تجهیزات ایران">
+            </div>
+            {% endif %}
+            {% endfor %}
+          </div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">قبلی</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">بعدی</span>
+          </a>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+    <div class="row border p-2 shadow" style="background-color: white;">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 float-left mt-2">
+        {% if spdesc.0.Group_Desc_1 != None %}
+        {% for spdesc in spdesc %}
+        {% if forloop.last %}
+        {% if spdesc.Group_Desc_1 %}
+        <div class="row">
+          <h5 class="float-right">درباره :</h5>
+        </div>
+        <p class=" justify "
+          style="padding: 2%; color: black; font-weight: bold; text-align: justify; text-justify:inter-word;">
+          {{ spdesc.Group_Desc_1 }}</p>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <div class="row"></div>
+        {% endif %}
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 float-right mt-2">
+        {% if spdesc.0.group_img_1 != None %}
+        {% for spdesc in spdesc %}
+        {% if forloop.last %}
+        {% if spdesc.group_img_1 %}
+        <img src="{% static 'media/' %}{{ spdesc.group_img_1 }}" alt="پخش لوله و تجهیزات ایران">
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {% else %}
+        <div class="row"></div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row mt-1 border">
+      <div class="col-12 p-1 border text-right shadow" style=" background-color: whitesmoke;">
+        <h6 class="font-wight-bold" style="color: black; position: relative; top: 15%;">
+          &nbsp&nbsp&nbsp&nbspپر
+          فروش ترین
+          ها </h6>
+      </div>
+      <div class="col-12 border" style="background-color: white;">
+        <div class="row mt-1">
+
+          {% for bs in bestssale %}
+          {% if bestssale %}
+          <div class="col-lg-3 col-md-f col-6">
+            <div class="product product-3 text-center ">
+              <figure class="product-media">
+                <!-- {% for Cost1 in Cost %}
+                  {% if Cost1.specialcell and Cost1.pid_id == np.id %}
+                  <span class="product-label label-sale">فروش ویژه</span>
+                  {% endif %}
+                  {% endfor %} -->
+                <a href="{% url 'WebSite:showproduct' bs.id %}">
+                  <img style=" height: 180px;" src="{% static 'media/' %}{{ bs.img1 }}" alt="تصویر محصول"
+                    class="product-image shadow ">
+                </a>
+                <div class="product-action-vertical">
+                  <div onclick="addّFavorite({{bs.id}},'{{ bs.name }}','{{bs.img1}}')"
+                    class="btn-product-icon btn-wishlist btn-expandable" style="cursor: pointer;">
+                    <span>افزودن
+                      به لیست علاقه مندی</span></div>
+                </div><!-- End .product-action-vertical -->
+              </figure><!-- End .product-media -->
+              <div class="product-body">
+                <div class="product-cat text-center">
+                  <a href="#">گروه کالا : {{ bs.groupname }}</a>
+                </div><!-- End .product-cat -->
+                <h3 class="product-title text-center"><a href="">نام کالا :
+                    {{ bs.name }}</a></h3>
+                <!-- End .product-title -->
+                <h3 class="product-title text-center"><a href="">برند کالا :
+                    {{ bs.brand }}</a></h3>
+                <!-- End .product-title -->
+                <div class="product-price">
+                  {% for Cost1 in Cost %}
+                  {% if Cost1.pid_id == bs.id %}
+                  <span class="new-price">{{ Cost1.priceoff }}تومان</span>
+                  <span class="old-price">{{ Cost1.priceorg }}</span>
+                  {% endif %}
+                  {% endfor %}
+                </div><!-- End .product-price -->
+              </div><!-- End .product-body -->
+              <div class="product-footer">
+                <div class="ratings-container">
+                  <div class="ratings">
+                    <div class="my-rating" style="width: 60%;"></div>
+                    <!-- End .ratings-val -->
+                  </div><!-- End .ratings -->
+                  <span class="ratings-text">( {{CommentCount}} دیدگاه )</span>
+                </div><!-- End .rating-container -->
+                <div class="product-action">
+                  <div onclick="addbascket({{bs.id}},'{{ bs.name }}','{{bs.img1}}')" style="cursor: pointer;"
+                    class="text-decoration-none btn-product btn-cart" title="افزودن به سبد خرید">
+                    <span>افزودن به سبد
+                      خرید</span></div>
+                  <a href="popup/quickView.html" class="btn-product btn-quickview"
+                    title="مشاهده سریع محصول"><span>مشاهده سریع</span></a>
+                </div><!-- End .product-action -->
+              </div><!-- End .product-footer -->
+            </div><!-- End .product -->
+          </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
+          {% endif %}
+          {% endfor %}
+
+        </div>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-4 text-right font-weight-bold">
+        <select id="selectProductSort" class="selectProductSort form-control" onchange="change('{{ id }}');">
+          <option value="quantity:desc">ترتیب</option>
+          <option value="price:asc">قیمت: ارزانتر</option>
+          <option value="price:desc">قیمت: گرانتر</option>
+          <option value="name:asc">نام: الف - ی</option>
+          <option value="name:desc">نام: ی - الف</option>
+          <option value="quantity:desc">موجودی</option>
+          <option value="reference:asc">مرجع: صعودی</option>
+          <option value="reference:desc">مرجع: نزولی</option>
+        </select>
+      </div>
+      <div class="col-4 text-right font-weight-bold">
+        <select name="n" id="nb_page_items" class="form-control" onchange="change('{{ id }}');">
+          <option value="24">نمایش: 24</option>
+          <option value="48">نمایش: 48</option>
+          <option value="-1">نمایش همه</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="page-content col-12 float-left" style="display: inline-block;">
+        <div class="products">
+          <div class="row row1 ">
+            <!--در این بخش در صورتی که از منو های بالای صفحه با روی کالا ها کلیک شده باشد اطلاعات نمایش داده میش ود-->
+            {% if products %}
+            {% for pl in products %}
+            <div style="display: inline-block;" class="product col-lg-3 col-md-4 col-6 border shadow rounded">
+              <figure class="product-media ">
+                <a href="{% url 'WebSite:showproduct' pl.id %}">
+                  <img src="{% static 'media/' %}{{ pl.img1 }}" style="width: 100%; height: 180px;" alt="تصویر محصول"
+                    class="product-image">
+                </a>
+
+                <!-- <div class="product-action-vertical">
+                          <div onclick="addّFavorite({{pl.id}},'{{ pl.name }}','{{pl.img1}}')"
+                            class="btn-product-icon btn-wishlist btn-expandable" style="cursor: pointer;">
+                            <span>افزودن
+                              به لیست علاقه مندی</span></div>
+                        </div>End .product-action -->
+
+                <div class="product-action action-icon-top">
+                  <div onclick="addbascket({{pl.id}},'{{ pl.name }}','{{pl.img1}}')" style="cursor: pointer;"
+                    class="text-decoration-none btn-product btn-cart" title="افزودن به سبد خرید"><span>افزودن به سبد
+                      خرید</span></div>
+                </div><!-- End .product-action -->
+              </figure><!-- End .product-media -->
+
+              <div class="product-body">
+                <div class="product-cat">
+                  <a href="#">{% for group in fehrests %}
+                    {% if group and group.id == pl.group_id %}
+                    گروه محصول : {{ group.Group_Name }}
+                    {% endif %}
+                    {% endfor %}
+                  </a>
+                </div><!-- End .product-cat -->
+                <h3 class="product-title"><a href="{% url 'WebSite:showproduct' pl.id %}">نام کالا :
+                    {{ pl.name }}</a></h3>
+                <h3 class="product-title"><a href="#">برند کالا :
+                    {{ pl.brand }}</a></h3>
+                <!-- End .product-title -->
+                <div class="product-price">
+                  {% for cost in Cost %}
+                  {% if cost and cost.pid_id == pl.id %}
+                  <span class="new-price">{{ cost.priceoff }}تومان</span>
+                  <span class="old-price">{{ cost.priceorg }}</span>
+                  {% endif %}
+                  {% endfor %}
+                </div><!-- End .product-price -->
+                <div class="ratings-container">
+                  <div class="ratings">
+                    <div class="ratings-val" style="width: 0%;"></div>
+                    <!-- End .ratings-val -->
+                  </div><!-- End .ratings -->
+                  <span class="ratings-text">( {{CommentCount}} دیدگاه )</span>
+                </div><!-- End .rating-container -->
+              </div><!-- End .product-body -->
+            </div><!-- End .product -->
+            {% endfor %}
+            {% endif %}
+          </div><!-- End .products -->
+        </div><!-- End .container -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% include 'partials/footer.html' %}
+{% include 'partials/mobile.html' %}
+{% endblock %}

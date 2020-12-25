@@ -1,0 +1,343 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد محصول|
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:product' %}">گزارش محصول ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد محصول</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div style="margin: 1%;" class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            {% if error %}
+            {% for error in error %}
+            <p class="font-wait-bold border border-danger rounded text-danger shadow" style="padding: 1%;">
+                {{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <form method="POST" role="form" enctype="multipart/form-data" autocomplete="off">
+                                {% csrf_token %}
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            ایجاد محصول
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table table-sm table-striped table-hover shadow">
+                                    {% if error %}
+                                    <tr class="text-danger">
+                                        <td class="font-weight-bold  text-center ">
+                                            {{ product.name.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.name  }}
+                                        </td>
+                                        <td class="font-weight-bold  text-center ">
+                                            {{ product.serial.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.serial  }}
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td class="font-weight-bold  text-center ">
+                                            {{ product.name.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.name  }}
+                                        </td>
+                                        <td class="font-weight-bold  text-center ">
+                                            {{ product.serial.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.serial  }}
+                                        </td>
+                                    </tr>
+                                    {% endif %}
+                                    <tr></tr>
+
+                                    <tr>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.group.label  }}
+                                        </td>
+
+                                        <td>
+                                            <select name="group" class="form-control" required="" id="id_group"
+                                                onchange="changegroup($('option:selected', this).val())">
+
+                                                <option value="">---------</option>
+                                                {% for a in groups %}
+                                                {% if a.glevel == 3 %}
+                                                <option value="{{ a.id }}">{{ a.Group_Name }}</option>
+                                                {% endif %}
+                                                {% endfor %}
+                                            </select>
+
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.brand.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.brand  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td id="cname1" class="font-weight-bold text-center ">
+                                            {{ product.cname1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.cname1  }}
+                                        </td>
+                                        <td id="cname2" class="font-weight-bold text-center ">
+                                            {{ product.cname2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.cname2  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td id="cname3" class="font-weight-bold text-center ">
+                                            {{ product.cname3.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.cname3  }}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+
+                                    </tr>
+                                    <tr></tr>
+                                    
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.guarantee.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.guarantee }}
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.guaranteecount.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.guaranteecount }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.supportaftersale.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.supportaftersale }}
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.supportaftersalecount.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.supportaftersalecount }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.goods.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.goods }}
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ product.numberofgoods.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.numberofgoods }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.desc.label }}
+                                        </td>
+                                        <td>
+                                            {{ product.desc }}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                   
+                                </table>
+
+
+                                <table class="table  table-sm table-striped table-hover shadow">
+                                    <tr>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.img1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.img1  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.img2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.img2  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.img3.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.img3 }}
+                                        </td>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.img4.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.img4  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.img5.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.img5  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center ">
+                                            {{ product.img6.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.img6  }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            در این بخش اطلاعات مربوط به صفحه جزئیات کالا ها تکمیل می شود
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            {{ product.img_desc_1.label  }}
+                                        </td>
+                                        <td>
+                                            <input type="file" name="img_desc_1" class="img-thumbnail" accept="image/*"
+                                                id="id_img_desc_1">
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            {{ product.desc_1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.desc_1  }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            {{ product.img_desc_2.label  }}
+                                        </td>
+                                        <td>
+
+                                            <input type="file" name="img_desc_2" class="img-thumbnail" accept="image/*"
+                                                id="id_img_desc_2">
+
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            {{ product.desc_2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.desc_2  }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            {{ product.img_desc_3.label  }}
+                                        </td>
+                                        <td>
+                                            <input type="file" name="img_desc_3" class="img-thumbnail" accept="image/*"
+                                                id="id_img_desc_3">
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold">
+                                            {{ product.desc_3.label  }}
+                                        </td>
+                                        <td>
+                                            {{ product.desc_3  }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="col-lg-4 col-ms-4 col-sm-12 col-xs-12 float-right ">
+                                            <input style="opacity: 60%;" type="submit" value='ذخیره'
+                                                class="btn btn-success rounded col-12 font-weight-bold">
+                                        </td>
+
+                                    </tr>
+                                </table>
+                            </form>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

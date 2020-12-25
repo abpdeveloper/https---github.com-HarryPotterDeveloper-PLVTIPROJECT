@@ -1,0 +1,124 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش اقلام رسید ها|
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">گزارش اقلام رسید ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="{% url 'WebSite:productsgroupsLV' %}">گزارش گروه
+                                            محصول
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:product' %}">گزارش محصول
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:brandreport' %}">گزارش برند</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:costreport' %}">گزارش قیمت محصول</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'WebSite:commentreport' %}">گزارش کامنت ها</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:customerLV' %}">گزارش مشتری
+                                            ها</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="{% url 'WebSite:factorreport' %}">گزارش فاکتور
+                                            ها</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link active" href="{% url 'WebSite:PayRcvreport' %}">گزارش رسید ها
+                                            </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class=" border-right" style="display: inline-block; margin: 1%;" aria-label="...">
+                                <a href="{% url 'WebSite:PayRcvSync' %}">
+                                    <span class="glyphicon glyphicon-refresh btn btn-success rounded shadow">همگام سازی
+                                        رسید ها</span>
+                                </a>
+                            </div>
+                            <div style="margin: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:PayRcvreport' %}">لیست رسید ها
+                                            
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'WebSite:userAdminCheck' %}">لیست اقلام رسید ها
+                                            
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش اقلام رسید
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%" id="PayRcvDetaile"
+                                class="display table table-hover table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                                class="selectAll " name="selectAll" value="all"></th>
+                                        <th class="text-center">کد</th>
+                                        <th class="text-center">نوع</th>
+                                        <th class="text-center">شماره چک</th>
+                                        <th class="text-center">مبلغ</th>
+                                        <th class="text-center">تاریخ دربافت</th>
+                                        <th class="text-center">تاریخ سررسید</th>
+                                        <th class="text-center">وضعیت</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                            </table>
+
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+
+{% endblock %}

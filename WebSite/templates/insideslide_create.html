@@ -1,0 +1,66 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد اسلایدر محصول|
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد ادمین</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:slidersreport' %}">گزارش اسلایدر ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد اسلایدر محصول ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <form method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            ایجاد اسلایدر محصول ها
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="col-12 table-hover table-sm table-striped shadow">
+                                    <tr>
+                                        <td
+                                            class="col-lg-6 col-ms-6 col-sm-12 col-xs-12 float-right text-center font-weight-bold">
+                                            {{ slider.slide.label }}
+                                        </td>
+                                        <td class="col-lg-6 col-ms-6 col-sm-12 col-xs-12 float-left">
+                                            {{ slider.slide  }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top:2%;"
+                                    class="table-hover table-sm table-striped table-hover shadow">
+                                    <tr>
+                                        <td>
+                                            <input
+                                                class="btn btn-success rounded shadow col-lg-2 col-md-2 col-sm-12 col-xs-12"
+                                                type="submit" value='ذخیره'>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {% endblock %}

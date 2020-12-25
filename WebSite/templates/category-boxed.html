@@ -1,0 +1,98 @@
+{% extends 'share/mainpage.html' %}
+{% load static %}
+
+
+{% block title %}
+{{ super }} لیست کالا ها|
+{% endblock %}
+
+
+
+{% block body %}
+<div class="page-wrapper" style="background-color: whitesmoke;">
+    {% include 'partials/firstpageheader.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-1">
+            <div class="container border-bottom border-black">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a class="font-weight-bold" href="{% url 'WebSite:login' %}">خانه</a>
+                    </li>
+                    <li class="breadcrumb-item"><a class="font-weight-bold"
+                            href="{% url 'WebSite:treeshowgroup' 0 %}">گروه های کالا</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" class="font-weight-bold"> لیست همه کالا های
+                    </li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div>
+            <div class="container">
+                {% if Allproducts %}
+                {% for pl in Allproducts %}
+                <div style="display: inline-block;"
+                    class="product col-lg-3 col-md-3  border shadow rounded">
+                  
+                        <a href="{% url 'WebSite:showproduct' pl.id %}">
+                            <img style="width: 100%; height: 250px;" src="{% static 'media/' %}{{ pl.img1 }}"
+                                alt="تصویر محصول" class="product-image">
+                        </a>
+
+                        <div class="product-action-vertical">
+                            <div onclick="addّFavorite({{pl.id}},'{{ pl.name }}','{{pl.img1}}')"
+                                class="btn-product-icon btn-wishlist btn-expandable" style="cursor: pointer;">
+                                <span>افزودن
+                                    به لیست علاقه مندی</span></div>
+                        </div><!-- End .product-action -->
+
+                        <div class="product-action action-icon-top">
+                            <div onclick="addbascket({{pl.id}},'{{ pl.name }}','{{pl.img1}}')" style="cursor: pointer;"
+                                class="text-decoration-none btn-product btn-cart" title="افزودن به سبد خرید">
+                                <span>افزودن به سبد
+                                    خرید</span></div>
+                        </div><!-- End .product-action -->
+                    
+
+                    <div class="product-body">
+                        <div class="product-cat">
+                            <a href="#">{% for group in fehrests %}
+                                {% if group and group.id == pl.group_id %}
+                                گروه محصول : {{ group.Group_Name }}
+                                {% endif %}
+                                {% endfor %}
+                            </a>
+                        </div><!-- End .product-cat -->
+                        <h3 class="product-title"><a href="{% url 'WebSite:showproduct' pl.id %}">نام کالا :
+                                {{ pl.name }}</a></h3>
+                        <h3 class="product-title"><a href="#">برند کالا :
+                                {{ pl.brand }}</a></h3>
+                        <!-- End .product-title -->
+                        <div class="product-price">
+                            {% for cost in Cost %}
+                            {% if cost and cost.pid_id == pl.id %}
+                            {% if cost.priceoff %}
+                            قیمت : {{ cost.priceoff }}تومان
+                            {% else %}
+                            قیمت : {{ cost.priceorg }}تومان
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </div><!-- End .product-price -->
+                        <div class="ratings-container">
+                            <div class="ratings">
+                                <div class="ratings-val" style="width: 0%;"></div>
+                                <!-- End .ratings-val -->
+                            </div><!-- End .ratings -->
+                            <span class="ratings-text">( 0 دیدگاه )</span>
+                        </div><!-- End .rating-container -->
+                    </div><!-- End .product-body -->
+                </div><!-- End .product -->
+                {% endfor %}
+                {% endif %}
+
+            </div><!-- End .page-content -->
+    </main><!-- End .main -->
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/mobile.html' %}
+    {% endblock %}

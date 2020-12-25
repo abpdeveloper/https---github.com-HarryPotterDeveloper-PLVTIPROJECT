@@ -1,0 +1,117 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش اسلایدر محصول|
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#sliderBtnDelete").click({
+            ModelName: "slider",
+            RedirectPath: "slider", TableId: "sliderTable"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد ادمین</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">گزارش اسلایدر محصول ها</a></li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'WebSite:slidersreport' %}">گزارش اسلایدر اصلی</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:insideslidersreport' %}">گزارش اسلایدر صفحه محصول</a>
+                                    </li>
+                             
+                                </ul>
+                            </div>
+
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success rounded shadow"
+                                    href="{% url 'WebSite:create' 'slider' 'formsliderupdate' 'slidersreport' 'sliders_create' 'slider' %}">
+                                    ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger rounded shadow" id="sliderBtnDelete" href="#"> حذف
+                                    گروهی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container col-12"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش اسلایدر محصول ها
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table  style="width:100%" id="example"
+                                class="display shadow rounded table table-hover table-striped table-bordered table-sm">
+                                <thead>
+                                    <tr class="font-weight-bold">
+                                        <th style="text-align:center;"> <input type="checkbox" class="selectAll "
+                                                name="selectAll" value="all">
+                                        </th>
+                                        <th class="text-center">کد</th>
+                                        <th class="text-center">عکس</th>
+                                        <th class="text-center">کلید ها</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if slider %}
+                                    {% for result in slider %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td>{{ result.id }}</td>
+                                        <td>
+                                            <img class="img-responsive img-rounded img-hidden" alt="دست نگاره نقش عشق"
+                                                style="height: 50px; width: 50px;"
+                                                src="{% static 'media/' %}{{ result.FirstPage_Carousel_pic_1 }}">
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'slider' 'formsliderupdate' 'slidersreport' 'sliders_update' 'slider' result.id %}"><img
+                                                    src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'slider' 'slidersreport' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div><!-- End .col-lg-10 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+{% endif %}
+{% endif %}
+{% endblock %}

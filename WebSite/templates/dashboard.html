@@ -1,0 +1,275 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+{% load my_templatetag %}
+{% load jalali_tags %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div style="background-color: whitesmoke;">
+    <nav aria-label="breadcrumb" class="breadcrumb-nav p-1 border-bottom border-dark"
+        style="background-color: whitesmoke;">
+        <div class="container-fluid">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a style="font-size: medium; font-weight: bold; font-family: sans-serif;"
+                        href="{% url 'WebSite:login' %}">خانه</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a style="font-size: medium; font-weight: bold; font-family: sans-serif;" href="">داشبورد</a></li>
+            </ol>
+        </div><!-- End .container -->
+    </nav><!-- End .breadcrumb-nav -->
+
+    <div class="container-fluid mb-4 mt-0" style="background-color: whitesmoke;">
+        <div class="row">
+            <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 border-left shadow-lg mb-2"
+                style="background-color:white; border-radius: 10px;">
+                <div class="col-12 mt-1 mb-1 border-bottom">
+                    <div class="col-12 p-3 mb-3">
+                        {% if request.user.avatar %}
+                        <img style="border-radius: 10px;" class="shadow-lg text-center"
+                            src="{% static 'media/' %}{{ request.user.avatar }}" alt="">
+                        {% else %}
+                        <img style="border-radius: 10px;" class="shadow-lg text-center"
+                            src="{% static '/media/userpic/non-pic/user (1).png' %}" alt="">
+                        {% endif %}
+                    </div>
+                    <div class="col-12">
+                        {% if UserInfo %}
+                        {% for ufi in UserInfo %}
+                        <p class="text-center"
+                            style="font-size: medium; font-weight: bold; color: black; font-family: sans-serif;">
+                            {{ ufi.first_name }}</p>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% include 'partials/Sidebar-dashboard-users.html' %}
+
+            </div>
+            <div class="col-lg-10 col-md-10 col-12">
+                <p style="font-size: large; font-weight: bold; height: 50px; font-family: sans-serif;
+             background-color: white; border-radius: 10px;" class="col-12 shadow-lg p-3 mb-2 text-center">
+                    اطلاعات فاکتور های قبلی شما </p>
+                <div class="col-12 shadow-lg p-4 mt-1"
+                    style="height: 180px; background-color:white; border-radius: 10px;">
+                    {% for ts in totalsale %}
+
+                    <div class="col-lg-6 col-md-6  col-12 float-right border-bottom">
+
+                        <div class="col-6 float-right border-left text-center"
+                            style="font-size: medium; font-weight: bold; font-family: sans-serif; ">تعداد
+                            {% if ts.FactorType %}{{ ts.FactorType }}{% else %} {% endif %}  :</div>
+                        <div class="col-6 float-left border-left text-center"
+                            style="font-size: medium; font-weight: bold; font-family: sans-serif;">
+                            {% if ts.totalcount %}{{ ts.totalcount }}{% else %} 0 {% endif %} </div>
+
+                    </div>
+
+                    <div class="col-lg-6 col-md-6  col-12 float-left border-bottom">
+                        <div class="col-6 float-right border-left text-center"
+                            style="font-size: medium; font-weight: bold; font-family: sans-serif;"> مبلغ
+                            {% if ts.FactorType %}{{ ts.FactorType }}{% else %} {% endif %}  :</div>
+                        <div class="col-6 float-left text-center"
+                            style="font-size: medium; font-weight: bold; font-family: sans-serif;">
+                            {% if ts.totalsale %}{{ ts.totalsale | intdot }}{% else %} 0 {% endif %} (ریال)</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="col-12 shadow-lg mt-2" style="background-color: white; border-radius: 10px;">
+
+                    <form method="GET" class="text-right row" action="." autocomplete="off">
+                        {% csrf_token %}
+
+                        <p class="col-12 p-2 text-center border-bottom"
+                            style="font-size: medium; font-weight: bold; font-family: sans-serif;">فیلتر
+                            تاریخ :</p>
+                        <p class="col-12 p-2" style="color: red; font-weight: bold; font-family: sans-serif;">کاربر گرامی : لطفا جهت انتخاب تاریخ روی آیکون تقویم
+                            کلیک
+                            نمائید .</p>
+                        <div class="row p-4 col-12">
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 float-right mt-1" 
+                                style="font-size: large; font-weight: bold; font-family: sans-serif;">از :</div>
+                                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 float-left">{{ testform.date1 }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 float-right mt-1" 
+                                style="font-size: large; font-weight: bold; font-family: sans-serif;">تا :</div>
+                                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 float-left">{{ testform.date2 }}
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-12 float-left mt-1"> <input type="submit" value="جستجو ..."
+                                    class="btn  rounded" style="background-color: #00b6be; color: white; border-radius: 5px;"></div>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+                <p style="font-size: large; font-weight: bold; height: 50px; font-family: sans-serif;
+             background-color: white; border-radius: 10px;" class="col-12 shadow-lg p-3 mb-2 text-center">
+                    گزارش صورت حساب </p>
+                
+                <div class="col-12 mt-2 p-4 shadow-lg" style="background-color: white; border-radius: 10px;">
+                    <iframe id="txtArea1" style="display:none"></iframe>
+                    <table style="width:100%; color: black; font-weight: bold; font-family: sans-serif;" id="example"
+                        class="display compact table table-hover table-striped table-bordered shadow">
+                        <thead>
+                            <tr class="font-weight-bold text-center">
+                                <th></th>
+                                <th class="text-center">شماره</th>
+                                <th class="text-center" >مشاهده اقلام</th>
+                                <th class="text-center">تاریخ</th>
+                                <th class="text-center">نوع فرم</th>
+                                <th class="text-center">تخفیف</th>
+                                <th class="text-center">هزینه</th>
+                                <th class="text-center">جمع کل</th>
+                                <th class="text-center">شرح</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% if not datefilter %}
+                            {% for result in datefilter %}
+                            <tr>
+                                <td></td>
+                                <td class="text-center">{{ result.FactorNo }}</td>
+                                <td class="text-center" style="font-family: sans-serif;">
+
+
+                                    مشاهده اقلام
+                                    {% if result.t  %}
+                                    <a onclick="userinfoOpen('{{ result.id }}')" class="text-decoration-none nav-link"
+                                        id="tab-orders-link" data-toggle="tab" href="#" role="tab"
+                                        aria-controls="tab-orders" aria-selected="false">
+
+                                        مشاهده اقلام
+                                        <script>
+                                            var Window;
+
+                                            function userinfoOpen(a) {
+
+                                                Window = window.open(
+                                                    "/factordetaile/" + a,
+                                                    "_blank", "width=1200, height=900,position=relative; top=10%; left=-20%;");
+                                            }
+
+
+                                        </script>
+                                    </a>
+                                    {% else %}
+                                    <a onclick="userpayinfoOpen('{{ result.id }}')"
+                                        class="text-decoration-none nav-link" id="tab-orders-link" data-toggle="tab"
+                                        href="#" role="tab" aria-controls="tab-orders" aria-selected="false">
+
+                                        مشاهده اقلام
+                                        <script>
+                                            var Window;
+
+                                            function userpayinfoOpen(a) {
+
+                                                Window = window.open(
+                                                    "/PayRcvDetaile/" + a,
+                                                    "_blank", "width=1200, height=900,position=relative; top=10%; left=-20%;");
+                                            }
+                                        </script>
+                                    </a>
+                                    {% endif %}
+
+                                </td>
+                                <td class="text-center">{{ result.SPDate | MiladiToShamsi:request }}
+                                </td>
+                                <td class="text-center">{{ result.FactorType  }}</td>
+                                <td class="text-center">{{ result.Discount | intdot  }}</td>
+                                <td class="text-center">
+                                    <script>
+                                        var str = '{{ result.Expense | intdot  }}'
+                                        var res = str.replace("-", "");
+                                        document.write(res);
+                                    </script>
+                                </td>
+                                <td class="text-center">{% if result.total %}{{ result.Total | intdot  }}{% elif result.PCValue %}{{ result.PCValue | intdot  }}{% else %}0{% endif %}</td>
+                                <td class="text-center">{{ result.SPDesc }}</td>
+                            </tr>
+                            {% endfor %}
+
+
+
+                    {% else %}
+                    {% for result in datefilter %}
+                    <tr>
+                        <td></td>
+                        <td class="text-center">{{ result.FactorNo }}</td>
+                        <td class="text-center" style="font-family: sans-serif;">
+
+                            {% if result.t  %}
+                            <a onclick="userinfoOpen('{{ result.id }}')" class="text-decoration-none nav-link"
+                                id="tab-orders-link" data-toggle="tab" href="#" role="tab" aria-controls="tab-orders"
+                                aria-selected="false">
+
+                                مشاهده اقلام
+                                <script>
+                                    var Window;
+
+                                    function userinfoOpen(a) {
+
+                                        Window = window.open(
+                                            "/factordetaile/" + a,
+                                            "_blank", "width=1200, height=900,position=relative; top=10%; left=-20%;");
+                                    }
+
+
+                                </script>
+                            </a>
+                            {% else %}
+                            <a onclick="userpayinfoOpen('{{ result.id }}')" class="text-decoration-none nav-link"
+                                id="tab-orders-link" data-toggle="tab" href="#" role="tab" aria-controls="tab-orders"
+                                aria-selected="false">
+
+                                مشاهده اقلام
+                                <script>
+                                    var Window;
+
+                                    function userpayinfoOpen(a) {
+
+                                        Window = window.open(
+                                            "/PayRcvDetaile/" + a,
+                                            "_blank", "width=1200, height=900,position=relative; top=10%; left=-20%;");
+                                    }
+                                </script>
+                            </a>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">{{ result.SPDate | MiladiToShamsi:request }}
+                        </td>
+                        <td class="text-center">{{ result.FactorType }}</td>
+                        <td class="text-center">{{ result.Discount | intdot  }}</td>
+                        <td class="text-center">
+                            <script>
+                                var str = '{{ result.Expense | intdot  }}'
+                                var res = str.replace("-", "");
+                                document.write(res);
+                            </script>
+                        </td>
+                        <td class="text-center">{% if result.total != 0 %}{{ result.Total | intdot  }}{% elif result.PCValue != 0 %}{{ result.PCValue | intdot  }}{% else %}0{% endif %}</td>
+                        <td class="text-center">{{ result.SPDesc }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+    {% include 'partials/footer.html' %}
+    {% include 'partials/mobile.html' %}
+</div>
+{% else %}
+{% include '404.html' %}
+{% endif %}
+{% endblock %}

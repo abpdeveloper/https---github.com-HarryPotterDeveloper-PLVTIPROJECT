@@ -1,0 +1,206 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد درباره ما|
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد</a></li>
+                    <li class="breadcrumb-item active"><a href="{% url 'WebSite:ccontactusreport' %}">گزارش درباره ما
+                        </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد درباره ما - مرکز</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div style="margin: 1%;" class="container-fluid">
+            {% if error %}
+            {% for error in error %}
+            <p class="font-wait-bold border border-danger rounded text-danger shadow" style="padding: 1%;">
+                {{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-content col-12">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <form method="POST" role="form" enctype="multipart/form-data" autocomplete="off">
+                                {% csrf_token %}
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            ایجاد درباره ما - مرکز
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="col-12 table-sm table-striped table-hover text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ ccontactus.tell.label }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.tell }}
+                                        </td>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.email.label }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.email }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.tell2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.tell2  }}
+                                        </td>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.mobile.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.mobile }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.fax.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.fax  }}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+
+                                <table style="margin-top: 2%;"
+                                    class="col-12 table-sm table-striped table-hover text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.callinfo.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.callinfo }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.address.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.address }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            بخش مربوط به توضیح خدمات اینترنتی برای پاییت صفحه
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top: 2%;"
+                                    class="col-12 table-sm table-striped table-hover text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.internetsaletitle.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.internetsaletitle }}
+                                        </td>
+
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.internetimg.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.internetimg }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top: 2%;"
+                                    class="col-12 table-sm table-striped table-hover text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.internetsaledesc.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.internetsaledesc }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            بخش زمان های کاری
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table style="margin-top: 2%;"
+                                    class="col-12 table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.wtworkstart.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.wtworkstart }}
+                                        </td>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.wtworkend.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.wtworkend }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.ltworkstart.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.ltworkstart }}
+                                        </td>
+                                        <td class="font-weight-bold  text-center">
+                                            {{ ccontactus.ltworkend.label  }}
+                                        </td>
+                                        <td>
+                                            {{ ccontactus.ltworkend }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <input style="opacity: 60%; margin-top: 1%;" type="submit" value='ذخیره'
+                                    class="shadow btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold">
+
+                            </form>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

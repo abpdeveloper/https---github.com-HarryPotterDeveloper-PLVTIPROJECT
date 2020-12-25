@@ -1,0 +1,143 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش دسته بندی محصول|
+{% endblock %}
+
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#productsgroupsBtnDelete").click({
+            ModelName: "productsgroups",
+            RedirectPath: "productsgroupsLV", TableId: "example"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">داشبورد ادمین</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success shadow rounded"
+                                    href="{% url 'WebSite:create' 'productscategory' 'productscategoryform' 'productscategoryLV' 'productscategory_create' 'pcategory' %}">
+                                    ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger shadow rounded" id="productsgroupsBtnDelete" href="#"> حذف
+                                    دسته بندیی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش دسته بندی محصول ها
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%" id="example"
+                                class="display table table-hover table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                                class="selectAll " name="selectAll" value="all"></th>
+                                        <th class="text-center">کد</th>       
+                                        <th class="text-center">کلید ها</th>
+                                        <th class="text-center">کلید زیر دسته بندی ها</th>
+                                        <th class="text-center">کد دسته بندی بالادست</th>
+                                        <th class="text-center">نام دسته بندی</th>
+                                        <th class="text-center">شرح دسته بندی</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if productscategory %}
+                                    {% for result in productscategory %}
+                                    {% if result.cparentid == 0  %}
+
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'productscategory' 'productscategoryformupdate' 'productscategoryLV' 'productscategory_update' 'productscategory' result.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'productscategory' 'productscategoryLV' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+
+                                        <td class="text-center"><a
+                                                href="{% url 'WebSite:productscategoryparent' result.id %}">ایجاد زیر
+                                                دسته بندی
+                                            </a></td>
+                                        <td class="text-center text-dark">{{ result.cparentid }}</td>
+                                        <td class="text-center">{{ result.cname }}</td>
+                                        <td class="text-center text-dark">{{ result.cdesc }}</td>
+                                    </tr>
+                                    {% for result2 in productscategory %}
+                                    {% if result2.cparentid == result.id  %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result2.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'productscategory' 'productscategoryformupdate' 'productscategoryLV' 'productscategory_update' 'productscategory' result2.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'productscategory' 'productscategoryLV' result2.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+
+                                        <td class="text-center">سطح آخر</td>
+                                        <td class="text-center text-dark">{{ result2.cparentid }}</td>
+                                        <td class="text-center">{{ result2.cname }}</td>
+                                        <td class="text-center text-dark">{{ result2.cdesc }}</td>
+                                    </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

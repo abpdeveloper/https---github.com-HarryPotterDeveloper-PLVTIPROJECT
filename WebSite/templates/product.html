@@ -1,0 +1,173 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش محصول|
+{% endblock %}
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    $(document).ready(function () {
+        $("#productBtnDelete").click({
+            ModelName: "products",
+            RedirectPath: "product", TableId: "example"
+        }, DeleteRecords);
+        
+    });
+</script>
+
+
+    {% include 'partials/dashboard_header.html' %}
+    <div class="page-wrapper">
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb ">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">گزارش محصول ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="{% url 'WebSite:productsgroupsLV' %}">گزارش گروه
+                                            محصول
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'WebSite:product' %}">گزارش محصول
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:brandreport' %}">گزارش برند</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:costreport' %}">گزارش قیمت محصول</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:commentreport' %}">گزارش کامنت ها</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:commentreport' %}">گزارش مشتری
+                                            ها</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="{% url 'WebSite:factorreport' %}">گزارش فاکتور
+                                            ها</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link " href="{% url 'WebSite:PayRcvreport' %}">گزارش رسید ها
+                                            </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success rounded shadow"
+                                    href="{% url 'WebSite:create' 'products' 'productsForm' 'product' 'product_create' 'product' %}">
+                                    ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger shadow rounded" id="productBtnDelete" href="#"> حذف
+                                    گروهی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش محصول ها
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%" id="product"
+                                class="display table table-hover table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                            class="selectAll " name="selectAll" value="all"></th>
+                                        <th>کد</th>   
+                                        <th>کلید ها</th>
+                                        <th>نام</th>
+                                        <th>سریال</th>
+                                        <th>گروه</th>
+                                        <th>برند</th>
+                                        <!-- <th>گارانتی</th>
+                                        <th>خدمات پس از فروش</th> -->
+                                        <th>شرح</th>
+                                        <th>عکس یک</th>
+                                        <th>عکس دو</th>
+                                        <th>عکس سه</th>
+                                        <th>عکس چهار</th>
+                                        <th>عکس پنج</th>
+                                        <th>عکس شش</th>
+                                        <!-- <th>دسته بندی یکم</th>
+                                        <th>دسته بندی دوم</th>
+                                        <th>دسته بندی سوم</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  
+                                    <!-- {% if product %}
+                                    {% for result in product %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result.id }}</td>
+                                        <td class="text-center">
+                                            <a class=" text-success"
+                                                href="{% url 'WebSite:update' 'products' 'productsFormUpdate' 'product' 'product_update' 'product' result.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px; display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class=" text-danger"
+                                                href="{% url 'WebSite:delete' 'products' 'product' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+                                        <td>{{ result.name }}</td>
+                                        <td>{{ result.serial }}</td>
+                                        <td>{{ result.group }}</td>
+                                        <td>{{ result.brand }}</td>
+                                        <td>{{ result.desc }}</td>
+                                        <td><img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.img1 }}"></td>
+                                        <td><img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.img2 }}"></td>
+                                        <td><img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.img3 }}"></td>
+                                        <td><img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.img4 }}"></td>
+                                        <td><img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.img5 }}"></td>
+                                        <td><img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}{{ result.img6 }}"></td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %} -->
+                                </tbody>
+                            </table>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

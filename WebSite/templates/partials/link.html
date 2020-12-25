@@ -1,0 +1,1350 @@
+{% load static %}
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="keywords" content="HTML5 Template">
+<meta name="description" content="Molla - Bootstrap eCommerce Template">
+<meta name="author" content="p-themes">
+<!-- Favicon -->
+<!-- <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/images/icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/images/icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/images/icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'assets/images/icons/site.html' %}">
+    <link rel="mask-icon" href="{% static 'assets/images/icons/safari-pinned-tab.svg' %}" color="#666666">
+    <link rel="shortcut icon" href="{% static 'assets/images/icons/favicon.ico' %}"> -->
+<meta name="apple-mobile-web-app-title" content="Molla">
+<meta name="application-name" content="Molla">
+<meta name="msapplication-TileColor" content="#cc9966">
+<meta name="msapplication-config" content="{% static 'assets/images/icons/browserconfig.xml' %}">
+<meta name="theme-color" content="#ffffff">
+<!-- Plugins CSS File -->
+<link rel="stylesheet" href="{% static 'assets/css/bootstrap-rtl.min.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/plugins/owl-carousel/owl.carousel.css' %}">
+<link rel="stylesheet" href="{% static 'assets/css/plugins/magnific-popup/magnific-popup.css' %}">
+<!-- Main CSS File -->
+<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+<!-- fontawesome CSS -->
+
+<!-- Bootstrap CSS -->
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<!-- By default, Datepicker using jQuery, you need to set your script after loading jQuery! -->
+<!-- loading directly -->
+
+<link rel="stylesheet" href="{% static 'admin/jquery.ui.datepicker.jalali/themes/base/jquery-ui.min.css' %}"/>
+<link rel="stylesheet" type="text/css"
+    href="{% static 'dataTable/DataTables-1.10.21/css/dataTables.bootstrap4.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/Buttons-1.6.2/css/buttons.bootstrap4.css' %}" />
+<link rel="stylesheet" type="text/css"
+    href="{% static 'dataTable/FixedHeader-3.1.7/css/fixedHeader.bootstrap4.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/KeyTable-2.5.2/css/keyTable.bootstrap4.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/Responsive-2.2.5/css/responsive.bootstrap4.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/Scroller-2.0.2/css/scroller.bootstrap4.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/jquery.dataTables.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/select.datatables.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'dataTable/jquery-ui.css' %}" />
+
+<!-- loading scripts -->
+
+
+
+
+
+
+
+<script src="{% static 'js/slim.min.js' %}"></script>
+
+
+
+<script type="text/javascript" src="{% static 'dataTable/jquery-3.5.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/popper.min.js' %}"></script>
+
+
+<script>
+    $(function () {
+        // انتخاب با کلیک بر روی عکس
+        $("img.ui-datepicker-trigger").css("width", "5%");
+    });
+</script>
+<script src="{% static 'admin/js/django_jalali.min--.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/DataTables-1.10.21/js/jquery.dataTables.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'dataTable/Bootstrap-4-4.1.1/js/bootstrap.js' %}"></script>
+
+
+
+<script type="text/javascript" src="{% static 'dataTable/DataTables-1.10.21/js/dataTables.bootstrap4.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/Buttons-1.6.2/js/dataTables.buttons.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/Buttons-1.6.2/js/buttons.bootstrap4.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/Buttons-1.6.2/js/buttons.flash.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/Buttons-1.6.2/js/buttons.html5.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'dataTable/FixedHeader-3.1.7/js/dataTables.fixedHeader.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/KeyTable-2.5.2/js/dataTables.keyTable.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/Responsive-2.2.5/js/dataTables.responsive.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/Scroller-2.0.2/js/dataTables.scroller.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/dataTables.buttons.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/jszip.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/buttons.html5.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/buttons.print.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'dataTable/dataTables.select.min.js' %}"></script>
+<!-- Plugins JS File -->
+
+<script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.hoverIntent.min.js' %}"></script>
+<script src="{% static 'assets/js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'assets/js/superfish.min.js' %}"></script>
+<script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap-input-spinner.js' %}"></script>
+<script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+<!-- Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+<script src="{% static 'js/mymain.js' %}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="{% static 'js/hullabaloo.js' %}"></script>
+<script src="{% static 'js/persianumber.min.js' %}"></script>
+
+
+<script>
+    function removepic(a, id) {
+        $('input.' + a + ':file').attr('value', '');
+
+        $.ajax({
+            url: '{% url "WebSite:removepic" %}',
+            data: {
+                'id': id,
+                'img': a
+
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.img) {
+                    $('span.' + a).remove();
+
+                    hulla.send(data.img + ' ' + 'حذف شد', 'danger');
+
+                }
+            }
+        });
+
+
+
+    };
+
+</script>
+<script>
+    function removepicBanner(a, id) {
+        //$('input.' + a + ':file').attr('value', '');
+        $('input#id_' + a + ':file').attr('value', '');
+
+        $.ajax({
+            url: '{% url "WebSite:removepicBanner" %}',
+            data: {
+                'id': id,
+                'img': a
+
+            },
+            dataType: 'json',
+            success: function (data) {
+                if (data.img) {
+                    $('span.' + a).remove();
+
+                    hulla.send(data.img + ' ' + 'حذف شد', 'danger');
+
+                }
+            }
+        });
+
+
+
+    };
+
+</script>
+
+<script type="text/javascript">
+    var hulla = new hullabaloo();
+
+    // hulla.send("jQueryScript.Net", "success");
+      //hulla.send("jQuery Hullabaloo.js Plugin Examples", "info");
+     //hulla.send("A Bootstrap 4 Notification Plugin", "warning");
+</script>
+<script>
+    $(function () {
+        // انتخاب با کلیک بر روی عکس
+        $("img.ui-datepicker-trigger").css("width", "5%");
+    });
+
+</script>
+<script>
+    var table = $('#example').DataTable();
+    table.rows('.important').select();
+
+    $(document).ready(function () {
+        $('*').persiaNumber();
+        $(".active").click(function () {
+            $(this).addClass("active");
+            $(".active").not(this).removeClass("active");
+        });
+        // $('#example thead tr').clone(true).appendTo('#example thead');
+        // $('#example thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        // $('#example thead tr:eq(1) th').each(function (i) {
+        //     if (i > 0) {
+        //         var title = $(this).text();
+
+        //         $(this).html('<input type="text" placeholder="جستجو ' + title + '" />');
+
+        //         $('input', this).on('keyup change', function () {
+        //             if (table.column(i).search() !== this.value) {
+        //                 table
+        //                     .column(i)
+        //                     .search(this.value, regex = true)
+        //                     .draw();
+        //             }
+        //         });
+        //     }
+        // });
+        var table = $('#example').DataTable({
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#example');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+
+        });
+
+
+
+        var DT1 = $('#example').DataTable();
+
+        $(".selectAll").on("click", function (e) {
+
+            if ($(this).is(":checked")) {
+                DT1.rows({ page: 'current' }).select();
+            } else {
+                DT1.rows({ page: 'current' }).deselect();
+            }
+
+        });
+        $('#CustomerTable thead tr').clone(true).appendTo('#CustomerTable thead');
+        $('#CustomerTable thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        $('#CustomerTable thead tr:eq(1) th').each(function (i) {
+            if (i > 0) {
+                var title = $(this).text();
+
+                $(this).html('<input type="text" placeholder="جستجو ' + title + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table
+                            .column(i)
+                            .search(this.value, regex = true)
+                            .draw();
+                    }
+                });
+            }
+        });
+        var table = $('#CustomerTable').DataTable({
+            "processing": true,
+             "serverSide": true,
+        
+            aLengthMenu: [
+        [10, 25, 50, 100, 200,1000],
+        [10, 25, 50, 100, 200, 1000]
+    ],
+            "ajax": "{% url 'WebSite:customerreportJson' %}",
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0,
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#CustomerTable');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+
+        });
+        
+        $('.closbtn').click(function(){
+        window.close();
+    });
+
+
+        var DT1 = $('#CustomerTable').DataTable();
+
+
+
+        $(".selectAll").on("click", function (e) {
+
+            if ($(this).is(":checked")) {
+                DT1.rows({ page: 'current' }).select();
+            } else {
+                DT1.rows({ page: 'current' }).deselect();
+            }
+
+        });
+        $('#SPFactorTable thead tr').clone(true).appendTo('#SPFactorTable thead');
+        $('#SPFactorTable thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        $('#SPFactorTable thead tr:eq(1) th').each(function (i) {
+            if (i > 0) {
+                var title = $(this).text();
+
+                $(this).html('<input type="text" placeholder="جستجو ' + title + '" name=' + i + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table
+                            .column(i)
+                            .search(this.value, regex = true)
+                            .draw();
+                    }
+                });
+            }
+        });
+        // var FactorNo = $('input[name="1"]').val();
+        // alert(FactorNo);
+
+
+        
+        var table = $('#SPFactorTable').DataTable({
+            "processing": true,
+             "serverSide": true,
+        
+            aLengthMenu: [
+        [10, 25, 50, 100, 200,1000],
+        [10, 25, 50, 100, 200, 1000]
+    ],
+            // data: {
+            //     'FactorNo': FactorNo
+            // },
+            "ajax": "{% url 'WebSite:factorreportJson' %}",
+            "columns": [
+                { "data": " " },
+                {
+                    "data": "id", render: function (data, type, meta) {
+                        return `<a  onclick="formdetailsOpen(` + data + `); function formdetailsOpen(a) {
+                            var Window;
+                            Window = window.open(
+                                '/factordetaile/' + a + '/',
+                                '_blank', 'width=1100, height=500,posision=relative; top=5%; left=5%;');
+
+                        }" class="text-decoration-none text-success" href="#">
+                           `+ data + `
+
+                        </a>`;
+
+                    }
+                },
+                { "data": "FactorNo" },
+                { "data": "ReferenceNo" },
+                { "data": "SPDate" },
+                { "data": "FactorType" },
+                { "data": "CustomerId" },
+                { "data": "Total" },
+                { "data": "Discount" },
+                { "data": "Expense" },
+                { "data": "SPDesc" },
+                { "data": "CustomerName" },
+                { "data": "CustomerPhoneNo" },
+                { "data": "CustomerEcCode" },
+                { "data": "CustomerAddress" },
+                // { "data": "FPId" },
+                // { "data": "SC" },
+                { "data": "FStatus" },
+                // { "data": "FactorSubType" },
+                // { "data": "Committed" },
+            ],
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#SPFactorTable');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+
+        });
+        var DT1 = $('#SPFactorTable').DataTable();
+        
+        $('#PayRcvTable thead tr').clone(true).appendTo('#PayRcvTable thead');
+        $('#PayRcvTable thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        $('#PayRcvTable thead tr:eq(1) th').each(function (i) {
+            if (i > 0) {
+                var title = $(this).text();
+
+                $(this).html('<input type="text" placeholder="جستجو ' + title + '" name=' + i + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table
+                            .column(i)
+                            .search(this.value, regex = true)
+                            .draw();
+                    }
+                });
+            }
+        });
+        // var FactorNo = $('input[name="1"]').val();
+        // alert(FactorNo);
+
+
+
+        var table = $('#PayRcvTable').DataTable({
+            "processing": true,
+             "serverSide": true,
+        
+            aLengthMenu: [
+        [10, 25, 50, 100, 200,1000],
+        [10, 25, 50, 100, 200, 1000]
+    ],
+            // data: {
+            //     'FactorNo': FactorNo
+            // },
+            "ajax": "{% url 'WebSite:PayRcvReportJson' %}",
+            "columns": [
+                { "data": " " },
+                {
+                    "data": "id", render: function (data, type, meta) {
+                        return `<a  onclick="formdetailsOpen(` + data + `); function formdetailsOpen(a) {
+                            var Window;
+                            Window = window.open(
+                                '/PayRcvDetaile/' + a + '/',
+                                '_blank', 'width=1100, height=500,posision=relative; top=5%; left=5%;');
+
+                        }" class="text-decoration-none text-success" href="#">
+                           `+ data + `
+
+                        </a>`;
+
+                    }
+                },
+                { "data": "PNo" },
+                { "data": "PayType" },
+                { "data": "PDate" },
+                { "data": "RcvrFAccId" },
+                { "data": "PDesc" },
+                { "data": "CustomerId" },
+                { "data": "PCValue" },
+            ],
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#PayRcvTable');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+
+        });
+
+// $('#PayRcvDetaile thead tr').clone(true).appendTo('#PayRcvDetaile thead');
+//         $('#PayRcvDetaile thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+//         $('#PayRcvDetaile thead tr:eq(1) th').each(function (i) {
+//             if (i > 0) {
+//                 var title = $(this).text();
+
+//                 $(this).html('<input type="text" placeholder="جستجو ' + title + '" name=' + i + '" />');
+
+//                 $('input', this).on('keyup change', function () {
+//                     if (table.column(i).search() !== this.value) {
+//                         table
+//                             .column(i)
+//                             .search(this.value, regex = true)
+//                             .draw();
+//                     }
+//                 });
+//             }
+//         });
+        // var FactorNo = $('input[name="1"]').val();
+        // alert(FactorNo);
+
+
+
+        var table = $('#PayRcvDetaile').DataTable({
+            "processing": true,
+            "serverSide": true,
+        
+            aLengthMenu: [
+        [10, 25, 50, 100, 200,1000],
+        [10, 25, 50, 100, 200, 1000]
+    ],
+            
+
+            "ajax": "{% url 'WebSite:PayRcvDetaileReportJson' %}",
+            "columns": [
+                { "data": " " },
+                { "data": "id" },
+                { "data": "SType" },
+                { "data": "CheckNo" },
+                { "data": "CValue" },
+                { "data": "CDate" },
+                { "data": "RcptDate" },
+                { "data": "CStatus" },
+            ],
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#PayRcvDetaile');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+          
+
+        });
+        
+        var DT1 = $('#PayRcvDetaile').DataTable();
+
+        $('#product thead tr').clone(true).appendTo('#product thead');
+        $('#product thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        $('#product thead tr:eq(1) th').each(function (i) {
+            if (i > 0) {
+                var title = $(this).text();
+
+                $(this).html('<input type="text" id="product'+i+'" placeholder="جستجو ' + title + '" name=' + i + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table
+                            .column(i)
+                            .search(this.value, regex = true)
+                            .draw();
+                    }
+                });
+            }
+        });
+        $("#product1,#product3,#product4,#product5,#product6").on("change paste keyup", function() {
+                // alert($(this).val()); 
+                $('#product').DataTable().ajax.reload();
+
+            });
+        var table = $('#product').DataTable({
+            "processing": true,
+             "serverSide": true,
+        
+            aLengthMenu: [
+        [10, 25, 50, 100, 200,1000],
+        [10, 25, 50, 100, 200, 1000]
+    ],
+            "ajax": {
+                url: '{% url "WebSite:ProductReportJson" %}',
+                data: function (d) {
+                    d.product1 = $("#product1").val();
+                    d.product2 = $("#product2").val();
+                    d.product3 = $("#product3").val();
+                    d.product4 = $("#product4").val();
+                    d.product5 = $("#product5").val();
+                    d.product6 = $("#product6").val();
+                    d.product7 = $("#product7").val();
+                    d.product8 = $("#product8").val();
+                    d.product9 = $("#product9").val();
+                    d.product10 = $("#product10").val();
+                    d.product11 = $("#product11").val();
+                    d.product12 = $("#product12").val();
+                    // d.product13 = $("#product13").val();
+                },
+                dataType: 'json'
+
+            },
+            "columns": [
+                { "data": " " },
+                { "data": "id" },
+                {
+                    "data": "id", render: function (data, type, meta) {
+                        return `<a class=" text-success"
+                                    href="/Update/products/productsFormUpdate/product/product_update/product/`+data+`">
+                                    <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                        style="width: 20px; height: 20px; display: inline-block;">
+                                    ویرایش</a> |
+                                <a class=" text-danger"
+                                
+                                    href="/delete/products/product/`+data+`">حذف
+                                    <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                        style="width: 20px; height: 20px;  display: inline-block;"></a>`;
+
+                    }
+                },
+                { "data": "name" },
+                { "data": "serial" },
+                { "data": "group" },
+                { "data": "brand" },
+                { "data": "desc" },
+                {
+                    "data": "img1", render: function (data, type, meta) {
+                        return `<img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}`+data+`">`;
+
+                    }
+                },
+                {
+                    "data": "img2", render: function (data, type, meta) {
+                        return `<img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}`+data+`">`;
+
+                    }
+                },
+                {
+                    "data": "img3", render: function (data, type, meta) {
+                        return `<img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}`+data+`">`;
+
+                    }
+                },
+                {
+                    "data": "img4", render: function (data, type, meta) {
+                        return `<img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}`+data+`">`;
+
+                    }
+                },
+                {
+                    "data": "img5", render: function (data, type, meta) {
+                        return `<img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}`+data+`">`;
+
+                    }
+                },
+                {
+                    "data": "img6", render: function (data, type, meta) {
+                        return `<img style="width: 100%; height: 100px;"
+                                                src="{% static 'media/' %}`+data+`">`;
+
+                    }
+                }
+               
+            ],
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#product');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+
+        });
+
+        // $('#PayRcvDetaile tbody').click(function () {
+        //     //var id = $(this).attr('id');
+        //     alert($(this).children('td').text());
+        //   //  alert('test');
+        //     //do something with id
+        // });
+        //     $('#PayRcvDetaile').on( 'dblclick', 'tr', function () {
+        // var id = table.row( this ).find('td:nth-child(2)').text();
+
+        // $('#PayRcvDetaile tbody').on('dblclick', 'td:nth-child(2)', function () {
+        //     alert(table.cell(this).data());
+        // });
+
+
+        var DT1 = $('#product').DataTable();
+        
+      
+
+
+        $(".selectAll").on("click", function (e) {
+
+            if ($(this).is(":checked")) {
+                DT1.rows({ page: 'current' }).select();
+            } else {
+                DT1.rows({ page: 'current' }).deselect();
+            }
+
+        });
+
+        //PayRcvDetaile
+
+
+
+        $('#SPArticleTable thead tr').clone(true).appendTo('#SPArticleTable thead');
+        $('#SPArticleTable thead tr:eq(1) th:eq(0)').html('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+        $('#SPArticleTable thead tr:eq(1) th').each(function (i) {
+            if (i > 0) {
+                var title = $(this).text();
+
+                $(this).html('<input type="text" placeholder="جستجو ' + title + '" name=' + i + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table
+                            .column(i)
+                            .search(this.value, regex = true)
+                            .draw();
+                    }
+                });
+            }
+        });
+        // var FactorNo = $('input[name="1"]').val();
+        // alert(FactorNo);
+        var table = $('#SPArticleTable').DataTable({
+            "processing": true,
+             "serverSide": true,
+        
+            aLengthMenu: [
+        [10, 25, 50, 100, 200,1000],
+        [10, 25, 50, 100, 200, 1000]
+    ],
+            // data: {
+            //     'FactorNo': FactorNo
+            // },
+            "ajax": "{% url 'WebSite:ArticlereportJson' %}",
+
+            "ordering": true,
+            scrollX: true,
+            language: {
+                "sEmptyTable": "خالی",
+                "sInfo": "نمایش _START_ تا _END_ از _TOTAL_ ردبف",
+                "sInfoEmpty": "نمایش 0 از 0 تا 0 ردیف",
+                "sInfoFiltered": "(انتخاب شده از _MAX_ ردیف)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "نمایش _MENU_ ردیف",
+                "sLoadingRecords": "درحال بارگزاری",
+                "sProcessing": "درحال پردازش",
+                "sSearch": "جستجو:",
+                "sZeroRecords": "هبچ چیز پیدا نشد",
+                "srow selected": "ردیف های انتخاب شده",
+                "oPaginate": {
+                    "sFirst": "اولین صفحه",
+                    "sLast": "آخرین صفحه",
+                    "sNext": "بعد",
+                    "sPrevious": "قبل"
+                },
+                "oAria": {
+                    "sSortAscending": "سورت بزرگ به کوچک",
+                    "sSortDescending": "سورت کوچک به بزرگ"
+                }
+            },
+            orderCellsTop: true,
+            fixedHeader: false,
+
+            columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr'
+            },
+            order: [[1, 'asc']],
+            dom: 'Blfrtip',
+            buttons: [
+                {
+                    extend: 'copy',
+                    title: '',
+                    text: 'کپی',
+                    messageTop: null,
+                    messageBottom: null,
+                    exportOptions: {
+                        columns: [':visible'],
+                    }
+                },
+                {
+                    extend: 'excel',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    text: 'اکسل',
+                    exportOptions: {
+                        columns: [':visible'],
+
+                    }
+                },
+                {
+                    extend: 'print',
+                    title: '',
+                    messageTop: null,
+                    messageBottom: null,
+                    autoPrint: true,
+                    text: 'پرینت و pdf',
+                    exportOptions:
+                    {
+                        columns: [':visible'],
+                        rows: function (idx, data, node) {
+                            var dt = new $.fn.dataTable.Api('#SPArticleTable');
+                            var selected = dt.rows({ selected: true }).indexes().toArray();
+
+                            if (selected.length === 0 || $.inArray(idx, selected) !== -1)
+                                return true;
+
+
+                            return false;
+                        },
+                    }
+                },
+
+            ],
+
+        });
+
+        // $('#SPArticleTable tbody').click(function () {
+        //     //var id = $(this).attr('id');
+        //     alert($(this).children('td').text());
+        //   //  alert('test');
+        //     //do something with id
+        // });
+        //     $('#SPArticleTable').on( 'dblclick', 'tr', function () {
+        // var id = table.row( this ).find('td:nth-child(2)').text();
+
+
+
+
+        var DT1 = $('#SPArticleTable').DataTable();
+
+
+        $(".selectAll").on("click", function (e) {
+
+            if ($(this).is(":checked")) {
+                DT1.rows({ page: 'current' }).select();
+            } else {
+                DT1.rows({ page: 'current' }).deselect();
+            }
+
+        });
+
+    });
+
+
+
+    function acceptcomment(id) {
+        //var action = confirm("Are you sure you want to delete this user?");
+        // if (action != false) {
+        $.ajax({
+            url: '{% url "WebSite:commentAccept" %}',
+            data: {
+                'id': id,
+            },
+            dataType: 'json',
+            success: function (data) {
+
+
+                $('#comment' + id + ' td:nth-child(6)').text('تایید شده');
+                hulla.send('.       تایید شد', 'success');
+
+
+            }
+        });
+        // }
+    }
+
+    function rejectcomment(id) {
+        //var action = confirm("Are you sure you want to delete this user?");
+        // if (action != false) {
+        $.ajax({
+            url: '{% url "WebSite:commentReject" %}',
+            data: {
+                'id': id,
+            },
+            dataType: 'json',
+            success: function (data) {
+
+
+                $('#comment' + id + ' td:nth-child(6)').text('رد شده');
+                hulla.send('.       رد شد', 'danger');
+
+
+            }
+        });
+        // }
+    }
+
+    function deletecomment(id) {
+        //var action = confirm("Are you sure you want to delete this user?");
+        // if (action != false) {
+        $.ajax({
+            url: '{% url "WebSite:commentDelete" %}',
+            data: {
+                'id': id,
+            },
+            dataType: 'json',
+            success: function (data) {
+
+
+                $('#comment' + id).remove();
+
+
+            }
+        });
+        // }
+    }
+
+//////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+</script>
+

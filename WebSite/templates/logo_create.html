@@ -1,0 +1,246 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد لوگو و بنر ها|
+{% endblock %}
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:logoreport' %}">گزارش لوگو و بنر ها</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد لوگو و بنر ها</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div style="margin: 1%;" class="container">
+            {% if error %}
+            {% for error in error %}
+            <p class="font-wait-bold border border-danger rounded text-danger shadow" style="padding: 1%;">
+                {{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-content col-12">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <form method="POST" role="form" enctype="multipart/form-data" autocomplete="off">
+                                {% csrf_token %}
+                                <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            ایجاد لوگو و بنر ها
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p style="font-size: medium; font-weight: bold; color: black; border: 1px solid black; border-radius: 5px;"
+                                    class="text-center shadow-lg m-3 p-1">چهار بنر پایین اسلایدر در صفحه اصلی</p>
+
+                                <table class="col-12 table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            از سمت چپ شماره یک
+                                        </td>
+                                        <td>
+                                            {{ logo.baner8  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group8.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group8  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            از سمت چپ شماره دو
+                                        </td>
+                                        <td>
+                                            {{ logo.baner9  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group9.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group9  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            از سمت چپ شماره سه
+                                        </td>
+                                        <td>
+                                            {{ logo.baner10  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group10.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group10  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            از سمت چپ شماره چهار
+                                        </td>
+                                        <td>
+                                            {{ logo.baner11  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group11.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group11  }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <p style="font-size: medium; font-weight: bold; color: black; border: 1px solid black; border-radius: 5px;"
+                                    class="text-center shadow-lg m-3 p-1">پنج بنر کنار آخرین خبر در صفحه اصلی</p>
+
+                                <table class="col-12 table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            بنر کشیده
+                                        </td>
+                                        <td>
+                                            {{ logo.baner1  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group1  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            ردیف اول سمت چپ
+                                        </td>
+                                        <td>
+                                            {{ logo.baner2  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group2  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            ردیف دوم سمت چپ
+                                        </td>
+                                        <td>
+                                            {{ logo.baner3  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group3.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group3  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            ردیف دوم وسط
+                                        </td>
+                                        <td>
+                                            {{ logo.baner4  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group4.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group4  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            ردیف دوم سمت راست
+                                        </td>
+                                        <td>
+                                            {{ logo.baner5  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group5.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group5 }}
+                                        </td>
+                                    </tr>
+                                </table>
+
+
+                                <p style="font-size: medium; font-weight: bold; color: black; border: 1px solid black; border-radius: 5px;"
+                                    class="text-center shadow-lg m-3 p-1">دو بنر پایین صفحه اصلی</p>
+
+                                </table>
+                                <table class="col-12 table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            بنر پایین صفحه سمت راست
+                                        </td>
+                                        <td>
+                                            {{ logo.baner6  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group6.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group6  }}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold  text-center">
+                                            بنر پایین صفحه سمت چپ
+                                        </td>
+                                        <td>
+                                            {{ logo.baner7  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group7.label  }}
+                                        </td>
+                                        <td>
+                                            {{ logo.group7  }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                <input style="opacity: 60%; margin-top: 1%;" type="submit" value='ذخیره'
+                                    class="shadow btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold">
+
+                            </form>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

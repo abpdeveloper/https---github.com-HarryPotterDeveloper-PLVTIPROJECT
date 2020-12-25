@@ -1,0 +1,127 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} گزارش حساب های بانکی|
+{% endblock %}
+
+
+
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+{% include 'partials/dashboard_header.html' %}
+<script>
+    $(document).ready(function () {
+        $("#bankBtnDelete").click({
+            ModelName: "parametsaccounts",
+            RedirectPath: "bankreport", TableId: "example"
+        }, DeleteRecords);
+    });
+</script>
+<div class="page-wrapper">
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">داشبورد</a></li>
+                    <li class="breadcrumb-item"><a href="#">مدیریت پارامتر های پایین صفحه</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">گزارش حساب های بانکی </li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12  float-left">
+                            <div style="margin-bottom: 1%;">
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="{% url 'WebSite:bankreport' %}">ایجاد حساب های بانکی
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="{% url 'WebSite:sasreport' %}">ایجاد خدمات پس از فروش
+                                            
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link  " href="{% url 'WebSite:supportreport' %}">ایجاد اطلاعات پشتیبانی
+                                            
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-success rounded shadow"
+                                    href="{% url 'WebSite:create' 'parametsaccounts' 'parametsaccountsform' 'bankreport' 'bacnkaccount_create' 'bank' %}">
+                                     ایجاد</a>
+                            </div>
+                            <div class=" border-right" style="display: inline-block;" aria-label="...">
+                                <a class="btn btn-danger rounded shadow" id="bankBtnDelete" href="#"> حذف گروهی</a>
+                            </div>
+                            <table class=" shadow rounded " style="margin-bottom: 2%;">
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                        گزارش حساب های بانکی
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%" id="example"
+                                class="display table table-hover table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th style="text-align:center;"> <input id="checkAllForm" type="checkbox"
+                                                class="selectAll " name="selectAll" value="all"></th>
+                                        <th class="text-center">شماره</th>
+                                        <th class="text-center">کلید ها</th>
+                                        <th class="text-center">اطلاعات بانک</th>
+                                        <th class="text-center">عکس بانک</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if bankreport %}
+                                    {% for result in bankreport %}
+                                    <tr class="text-center">
+                                        <td></td>
+                                        <td class="text-center">{{ result.id }}</td>
+                                        <td class="text-center">
+                                            <a class="text-decoration-none text-success"
+                                                href="{% url 'WebSite:update' 'parametsaccounts' 'parametsaccountsformupdate' 'bankreport' 'bacnkaccount_update' 'bank' result.id %}">
+                                                <img src="{% static 'media/edit and delete/edit.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;">
+                                                ویرایش</a> |
+                                            <a class="text-decoration-none text-danger"
+                                                href="{% url 'WebSite:delete' 'parametsaccounts' 'bankrport' result.id %}">حذف
+                                                <img src="{% static 'media/edit and delete/delete2.png' %}" alt=""
+                                                    style="width: 20px; height: 20px;  display: inline-block;"></a>
+                                        </td>
+                                        <td class="text-center">{{ result.account }}</td>
+                                        <td class="text-center"><img src="{% static 'media/' %}{{ result.accountimg }}">{{result.accountimg }}</td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

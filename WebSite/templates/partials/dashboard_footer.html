@@ -1,0 +1,81 @@
+{% load static %}
+{% if user.is_authenticated %}
+<footer class="footer footer-dark">
+    <div class="footer-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget widget-about">
+                        <img src="assets/images/demos/demo-22/logo-footer.png" class="footer-logo"
+                            alt="Footer Logo" width="100" height="25">
+                        <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم لورم ایپسوم متن ساختگی با تولید سادگی
+                            نامفهوم. </p>
+
+                        <div class="social-icons">
+                            
+                            <a href="#" class="social-icon" title="اینستاگرام" target="_blank"><i
+                                    class="icon-instagram"></i></a>
+                            <a href="#" class="social-icon" title="واتس آپ" target="_blank"><i
+                                    class="icon-whatsapp"></i></a>
+                            <a href="#" class="social-icon" title="تلگرام" target="_blank"><i
+                                    class="icon-telegram"></i></a>
+                        </div><!-- End .soial-icons -->
+                    </div><!-- End .widget about-widget -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title">لینک های مفید</h4><!-- End .widget-title -->
+
+                        <ul class="widget-list">
+                            <li><a href="{% url 'WebSite:category-boxed' %}">فروشگاه</a></li>
+                            <li><a href="{% url 'WebSite:stors' %}">نمایندگی ها</a></li>
+                            <li><a href="{% url 'WebSite:about' %}">درباره ما</a></li>
+                            <li><a href="{% url 'WebSite:contact' %}">تماس با ما</a></li>
+                        </ul><!-- End .widget-list -->
+                    </div><!-- End .widget -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title">خدمات مشتری</h4><!-- End .widget-title -->
+
+                        <ul class="widget-list">
+                            <li><a href="#">شیوه پرداخت</a></li>
+                            <li><a href="#">شیوه ارسال محصولات</a></li>
+                            <li><a href="#">خط مشی</a></li>
+                        </ul><!-- End .widget-list -->
+                    </div><!-- End .widget -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+       
+                <div class="col-sm-6 col-lg-3">
+                    <div class="widget">
+                        <h4 class="widget-title">حساب کاربری</h4><!-- End .widget-title -->
+
+                        <ul class="widget-list">
+                            <li><a href="#">ورود</a></li>
+                            <li><a href="cart.html">سبد خرید</a></li>
+                            <li><a href="#">لیست علاقه مندی ها</a></li>
+                            <li><a href="#">پیگیری سفارشات</a></li>
+                            <li><a href="#">راهنما</a></li>
+                        </ul><!-- End .widget-list -->
+                    </div><!-- End .widget -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .footer-middle -->
+
+    <div class="footer-bottom">
+        <div class="container">
+            <p class="footer-copyright">کلیه حقوق این سایت متعلق به گروه پخش لوله و تجهیزات ایران می باشد .</p>
+            <!-- End .footer-copyright -->
+        </div><!-- End .container -->
+    </div><!-- End .footer-bottom -->
+</footer><!-- End .footer -->
+
+
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+
+
+{% include 'partials/mobile.html' %}
+{% endif %}

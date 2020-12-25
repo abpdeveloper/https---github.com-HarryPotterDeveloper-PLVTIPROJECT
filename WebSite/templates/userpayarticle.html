@@ -1,0 +1,77 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+{% load my_templatetag %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+    <main class="main">
+        <nav aria-label="breadcrumb" class="breadcrumb-nav mb-3">
+            <div class="container-fluid">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <iframe id="txtArea1" style="display:none"></iframe>
+                            <table style="width:100%; color: black; font-weight: bold; font-family: sans-serif;" id="example"
+                                class="display table table-hover table-sm table-striped table-bordered shadow">
+                                <thead>
+                                    <tr class="font-weight-bold text-center">
+                                        <th></th>
+                                        <th class="text-center">نوع عملیات</th>
+                                        <th class="text-center">شماره/ شماره چک</th>
+                                        <th class="text-center">مبلغ چک</th>
+                                        <th class="text-center">تاریخ دریافت</th>
+                                        <th class="text-center">تاریخ سررسید</th>
+                                        <th class="text-center">وضعیت چک</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if userarticles %}
+                                    {% for result in userarticles %}
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center">{{ result.SType }}</td>
+                                        <td class="text-center">{{ result.CheckNo }}</td>
+                                        <td class="text-center">{{ result.CValue | intdot }}</td>
+                                        <td class="text-center">{{ result.RcptDate }}</td>
+                                        <td class="text-center">{{ result.CDate }}</td>
+                                        <td class="text-center">{{ result.CStatus }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                </tbody>
+                                <div class="tab-pane fade" id="tab-orders" role="tabpanel"
+                                    aria-labelledby="tab-orders-link">
+                                    <p>رسیدی وجود ندارد</p>
+                                    {% endif %}
+                                </div>
+                            </table>
+                            <div>
+                                <button type="submit"
+                class="closbtn shadow btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold"
+                style="background-color:#e7462a; color: white;">بستن پنجره</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End .col-lg-9 -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+<!-- Mobile Menu -->
+{% include 'partials/mobile.html' %}
+<!-- Sign in / Register Modal -->
+{% else %}
+{% include '404.html' %}
+{% endif %}
+{% endblock %}

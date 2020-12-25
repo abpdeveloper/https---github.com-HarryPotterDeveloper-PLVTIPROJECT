@@ -1,0 +1,144 @@
+{% load static %}
+<footer class="footer footer-white shadow mt-1" style="background-color:#e6e6e6; font-family: sans-serif;">
+    <div class="container" style="background-color:#e6e6e6">
+        <div class="row" style="background-color:#e6e6e6">
+            <div class="container service mb-1 " style="background-color:#e6e6e6">
+                <div class="row" >
+                    <div class="col-lg-2 col-md-2 float-right"></div>
+                    <div class="col-lg-8 col-md-8 text-center">
+                        <div style="display: inline-block;" class="mb-1 col-lg-3 col-md-3 col-sm-6 col-6 float-right"><a
+                                href="{% url 'WebSite:footersupportreport' %}">
+                                <img src="{% static '/footer/pic1-shomarehesab.png' %}"
+                                    style="height: 130px; width:  100%;  border-radius: 25px; "></a></div>
+                        <div style="display: inline-block;" class="mb-1 col-lg-3 col-md-3 col-sm-6 col-6 float-right">
+                            <a href="">
+                                <img src="{% static '/footer/aghsati.png' %}"
+                                    style="height: 130px; width:  100%;   border-radius: 25px; "></a></div>
+                        <div style="display: inline-block;" class="mb-1 col-lg-3 col-md-3 col-sm-6 col-6 float-left"><a
+                                href="{% url 'WebSite:footersupportreport' %}">
+                                <img src="{% static '/footer/khadamat.png' %}"
+                                    style="height: 130px; width:  100%;   border-radius: 25px; ">
+                            </a></div>
+                        <div style="display: inline-block;" class="mb-1 col-lg-3 col-md-3 col-sm-6 col-6  float-left">
+                            <a href="{% url 'WebSite:footersupportreport' %}">
+                                <img src="{% static '/footer/zemanatebazgasht.png' %}"
+                                    style="height: 130px; width: 100%;   border-radius: 25px; "></a></div>
+
+                    </div>
+                    <div class="col-lg-2 col-md-2 float-left"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-middle " >
+        <div class="container" style="background-color:#e6e6e6">
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-xs-6 float-right">
+                    <div class="widget">
+                        <h4 class="widget-title" style="font-family: sans-serif;">لینک های مفید</h4><!-- End .widget-title -->
+                        <ul class="widget-list">
+                            <li><a href="{% url 'WebSite:stors' %}">نمایندگی ها</a></li>
+                            <li><a href="{% url 'WebSite:about' %}">درباره ما</a></li>
+                            <li><a href="{% url 'WebSite:contact' %}">تماس با ما</a></li>
+                            <li><a href="{% url 'WebSite:osoolreportusers' %}">شیوه پرداخت</a></li>
+                            <li><a href="{% url 'WebSite:footersasreport' %}">خدمات پس از فروش</a></li>
+                        </ul><!-- End .widget-list -->
+                    </div><!-- End .widget -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 float-left">
+                    <div class="widget widget-about ">
+                        <!--در این بخش نمایش لولگو در فوتر کامنت شدده است-->
+                        {% comment %}
+                        {% for b in fhlogo %}
+                        {% if fhlogo %}
+                        {% if forloop.first %}
+                        <a href="{% url 'WebSite:login' %}" class="logo">
+                            <img class=" " src="{% static 'media/' %}{{ b.Logo }}" alt="پخش لوله و تجهیزات ایران"
+                                width="130" height="30">
+                        </a>
+                        {% endif %}
+                        {% endif %}
+                        {% endfor %}
+                        {% endcomment %}
+
+                        {% if fcontact.0.address != None %}
+                        {% for fn in fcontact %}
+                        
+                        <h6 style="font-family: sans-serif; font-weight: bold;"> {{ fn.callinfo }} </h6>
+                        <span>{{ fn.address }} -- {{ fn.tell }} --
+                            {{ fn.tell2 }} .<br />فکس : {{ fn.fax }}<br />آدرس ایمیل : {{ fn.email }}</span>
+                        {% endfor %}
+                        {% else %}
+                        {% endif %}
+                    </div><!-- End .widget about-widget -->
+                </div><!-- End .col-sm-6 col-lg-3 -->
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                    {% for fi in fcontact %}
+                    {% if fcontact %}
+                    {% if fcontact.0.address != None %}
+                    {% if fi.internetsaletitle and fi.internetsaledesc and fi.internetimg %}
+                    <h6> {{ fi.internetsaletitle }} </h6>
+                  
+                    <p style="text-align: justify; text-justify: inter-word;">
+                        توضیح : {{ fi.internetsaledesc }}<br /></p>
+                    <img src="{% static 'media/' %}{{ fi.internetimg }}"
+                        style="width: 50px; height: 50px; border-radius: 15px;" class="logo mt-1">
+                    
+                    {% endif %}
+                    {% endif %}
+                    {% else %}
+                    {% endif %}
+                    {% endfor %}
+                </div><!-- End .col-sm-6 col-lg-3 -->
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 float-left mt-6">
+                    <img src="{% static 'enamand/enamad.png' %}"
+                        style="width: 280px; height: 135px; border-radius: 25px;">
+                </div>
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .footer-middle -->
+    <div class="footer-bottom border-primary mt-0" style="border-top-style: solid; border-top-color: #224094;
+    border-top-width: 3px; background-color: rgb(210, 210, 210);">
+        <p class=" text-center col-12 mt-2 mb-2" style="font-size: medium; color: black; font-family: sans-serif;">تمامي
+            كالاها و خدمات اين فروشگاه، داراي
+            مجوزهاي لازم از مراجع مربوطه و فعاليت‌هاي اين سايت تابع قوانين و مقررات جمهوري اسلامي ايران است.</p>
+        <div class="col-12 d-flex justify-content-center mt-0 ">
+            <style>
+                .social:hover
+                {
+                    box-shadow:2px 2px 2px 2px grey ;
+                    border-radius: 50%;
+                }
+            </style>
+            <div class="row mb-1">
+                <a href=""
+                    class=" d-flex justify-content-center col-lg-3 col-md-3 col-sm-3 col-3" title="فیس بوک"
+                    target="_blank"><img src="{% static 'media/SocialMedia/facebook.png' %}" class="social facebook-ho"
+                        alt="فیس بوک" width="50" height="50"></a>
+                <a href="https://t.me/kalaei_group"
+                    class=" d-flex justify-content-center col-lg-3  col-md-3 col-sm-3 col-3" title="توییتر"
+                    target="_blank"><img src="{% static 'media/SocialMedia/twitter.png' %}" class=" social facebook-ho"
+                        alt="توییتر" width="50" height="50"></a>
+                <a href="https://www.instagram.com/p/kalaeigroup"
+                    class=" d-flex justify-content-center col-lg-3 col-md-3 col-sm-3 col-3" title="اینستاگرام"
+                    target="_blank"><img src="{% static 'media/SocialMedia/instagram (1).png' %}" class="social facebook-ho"
+                        alt="ایسنتاگرام" width="50" height="50"></a>
+                <a href="https://t.me/kalaei_group"
+                    class=" d-flex justify-content-center col-lg-3  col-md-3 col-sm-3 col-3" title="تلگرام"
+                    target="_blank"><img src="{% static 'media/SocialMedia/telegram.png' %}" class="social facebook-ho "
+                        alt="تلگرام" width="50" height="50"></a>
+                {% comment %}
+                <!-- <a href="#" class=" d-flex justify-content-center col-lg-3 col-md-3 col-sm-3 col-3" title="واتس آپ"
+                    target="_blank"><img src="{% static 'media/SocialMedia/whatsapp.png' %}" class="facebook-ho"
+                        alt="واتس آپ" width="50" height="50"></a> -->
+                {% endcomment %}
+            </div>
+
+        </div><!-- End .container -->
+        <p class="text-center col-12" style="font-size: medium; color: black;">
+            Copyright © 2004 - 2020 www.kalaeshop.com
+        </p>
+    </div><!-- End .footer-bottom -->
+</footer><!-- End .footer -->
+<button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+{% include 'partials/mobile.html' %}

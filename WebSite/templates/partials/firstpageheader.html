@@ -1,0 +1,528 @@
+{% load static %}
+
+
+<header class="header border-bottom shadow " style="z-index: 20000000; background-color: rgb(255, 255, 255);">
+    <div class="header-right">
+        <div class="container-fluid">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only" style="color: black;">فهرست</span>
+                    <i class="icon-bars text-dark"></i>
+                </button>
+                {% for b in fhlogo %}
+                <a href="{% url 'WebSite:login' %}" class="Logo mt-0 mb-0">
+                    <img src="{% static 'media/' %}{{ b.Logo }}" alt="پخش لوله و تجهیزات ایران"
+                        style="width: 200px; height: 150px;">
+                </a>
+                {% endfor %}
+            </div><!-- End .header-left -->
+            <div class="header-center">
+                <div class=" header-search header-search-extended header-search-visible d-none d-lg-block">
+                    <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
+                    <form method="get" action="{% url 'WebSite:search_box' %}" class="col-lg-12 text-center">
+                        <div class="header-search-wrapper search-wrapper-wide text-center col-lg-12">
+                            <label for="q" class="sr-only">جستجو</label>
+                            <button class="btn " type="submit"><i class="icon-search"></i></button>
+                            <input type="search" class="form-control" name="search" id="q"
+                                placeholder="کالا و با برند مورد نظر خود را وارد کنید  ..." required>
+                        </div><!-- End .header-search-wrapper -->
+                    </form>
+                </div><!-- End .header-search -->
+            </div>
+            <div class="header-right">
+                <div class="header-bottom border p-2 text-right" style="border-radius: 8%;">
+                    <ul class="top-menu top-link-menu" style="color: black;">
+                        <li style="color: black;">
+                            <ul style="color: black;">
+                                {% if user.is_authenticated %}
+                                <div class="dropdown" data-visible="false" style="color: black;">
+                                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="true" title="کاربر" style="color: black;">
+                                        {% if request.user.username %}
+                                        <li class="p-1 text-dark" style="font-size: small; color: black;"><i class="icon-user" style="color: black;"></i>سلام
+                                            {{ request.user.first_name }}
+
+                                        </li>
+                                        {% endif %}
+                                    </a>
+                                    <div class="dropdown-menu shadow">
+                                        <a class="text-dark float-right" style="padding: 2%; margin: 2%;"
+                                            {% if user.is_superuser %} href="{% url 'WebSite:productsgroupsLV' %}"
+                                            {% else %} href="{% url 'WebSite:dashboard' %}" {% endif %}>
+                                            <i class="icon-user" style="color: black;"></i> پنل کاربری</a>
+                                        <a class="text-dark float-right" style="padding: 2%; margin: 2%;"
+                                            href="{% url 'WebSite:logout' %}">
+                                            <i class="icon-user" style="color: black;"></i>خروج</a>
+
+                                    </div>
+                                </div>
+                                {% else %}
+
+                                <li style="color: black;"><a id="enter" href="{% url 'WebSite:login' %}" data-toggle="modal"
+                                        data-target="#myModal" tabindex="-1" role="dialog" aria-modal="true"
+                                        style="color: black;"><i class="icon-user" style="color: black;"></i> ورود
+                                        /
+                                        ثبت نام</a></li>
+                                <!-- Modal -->
+                                <div class="modal fade shadow" id="myModal" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true"><i class="icon-close"></i></span>
+                                                </button>
+                                                <div class="form-box">
+                                                    <div class="form-tab">
+                                                        <ul class="nav nav-pills nav-fill" role="tablist">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="signin-tab-2"
+                                                                    data-toggle="tab" href="#signin-2" role="tab"
+                                                                    aria-controls="signin-2"
+                                                                    aria-selected="true"  style="color: #00b6be;">ورود</a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a id="registerform" class="nav-link" id="register-tab-2"
+                                                                    data-toggle="tab" href="#register-2" role="tab"
+                                                                    aria-controls="register-2" aria-selected="false"  style="color: #00b6be;">ثبت
+                                                                    نام</a>
+                                                            </li>
+                                                        </ul>
+
+                                                        <div class="tab-content">
+                                                            <div style="margin-top: 1%;"
+                                                                class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                                {% if error_list %}
+                                                                {% for error in error_list %}
+                                                                <p class="font-wait-bold border border-danger rounded text-danger shadow"
+                                                                    style="padding: 1%; margin-right: 1%;">
+                                                                    {{ error_list.0 }}</p>
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                            </div>
+                                                            <div class="tab-pane fade show active" id="signin-2"
+                                                                role="tabpanel" aria-labelledby="signin-tab-2">
+                                                                <form method="POST" role="form"
+                                                                    enctype="multipart/form-data" autocomplete="off"
+                                                                    action="{% url 'WebSite:login' %}" name="login">
+                                                                    {% csrf_token %}
+                                                                    <div class="form-group">
+                                                                        <label>نام کاربری یا آدرس ایمیل
+                                                                            *</label>
+                                                                        {{ form.username }}
+                                                                    </div><!-- End .form-group -->
+                                                                    <div class="form-group">
+                                                                        <label>رمز عبور *</label>
+                                                                        {{ form.password }}
+                                                                    </div><!-- End .form-group -->
+                                                                    <div class="form-footer col-12">
+                                                                        <table>
+                                                                            <tr>
+                                                                                <td><button
+                                                                                        style="display: inline-block; color: white; background-color: #00b6be;"
+                                                                                        type="submit"
+                                                                                        class="shadow btn rounded font-weight-bold"
+                                                                                        id="alert-target">
+                                                                                        ورود
+                                                                                        <i class="icon-long-arrow-left"></i>
+                                                                                    </button></td>
+                                                                                <td>
+                                                                                    <span
+                                                                                        class="shadow">{{ form.captcha }}</span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        
+
+                                                                        </table>
+                                                                        <div class="row">
+                                                                            <a href="#" style="color: black;"
+                                                                                        class="col-12 p-3 forgot-link font-wait-bold text-center text-success" onclick="forgetpass()">رمز
+                                                                                        عبور خود
+                                                                                        را فراموش کرده اید؟</a>
+                                                                        </div>
+
+                                                                    </div><!-- End .form-footer -->
+                                                                </form>
+                                                                
+                                                                <div id="phone"></div>
+                                                                <p id="clickforgetagain" ></p>
+
+                                                                
+                                                                
+                                                               
+                                                                
+                                                            </div>
+
+                                                            <div class="tab-pane fade" id="register-2" role="tabpanel"
+                                                                aria-labelledby="register-tab-2">
+                                                                {% if registererror %}
+                                                                {% for error in registererror %}
+                                                                <p  class="font-wait-bold border border-danger rounded text-danger shadow"
+                                                                    style="padding: 1%; margin-right: 1%;">
+                                                                    {{ error }}</p>
+                                                                  
+                                                                {% endfor %}
+                                                                {% endif %}
+                                                                <form action="{% url 'WebSite:register' %}"
+                                                                    method="POST" enctype="multipart/form-data"
+                                                                    autocomplete="off">
+                                                                    {% csrf_token %}
+                                                                    <div class="form-group">
+                                                                        <span style="color: red; margin-top: 1%;">کاربر
+                                                                            گرامی : فیلد هایی که با ستاره قرمز
+                                                                            مشخص
+                                                                            شده اند
+                                                                            اجباری می باشد .</span>
+
+                                                                        <label for="first_name"
+                                                                            style="margin-top: 5%;">نام و نام خانوادگی
+                                                                            <span style="color: red;">*</span></label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="first_name" name="first_name" required>
+
+                                                                        <label for="last_name">آدرس
+                                                                            <span style="color: red;"></span></label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="last_name" name="last_name" >
+
+                                                                        <label for="email">آدرس ایمیل
+                                                                        </label>
+                                                                        <input type="email" class="form-control"
+                                                                            id="email" name="email">
+
+                                                                    </div><!-- End .form-group -->
+                                                                    <div class="form-group">
+
+                                                                        <label for="cellphone">شماره تلفن
+                                                                            همراه<span
+                                                                                style="color: red;">*</span></label>
+                                                                        <input type="tel" placeholder="09xxxxxxxxx" pattern="[0]{1}[9]{1}[0-9]{9}" class="form-control"
+                                                                            id="cellphone" name="cellphone" required>
+                                                                            <span style="color: red; margin-top: 1%;">کاربر
+                                                                                گرامی : شماره تلفن وارد شده لازم است با اعداد 09 شروع شده و 11 رقم باشد و با توجه به ارسال شدن کد فعال
+                                                                            سازی به
+                                                                            شماره ای که شما در این بخش وارد می
+                                                                            نمایید , لطفا
+                                                                            فیلد شماره
+                                                                            تلفن همراه را با دقت تکمیل فرمایید
+                                                                            .</span>
+
+                                                                        <label for="username"
+                                                                            style="margin-top: 5%;">نام
+                                                                            کاربری
+                                                                            <span style="color: red;">*</span></label>
+
+                                                                        <input type="text" class="form-control"
+                                                                            id="username" name="username" required>
+
+
+                                                                      
+                                                                        <!-- <label for="password">کلمه عبور<span
+                                                                                style="color: red;">*</span></label> -->
+                                                                        <input type="password" class="form-control"
+                                                                            id="password" name="password" value="123" hidden>
+
+                                                                    </div><!-- End .form-group -->
+                                                                    <div class="form-footer">
+
+                                                                        <button type="submit"
+                                                                            class="shadow btn rounded font-weight-bold rounded border" 
+                                                                            style="background-color: #00b6be; color: white;">
+                                                                            ثبت نام
+                                                                            <i class="icon-long-arrow-left"></i>
+                                                                        </button>
+
+                                                                        <div class="custom-control custom-checkbox">
+                                                                            <input type="checkbox"
+                                                                                class="custom-control-input"
+                                                                                id="register-policy-2" required>
+                                                                            <label class="custom-control-label"
+                                                                                for="register-policy-2">من
+                                                                                با
+                                                                                <a style="color: black;" href="#">قوانین
+                                                                                    و
+                                                                                    مقررات</a> موافقم
+                                                                                *</label>
+                                                                        </div><!-- End .custom-checkbox -->
+                                                                    </div><!-- End .form-footer -->
+                                                                </form>
+                                                            </div><!-- .End .tab-pane -->
+                                                        </div><!-- End .tab-content -->
+                                                    </div><!-- End .form-tab -->
+                                                </div><!-- End .form-box -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </div><!-- End .header-right -->
+            </div>
+            <div class="dropdown cart-dropdown">
+                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false" data-display="static">
+                    <i class="icon-shopping-cart" style="color: black;"></i>
+                    <span class="cart-count" style="background-color: #00b6be; color: whitesmoke;"
+                        id="cart-count">{{ sellbascketCount}} </span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+
+                    <div class="dropdown-cart-products">
+                        {% for sell in SellBascket %}
+                        <div class="product" id="Bascket{{sell.id}}">
+                            <div class="product-cart-details">
+                                <h4 class="product-title">
+                                    <a href="#">
+                                        {% for p in productsdetails %}
+                                        {% if sell.pid_id == p.id %}
+                                        {{ p.name }}
+                                        {% endif %}
+                                        {% endfor %}
+
+                                    </a>
+                                </h4>
+
+                                <span class="cart-product-info">
+                                    <!-- <span class="cart-product-qty">1 x </span> -->
+                                    قیمت واحد:
+                                    {% for Cost in Cost %}
+                                    {% if Cost.pid_id == sell.pid_id %}
+                                    {{ Cost.priceoff }}
+                                    {% endif %}
+                                    {% endfor %}
+
+                                </span>
+                                <br />
+                                <span>
+                                    قیمت کل:
+                                    {% for Cost in Cost %}
+                                    {% if Cost.pid_id == sell.pid_id %}
+                                    <span id="totalcost{{sell.id}}">
+                                        {% widthratio Cost.priceoff 1 sell.pcount %}
+                                    </span>
+                                    {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </div><!-- End .product-cart-details -->
+
+                            <figure class="product-image-container">
+                                {% for p in productsdetails %}
+                                {% if sell.pid_id == p.id %}
+                                <a href="{% url 'WebSite:products' %}" class="product-image">
+                                    <img src="{% static 'media/' %}{{ p.img1 }}" alt="محصول">
+                                </a>
+                                {% endif %}
+                                {% endfor %}
+                                <div style="width: 5em">
+                                    <form>
+                                        <input type="number" id="qty{{sell.id}}"
+                                            onchange="updatecount('{{sell.id}}','{{sell.pid_id}}')" class="pcount form-control"
+                                            value="{{ sell.pcount }}" min="1" step="1" data-decimals="0" required>
+
+                                    </form>
+                                </div>
+                            </figure>
+
+                            <div class="btn-remove" onclick="deleteBascket({{sell.id}})" style="cursor: pointer;"
+                                title="حذف محصول"><i class="icon-close"></i></div>
+
+
+
+                        </div><!-- End .product -->
+                        {% endfor %}
+                    </div><!-- End .cart-product -->
+
+
+                    <div class="dropdown-cart-total">
+                        <span>مجموع</span>
+
+                        <span class="cart-total-price" id='cart-total-price'>{{sumBascketPriceoff}} ریال</span>
+                    </div><!-- End .dropdown-cart-total -->
+
+                    <div class="dropdown-cart-action">
+                        <a href="{% url 'WebSite:salebacket' %}" class="btn "
+                            style="background-color: #00b6be; color: white;">مشاهده سبد خرید</a>
+                        
+                    </div><!-- End .dropdown-cart-total -->
+                </div><!-- End .dropdown-menu -->
+            </div><!-- End .cart-dropdown -->
+        </div><!-- End .header-right -->
+    </div><!-- End .header-middle -->
+
+    <div class="wrap-container sticky-header">
+        <div class="header-bottom">
+            {% comment %}
+            <div class="container-fluid">
+                <div class="header-right col-10">
+                    <nav class="main-nav">
+                        <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
+                            <li>
+                                <a href="{% url 'WebSite:login' %}"><i class="fas fa-home"></i>&nbspخانه</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'WebSite:treeshowgroup' 0 %}">دسته بندی گروه ها</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'WebSite:advancedsearchProducts' %}">فروشگاه</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'WebSite:stors' %}">نمایندگی ها</a>
+                            </li>
+                            <li>
+                                <a href="#" class="sf-with-ul">ارتباط با ما</a>
+                                <ul style="touch-action: pan-y;" class="col-2">
+
+                                    <li>
+                                        <a style="color: black; font-size: medium;"
+                                            href="{% url 'WebSite:about' %}">درباره ما</a>
+                                    </li>
+                                    <li>
+                                        <a style="color: black; font-size: medium;"
+                                            href="{% url 'WebSite:contact' %}">تماس با ما</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul><!-- End .menu -->
+                    </nav>
+                </div><!-- End .header-left -->
+            </div><!-- End .container -->
+            {% endcomment %}
+            <nav class="navbar navbar-expand-lg rounded" 
+                style="background-color: rgb(255, 255, 255);   border-top-style: solid; border-top-color: #224094;
+                border-top-width: 3px;">
+
+                <button class="navbar-toggler" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav ">
+                        {% for spg in spg %}
+                        {% if spg and spg.gparentid == 0 %}
+                        <li class="nav-item dropdown megamenu-li">
+                            <a class="nav-link dropdown-toggle text-center"
+                                href="{% url 'WebSite:advancedsearchProducts' spg.id %}"
+                                style="display:inline-block; color:black;  font-size: 15px;"
+                                data-toggle="dropdown">&nbsp{{ spg.Group_Name }}&nbsp&nbsp&nbsp</a>
+
+                            <div class="dropdown-menu megamenu " style="background-color: white;">
+                                <div class="col-10 float-right">
+                                    {% for spgt in spgt %}
+                                    {% if spgt and spgt.gparentid != 0 and spg.id == spgt.gparentid %}
+                                    <div>
+                                        <div class="col-2 float-right text-right " style="display:inline-block;">
+                                            <ul class=" border-bottom">
+                                                <li>
+                                                    <a class="iconfirst"
+                                                        href="{% url 'WebSite:advancedsearchProducts' spgt.id %}"
+                                                        style="font-weight: bold; font-size: 14px;  color:rgb(96, 173, 255);">{{ spgt.Group_Name }}</a>
+
+                                                </li>
+                                            </ul>
+                                         
+                                            
+                                                {% for spgtr in spgtr %}
+                                                {% if  spgt.id == spgtr.gparentid  %}
+                                                <ul class="mt-1">
+                                                <li>
+                                                    <a class="icon text-right"
+                                                        href="{% url 'WebSite:advancedsearchProducts' spgtr.id %}"
+                                                        style="font-weight: bold; font-size: 12px; color: rgb(116, 116, 116);">{{ spgtr.Group_Name }}</a>
+                                                </li>
+                                                {% endif %}
+                                                {% endfor %}
+                                                {% for spgtr2 in spgtr2 %}
+                                                {% if spgt.id == spgtr2.id %}
+                                                <a style="font-weight: bold; font-size: 12px; color: rgb(116, 116, 116);" class="iconfirst"
+                                                    href="{% url 'WebSite:advancedsearchProducts' spgtr2.id %}">+موارد
+                                                    بیشتر . .
+                                                    .</a>
+                                                {% if  spgtr2.tedad == 4  %}
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                {% elif  spgtr2.tedad == 3 %}
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+
+                                                {% elif  spgtr2.tedad == 2 %}
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+
+                                                {% elif  spgtr2.tedad == 1 %}
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                <li>
+                                                    <a class="icon text-right" href=""
+                                                        style="font-size: small;">&nbsp&nbsp&nbsp</a>
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                                {% endif %}
+                                                {% endfor %}
+
+
+                                            
+
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="col-2 float-left">
+                                    <img style="width: 200px; height: 200px; opacity: 90%;"
+                                        src="{% static 'media/' %}{{ spg.group_img }}">
+                                </div>
+                            </div>
+                        </li>
+
+                        {% endif %}
+                        {% endfor %}
+                        <li class="nav-item megamenu-li ml-1">
+                            <a class="nav-link text-center" style="color: black; font-size: medium;"
+                                href="{% url 'WebSite:weblog' %}">وبلاگ</a>
+                        </li>
+                        <li class="nav-item megamenu-li ml-1">
+                            <a class="nav-link text-center" style="color: black; font-size: medium;"
+                                href="{% url 'WebSite:contact' %}">تماس با ما</a>
+                        </li>
+                        <li class="nav-item megamenu-li ml-1">
+                            <a class="nav-link text-center" style="color: black; font-size: medium;"
+                                href="{% url 'WebSite:about' %}">&nbspدرباره ما</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div><!-- End .wrap-container -->
+    </div><!-- End .wrap-container -->
+</header><!-- End .header -->

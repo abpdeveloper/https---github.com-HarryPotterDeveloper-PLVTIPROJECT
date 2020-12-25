@@ -1,0 +1,96 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد دسته بندی محصول|
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productscategoryLV' %}">گزارش دسته بندی محصول </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد دسته بندی محصول</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div style="margin: 1%;" class="container col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            {% if error %}
+            {% for error in error %}
+            <p class="font-wait-bold border border-danger rounded text-danger shadow" style="padding: 1%;">
+                {{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <table class="table table-sm table-striped table-hover shadow text-center mb-1" >
+                                <tr>
+                                    <td class="font-weight-bold text-center container"
+                                        style="text-align: center; padding: 1%; 
+                                        background-color: lightgrey; opacity: 60%;">
+                                        ایجاد دسته بندی محصول
+                                    </td>
+                                </tr>
+                            </table>
+                            <form method="POST" role="form" enctype="multipart/form-data" autocomplete="off">
+                                {% csrf_token %}
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    {% if error %}
+                                    <tr class="shadow text-danger">
+                                        <td class="font-weight-bold text-center">
+                                            {{ pcategory.cname.label  }}
+                                        </td>
+                                        <td>
+                                            {{ pcategory.cname  }}
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ pcategory.cname.label  }}
+                                        </td>
+                                        <td>
+                                            {{ pcategory.cname  }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                {% endif %}
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ pcategory.cdesc.label  }}
+                                        </td>
+                                        <td>
+                                            {{ pcategory.cdesc  }}
+                                        </td>
+                                    </tr>
+                                </table>
+                                
+                                <input style="opacity: 60%;" type="submit" value='ذخیره'
+                                    class="btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold">
+                            </form>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}

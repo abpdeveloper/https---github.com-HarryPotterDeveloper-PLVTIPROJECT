@@ -1,0 +1,132 @@
+{% load static %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<script>
+    function usersreport() {
+        window.open(
+            "{% url 'WebSite:usersreport' %}", "_blank");
+    }
+    function productsgroupsLV() {
+        window.open(
+            "{% url 'WebSite:productsgroupsLV' %}", "_blank");
+    }
+    function orderlist() {
+        window.open(
+            "{% url 'WebSite:orderlist' %}", "_blank");
+    }
+    function slidersreport() {
+        window.open(
+            "{% url 'WebSite:slidersreport' %}", "_blank");
+    }
+    function logoreport() {
+        window.open(
+            "{% url 'WebSite:logoreport' %}", "_blank");
+    }
+    function aboutreport() {
+        window.open(
+            "{% url 'WebSite:aboutreport' %}", "_blank");
+    }
+    function ccontactusreport() {
+        window.open(
+            "{% url 'WebSite:ccontactusreport' %}", "_blank");
+    }
+    function parametrsreport() {
+        window.open(
+            "{% url 'WebSite:ersalreport' %}", "_blank");
+    }
+    function footerreport() {
+        window.open(
+            "{% url 'WebSite:bankreport' %}", "_blank");
+    }
+    function productscategoryviewreport() {
+        window.open(
+            "{% url 'WebSite:productscategoryLV' %}", "_blank");
+    } 
+</script>
+
+<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 border-left shadow mb-2" style="background-color:rgb(24, 114, 114);">
+    <div class="row">
+        <div class="col-12 mt-2 mb-2 border-bottom">
+            <div class="col-12 p-3 mb-3">
+                {% if request.user.avatar %}
+                    <img src="{% static 'media/' %}{{ request.user.avatar }}" alt="">
+                {% else %}
+                    <img src="{% static '/media/userpic/non-pic/user (1).png' %}" alt="">
+                {% endif %}
+            </div>
+            <div class="col-12">
+                {% if UserInfo %}
+                {% for ufi in UserInfo %}
+                <p class="text-center" style="font-size: medium; font-weight: bold; color: white;">
+                    {{ ufi.username }}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="col-12 shadow">
+            <div class="btn-group-vertical col-12 mb-2 border-bottom">
+                <a class="btn m-1 shadow"
+                    style="border-radius: 3%; background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-orders-link" data-toggle="tab" href="#" role="tab" aria-controls="tab-orders"
+                    aria-selected="false">سفارشات</a>
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-dashboard-link" onclick="productsgroupsLV()" href="{% url 'WebSite:productsgroupsLV' %}"
+                    role="tab" aria-controls="tab-dashboard" aria-selected="true">داشبورد</a>
+
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="productscategoryviewreport()" role="tab"
+                    aria-controls="tab-address" aria-selected="false">مدیریت دسته بندی ها</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-orders-link" data-toggle="tab" href="{% url 'WebSite:slidersreport' %}"
+                    onclick="slidersreport()" role="tab" aria-controls="tab-orders" aria-selected="false">مدیریت
+                    اسلایدر</a>
+
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-orders-link" data-toggle="tab" href="{% url 'WebSite:orderlist' %}" onclick="orderlist()"
+                    role="tab" aria-controls="tab-orders" aria-selected="false">مدیریت
+                    سفارشات</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="usersreport()" role="tab" aria-controls="tab-address"
+                    aria-selected="false">مدیریت لیست کاربر
+                    ها</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="logoreport()" role="tab" aria-controls="tab-address"
+                    aria-selected="false">مدیریت لوگو و بنر
+                    ها</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="aboutreport()" role="tab" aria-controls="tab-address"
+                    aria-selected="false">مدیریت درباره
+                    ما</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="ccontactusreport()" role="tab" aria-controls="tab-address"
+                    aria-selected="false">مدیریت ارتباط
+                    با ما</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="parametrsreport()" role="tab" aria-controls="tab-address"
+                    aria-selected="false">مدیریت پارامتر
+                    ها</a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    id="tab-address-link" href="#" onclick="footerreport()" role="tab" aria-controls="tab-address"
+                    aria-selected="false">مدیریت منوی پایین
+                    صفحه </a>
+
+                <a class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 2%;"
+                    href="{% url 'WebSite:logout' %}">خروج از حساب کاربری</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endif %}
+{% endif %}

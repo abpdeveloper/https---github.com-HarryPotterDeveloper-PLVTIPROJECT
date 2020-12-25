@@ -1,0 +1,64 @@
+{% load static %}
+
+<div class="btn-group-vertical col-lg-12 col-md-12 col-12 mb-2 border-bottom">
+
+    <a class="btn m-1 shadow" style="border-radius: 5px; 
+    background-color: #00b6be; color: white;" id="tab-orders-link" data-toggle="tab" href="#" role="tab"
+        aria-controls="tab-orders" aria-selected="false">سفارشات</a>
+
+    <a onclick="usersarticleOpen()" class="btn m-1 shadow"
+        style="background-color: #00b6be; color: white; border-radius: 5px;" id="tab-orders-link" data-toggle="tab"
+        href="#" role="tab" aria-controls="tab-orders" aria-selected="false">
+        نمایش ریز اقلام فاکتور ها
+        <script>
+            var Window;
+            function usersarticleOpen() {
+                Window = window.open(
+                    "{% url 'WebSite:usersarticle' %}",
+                    "_blank", "width=1300, height=700,position=relative; top=10%; left=-20%;");
+            }
+        </script>
+    </a>
+    <a onclick="userspayarticleOpen()" class="btn m-1 shadow"
+        style="background-color: #00b6be; color: white; border-radius: 5px;" id="tab-orders-link" data-toggle="tab"
+        href="#" role="tab" aria-controls="tab-orders" aria-selected="false">
+        نمایش ریز اقلام رسید ها
+        <script>
+            var Window;
+            function userspayarticleOpen() {
+                Window = window.open(
+                    "{% url 'WebSite:userspayarticle' %}",
+                    "_blank", "width=1300, height=700,position=relative; top=10%; left=-20%;");
+            }
+        </script>
+    </a>
+    <a onclick="formdetailsOpen()" class="btn m-1 shadow"
+        style="background-color: #00b6be; color: white; border-radius: 5px;" id="tab-orders-link" data-toggle="tab"
+        href="#" role="tab" aria-controls="tab-orders" aria-selected="false">
+        تغییر کلمه عبور
+        <script>
+            var Window;
+            function formdetailsOpen() {
+                Window = window.open(
+                    "/dashboard/User/ChangePassword/",
+                    "_blank", "width=700, height=400,position=relative; top=10%; left=-20%;");
+            }
+        </script>
+    </a>
+    <a onclick="userinfochangeOpen()" class="btn m-1 shadow"
+        style="background-color: #00b6be; color: white; border-radius: 5px;" id="tab-orders-link" data-toggle="tab"
+        href="#" role="tab" aria-controls="tab-orders" aria-selected="false">
+        تغییر اطلاعات حساب کاربری
+        <script>
+            var Window;
+            function userinfochangeOpen() {
+
+                Window = window.open(
+                    "{% url 'WebSite:userchangeinfo' %}",
+                    "_blank", "width=1200, height=900,position=relative; top=10%; left=-20%;");
+            }
+        </script>
+    </a>
+    <a class="btn m-1" class="btn m-1 shadow" style="background-color: #00b6be; color: white; border-radius: 5px;"
+        href="{% url 'WebSite:logout' %}">خروج از حساب کاربری</a>
+</div>

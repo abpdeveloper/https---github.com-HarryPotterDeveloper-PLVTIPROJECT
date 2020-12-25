@@ -1,0 +1,135 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block body %}
+{% if user.is_authenticated %}
+
+
+<div class="p-5 border shadow container-fluid" style="background-color: whitesmoke;">
+    <div >
+        <form action="." method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div style="margin-top: 1%;"
+                class="mb-1 ">
+                <button type="button" class="closbtn close p-4 shadow border-left" aria-label="Close" 
+                style="border-radius: 5px; color: white; background-color: red; font-weight: bold; font-size: large;">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div style="margin-top: 1%;"
+                    class="mb-1 col-lg-11 col-md-11 col-11 float-right text-center">
+                    {% if success %}
+                    {% for report in success %}
+                    <p class="font-wait-bold float-right border border-success rounded text-success shadow"
+                        style="padding: 1%; margin-right: 1%;">
+                        {{ report }}</p>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+                <p style="font-size: medium; font-weight: bold; height: 50px; border-radius: 20px;
+             background-color: white; "
+                    class="col-12 shadow p-2 mb-2 text-center">
+                    ویرایش اطلاعات کاربری </p>
+                <div class="col-12 p-4 shadow mb-2" style="
+                border-radius: 20px; background-color: white;">
+                    <div class="row col-12 float-left mt-2 mb-2 border-bottom ">
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="col-12 row text-center p-3" style="font-size: medium; font-weight: bold; ">
+                                نام و نام خانوادگی
+                            </div>
+                            <div class="col-12 row">
+                                <img class="col-lg-2 col-md-2 .d-sm-none .d-md-block float-right  text-center"
+                                    src="{% static 'media/keys/edit-property (2).png' %}"
+                                    style="width: 50px; height: 30px;">
+                                <div class="col-lg-10 col-md-10 col-12 float-right border-left text-center"
+                                    style="font-size: medium; font-weight: bold;">
+                                    {{ userinfo.first_name }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="col-12 row text-center p-3" style="font-size: medium; font-weight: bold; ">
+                                ایمیل
+                            </div>
+                            <div class="col-12 row">
+                                <img class="col-lg-2 col-md-2 .d-sm-none .d-md-block float-right  text-center"
+                                    src="{% static 'media/keys/email (1).png' %}" style="width: 50px; height: 30px;">
+                                <div class="col-lg-10 col-md-10 col-12 float-left border-left text-center"
+                                    style="font-size: medium; font-weight: bold;">
+                                    {{ userinfo.email }}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-12">
+                            <div class="col-12 row text-center p-3" style="font-size: medium; font-weight: bold; ">
+                                نام کاربری
+                            </div>
+                            <div class="col-12 row">
+                                <img class="col-lg-2 col-md-2 .d-sm-none .d-md-block float-right  text-center"
+                                    src="{% static 'media/keys/name.png' %}" style="width: 70px; height: 35px;">
+                                <div class="col-lg-10 col-md-10 col-12 float-left border-left text-center"
+                                    style="font-size: medium; font-weight: bold;">
+                                    {{ userinfo.username }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 p-4 mb-2 shadow" style="
+                border-radius: 20px; background-color: white;">
+                    <div class="row col-12 float-left mt-2 mb-2 border-bottom ">
+                        <div class="col-lg-6 col-md-6 col-12">
+                            <div class="col-12 row text-center p-3" style="font-size: medium; font-weight: bold; ">
+                                ویرایش عکس
+                            </div>
+                            <div class="col-12 row">
+                                <img class="col-lg-2 col-md-2 .d-sm-none .d-md-block float-right  text-center"
+                                    src="{% static 'media/keys/edit-image.png' %}" style="width: 50px; height: 35px;">
+                                <div class="col-lg-10 col-md-10 col-12 float-left text-center"
+                                    style="font-size: medium; font-weight: bold;">
+                                    {{ userinfo.avatar }}</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-12 text-center">
+                            <div class="col-12 row text-center p-3" style="font-size: medium; font-weight: bold; ">
+                                ویرایش شماره تماس
+                            </div>
+                            <div class="col-12 row text-center">
+                                <img class="col-lg-2 col-md-2 .d-sm-none .d-md-block float-right  text-center"
+                                    src="{% static 'media/keys/nokia-3310 (1).png' %}"
+                                    style="width: 50px; height: 35px;">
+                                <div class="col-lg-10 col-md-10 col-12 float-left text-center"
+                                    style="font-size: medium; font-weight: bold;">
+                                    {{ userinfo.cellphone }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 shadow p-4  mb-1" style="
+                      border-radius: 20px; background-color: white;">
+                    <div class="col-12 float-right mb-2">
+                        <div class="col-12 float-right  text-right" style="font-size: medium; font-weight: bold; ">
+                            آدرس </div>
+                    </div>
+                    <div class="row col-12 float-left mb-2">
+                        <div class="col-lg-12 col-md-12 col-12">
+                            <img class="col-lg-2 col-md-2 .d-sm-none .d-md-block float-right  text-center"
+                                src="{% static 'media/keys/address.png' %}" style="width: 70px; height: 35px;">
+                            <div class="col-lg-10 col-md-10 col-12 float-right text-center"
+                                style="font-size: medium; font-weight: bold;">
+                                {{ userinfo.last_name }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <input value="ذخیره تغییرات" type="submit"
+                class=" shadow btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold mt-2"
+                style="background-color:#00b6be; color: white;">
+                
+        </form>
+    </div>
+    {% else %}
+    {% include '404.html' %}
+    {% endif %}
+    {% endblock %}

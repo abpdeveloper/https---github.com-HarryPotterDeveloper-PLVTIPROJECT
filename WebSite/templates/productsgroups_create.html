@@ -1,0 +1,191 @@
+{% extends 'share/mainpage_for_other_pages.html' %}
+{% load static %}
+
+{% block title %}
+{{ super }} ایجاد گروه محصول|
+{% endblock %}
+
+{% block body %}
+{% if user.is_authenticated %}
+{% if user.is_superuser %}
+<div class="page-wrapper">
+    {% include 'partials/dashboard_header.html' %}
+
+    <main class="main">
+        <nav aria-label="breadcrumb " class="breadcrumb-nav mb-3">
+            <div class="container-fluid ">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:login' %}">خانه</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'WebSite:productsgroupsLV' %}">گزارش گروه محصول </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">ایجاد گروه محصول</li>
+                </ol>
+            </div><!-- End .container -->
+        </nav><!-- End .breadcrumb-nav -->
+        <div style="margin: 1%;" class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            {% if error %}
+            {% for error in error %}
+            <p class="font-wait-bold border border-danger rounded text-danger shadow" style="padding: 1%;">
+                {{ error }}</p>
+            {% endfor %}
+            {% endif %}
+            {% if cerror %}
+            {% for error in cerror %}
+            <p class="font-wait-bold border border-danger rounded text-danger shadow" style="padding: 1%;">
+                {{ error }}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="page-content">
+            <div class="dashboard">
+                <div class="container-fluid">
+                    <div class="row">
+                        {% include 'partials/side_menu_dashboard.html' %}
+
+                        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 ">
+                            <form method="POST" role="form" enctype="multipart/form-data" autocomplete="off">
+                                {% csrf_token %}
+                                <table class="table table-sm table-striped table-hover shadow text-center" style="margin-bottom: 2%;">
+                                    <tr>
+                                        <td class="font-weight-bold text-center container-fluid"
+                                            style="text-align: center; padding: 1%; background-color: lightgrey; opacity: 60%;">
+                                            ایجاد گروه محصول
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    {% if error %}
+                                    <tr class="shadow text-danger">
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.Group_Name.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.Group_Name  }}
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.Group_Name.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.Group_Name  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.group_img.label  }}
+                                        </td>
+
+                                        <td>
+                                            <input type="file" name="group_img" value="" class="img-thumbnail"
+                                                accept="image/*" id="id_group_img">
+
+
+                                            {% for a in ins_obj2 %}
+                                            <div>
+                                                <span class="group_img">{{ a.group_img }}</span>
+                                            </div>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+
+                                    {% endif %}
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.Group_Desc.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.Group_Desc  }}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.group_img_1.label  }}
+                                        </td>
+                                        <td>
+                                            <input type="file" name="group_img_1" value="" class="img-thumbnail"
+                                                accept="image/*" id="id_group_img_1">
+
+                                        </td>
+                                        <td>
+                                            {% for a in ins_obj2 %}
+                                            <div>
+                                                <span class="group_img_1">{{ a.group_img_1 }}</span>
+                                            </div>
+                                            {% endfor %}
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                    <tr>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.Group_Desc_1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.Group_Desc_1  }}
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                </table>
+                                <table class="table table-sm table-striped table-hover shadow text-center ">
+                                    <tr>
+                                        {% if cerror %}
+                                        <td class="font-weight-bold text-center text-danger">
+                                            {{ group_report.cname1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.cname1  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center text-danger">
+                                            {{ group_report.cname2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.cname2  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center text-danger">
+                                            {{ group_report.cname3.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.cname3  }}
+                                        </td>
+                                        {% else %}
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.cname1.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.cname1  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.cname2.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.cname2  }}
+                                        </td>
+                                        <td class="font-weight-bold text-center">
+                                            {{ group_report.cname3.label  }}
+                                        </td>
+                                        <td>
+                                            {{ group_report.cname3  }}
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                </table>
+                                <input style="opacity: 60%;" type="submit" value='ذخیره'
+                                    class="btn btn-success rounded col-lg-4 col-md-4 col-sm-12 col-xs-12 font-weight-bold">
+                            </form>
+                        </div><!-- End .col-lg-9 -->
+                    </div><!-- End .row -->
+                </div><!-- End .container -->
+            </div><!-- End .dashboard -->
+        </div><!-- End .page-content -->
+    </main><!-- End .main -->
+</div><!-- End .page-wrapper -->
+
+{% endif %}
+{% endif %}
+{% endblock %}
